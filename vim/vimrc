@@ -1,4 +1,7 @@
 source ~/dotfiles/vim/bundles/pathogen/autoload/pathogen.vim
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 set tabstop=4
 set shiftwidth=4
 set autoindent
