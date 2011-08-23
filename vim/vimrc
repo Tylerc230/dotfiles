@@ -13,7 +13,7 @@ set number
 syntax on
 " let g:solarized_termcolors=256
 set background=light
-"colorscheme solarized
+colorscheme solarized
 map <tab> <C-w>
 map :nt<CR> :NERDTree<CR>
 map :ff<CR> :FufFile **/
