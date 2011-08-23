@@ -1,0 +1,39 @@
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+
+set nowrap
+set number
+syntax on
+" let g:solarized_termcolors=256
+set background=light
+colorscheme solarized
+map <tab> <C-w>
+map :nt<CR> :NERDTree<CR>
+map :ff<CR> :FufFile **/
+map :mu<CR> :MRU<CR>
+map :cam<CR> :s/_\([a-z]\)/\U\1/g<CR>
+map :tl<CR> :TlistToggle<CR>
+map <C-Up> :Up<CR>
+map <C-Down> :Dn<CR>
+imap <D-Space> <C-n> 
+map <C-h> :bp<CR>
+map <C-l> :bn<CR>
+map <F5> :DbgStepInto<cr>
+map <F6> :DbgStepOver<cr>
+map <F7> :DbgStepOut<cr>
+map <F8> :DbgRun<cr>
+map <F9> :DbgDetach<cr>
+map :Bp<cr>  :DbgToggleBreakpoint<cr>
+" command GREP :execute 'vimgrep /'.expand('<cword>').'/gj **/*' | copen
+
+
+set nocompatible 
+let Tlist_WinWidth = 50
+let Tlist_Show_One_File = 1
+
+set statusline=%p%%\ %f%y\ %(\[%R]%)%=\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
+set laststatus=2
+
+
