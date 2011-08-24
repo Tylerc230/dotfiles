@@ -1,19 +1,39 @@
+set nocompatible 
 source ~/dotfiles/vim/bundles/pathogen/autoload/pathogen.vim
+"Pathogen calls
 call pathogen#infect('~/dotfiles/vim/bundles')
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+
+"temp
+" Quickly edit/reload the vimrc file
+let mapleader=","
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+"coloring
+syntax on
+"let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+"colorscheme mustang
 
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
-
 set nowrap
 set number
-syntax on
-" let g:solarized_termcolors=256
-set background=light
-colorscheme solarized
+set showmatch "show matching paren
+set hlsearch
+nmap <silent> ,/ :nohlsearch<CR> "clear search
+set incsearch
+set nobackup
+set noswapfile
+cmap w!! w !sudo tee % >/dev/null "sudo after file is loaded
+
+
+"key mappings
 map <tab> <C-w>
 map :nt<CR> :NERDTree<CR>
 map :ff<CR> :FufFile **/
@@ -34,7 +54,6 @@ map :Bp<cr>  :DbgToggleBreakpoint<cr>
 " command GREP :execute 'vimgrep /'.expand('<cword>').'/gj **/*' | copen
 
 
-set nocompatible 
 let Tlist_WinWidth = 50
 let Tlist_Show_One_File = 1
 
