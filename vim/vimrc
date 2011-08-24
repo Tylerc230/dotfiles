@@ -15,7 +15,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 syntax on
 "let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 "colorscheme mustang
 
 set tabstop=4
@@ -31,6 +31,8 @@ set incsearch
 set nobackup
 set noswapfile
 cmap w!! w !sudo tee % >/dev/null "sudo after file is loaded
+filetype plugin on
+set hidden "allow hiding of buffers"
 
 
 "key mappings
