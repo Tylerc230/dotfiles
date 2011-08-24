@@ -47,3 +47,4 @@ SVNSRV=https://svn.zynga.com/svn/cityville-mobile/server/
 alias localize='php Server/game/scripts/compile_locale_xml.php'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 STAGE=184.72.207.65
+export TERM="xterm-256color"
