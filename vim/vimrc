@@ -34,6 +34,15 @@ cmap w!! w !sudo tee % >/dev/null "sudo after file is loaded
 filetype plugin on
 set hidden "allow hiding of buffers"
 
+if has("autocmd")
+" When editing a file, always jump to the last cursor position
+   autocmd BufReadPost *
+     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+	 \   exe "normal g'\"" |
+	 \ endif
+endif
+
+
 
 "key mappings
 map <tab> <C-w>

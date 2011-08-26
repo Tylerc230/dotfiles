@@ -23,7 +23,7 @@ fi
 
 export EDITOR=vim
 set -o vi
-PATH=/Users/tcasselman/Software/cityville_mobile/scripts:/usr/local/sbin:/usr/local/bin:~/Dropbox/bin:$PATH:/Developer/usr/bin/:/usr/local/mysql/bin
+PATH=/Users/tcasselman/Software/cityville_mobile/scripts:/usr/local/sbin:/usr/local/bin:~/dotfiles/bin:$PATH:/Developer/usr/bin/:/usr/local/mysql/bin
 
 
 WEBAPP_DIR=~/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/DatabaseInput/
