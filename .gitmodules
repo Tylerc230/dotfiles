@@ -25,3 +25,6 @@
 [submodule "vim/bundles/fugitive"]
 	path = vim/bundles/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundles/xml"]
+	path = vim/bundles/xml
+	url = https://github.com/othree/xml.vim
