@@ -26,7 +26,7 @@ set nowrap
 set number
 set showmatch "show matching paren
 set hlsearch
-nmap <silent> ,/ :nohlsearch<CR> "clear search
+nmap <silent> <leader>/ :nohlsearch<CR> 
 set incsearch
 set nobackup
 set noswapfile
@@ -45,12 +45,11 @@ endif
 
 
 "key mappings
+map <leader>m :MRU<CR>
 map <tab> <C-w>
-map :nt<CR> :NERDTree<CR>
-map :ff<CR> :FufFile **/
-map :mu<CR> :MRU<CR>
+map <leader>n :NERDTree<CR>
 map :cam<CR> :s/_\([a-z]\)/\U\1/g<CR>
-map :tl<CR> :TlistToggle<CR>
+map <leader>l :TlistToggle<CR>
 map <C-Up> :Up<CR>
 map <C-Down> :Dn<CR>
 imap <D-Space> <C-n> 
