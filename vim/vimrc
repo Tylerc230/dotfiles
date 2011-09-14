@@ -50,6 +50,7 @@ map <tab> <C-w>
 map <leader>n :NERDTree<CR>
 map :cam<CR> :s/_\([a-z]\)/\U\1/g<CR>
 map <leader>l :TlistToggle<CR>
+map <leader>d :r!date "+\%A \%Y-\%m-\%d"<CR>
 map <C-Up> :Up<CR>
 map <C-Down> :Dn<CR>
 imap <D-Space> <C-n> 
