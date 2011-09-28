@@ -28,3 +28,6 @@
 [submodule "vim/bundles/xml"]
 	path = vim/bundles/xml
 	url = https://github.com/othree/xml.vim
+[submodule "vim/bundles/detectindent"]
+	path = vim/bundles/detectindent
+	url = https://github.com/ciaranm/detectindent.git

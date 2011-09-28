@@ -24,7 +24,8 @@ set autoindent
 set smartindent
 set nowrap
 set number
-set showmatch "show matching paren
+"show matching paren
+set showmatch 
 set hlsearch
 nmap <silent> <leader>/ :nohlsearch<CR> 
 set incsearch
@@ -32,7 +33,8 @@ set nobackup
 set noswapfile
 cmap w!! w !sudo tee % >/dev/null "sudo after file is loaded
 filetype plugin on
-set hidden "allow hiding of buffers"
+"allow hiding of buffers"
+set hidden 
 
 if has("autocmd")
 " When editing a file, always jump to the last cursor position
@@ -40,6 +42,7 @@ if has("autocmd")
      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
 	 \   exe "normal g'\"" |
 	 \ endif
+	autocmd BufReadPost * :DetectIndent 
 endif
 
 
@@ -67,6 +70,13 @@ map :Bp<cr>  :DbgToggleBreakpoint<cr>
 
 let Tlist_WinWidth = 50
 let Tlist_Show_One_File = 1
+
+"detect indent prefer tabs
+
+let g:detectindent_preferred_noexpandtab = 1
+let g:detectindent_preferred_indent = 4
+autocmd Filetype ruby let g:detectindent_preferred_expandtab = 1
+autocmd Filetype ruby let g:detectindent_preferred_indent = 2
 
 set statusline=%p%%\ %f%y\ %(\[%R]%)%=\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
 set laststatus=2
