@@ -31,3 +31,6 @@
 [submodule "vim/bundles/detectindent"]
 	path = vim/bundles/detectindent
 	url = https://github.com/ciaranm/detectindent.git
+[submodule "vim/bundles/vim-powerline"]
+	path = vim/bundles/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
