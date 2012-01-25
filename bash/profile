@@ -29,7 +29,7 @@ alias po='popd'
 PATH=/Users/tcasselman/Software/cityville_mobile/scripts:/usr/local/sbin:/usr/local/bin:~/dotfiles/bin:$PATH:/Developer/usr/bin/:/usr/local/mysql/bin
 
 VIMRUNTIME=~/.vim
-export HISTFILESIZE=3000
+export HISTSIZE=3000
 export TERM=xterm-color
 export CLICOLOR=1
 
