@@ -37,15 +37,16 @@ plugins=(bundler git brew heroku osx rails3 rake rvm svn vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/Users/tcasselman/.rvm/gems/ruby-1.9.2-p136/bin:/Users/tcasselman/.rvm/gems/ruby-1.9.2-p136@global/bin:/Users/tcasselman/.rvm/rubies/ruby-1.9.2-p136/bin:/Users/tcasselman/.rvm/bin:/usr/local/sbin:/usr/local/bin:/Users/tcasselman/dotfiles/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin:/Developer/usr/bin/
+export PATH=$HOME/dotfiles/bin:$PATH
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Developer/usr/bin/
 #from bash
 export EDITOR=vim
 set -o vi
+VIMRUNTIME=~/.vim
 alias pd='pushd'
 alias po='popd'
 
 
-VIMRUNTIME=~/.vim
 export HISTFILESIZE=3000
 export TERM=xterm-color
 export CLICOLOR=1
