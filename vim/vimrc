@@ -14,7 +14,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 "coloring
 syntax on
 "let g:solarized_termcolors=256
-set background=dark
+"set background=dark
+set background=light
 colorscheme solarized
 "colorscheme mustang
 "This is for Arduino files
@@ -78,6 +79,7 @@ let g:detectindent_preferred_noexpandtab = 1
 let g:detectindent_preferred_indent = 4
 autocmd Filetype ruby let g:detectindent_preferred_expandtab = 1
 autocmd Filetype ruby let g:detectindent_preferred_indent = 2
+
 
 let g:Powerline_symbols = 'fancy'
 
