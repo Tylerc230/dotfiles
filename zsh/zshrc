@@ -33,13 +33,12 @@ ZSH_THEME="dogenpunk"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(bundler git brew heroku osx rails3 rake rvm svn vi-mode)
-plugins=(git heroku brew osx rails3 rake rvm svn vi-mode)
+plugins=(pod git heroku brew osx rails3 rake rvm svn vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/dotfiles/bin:$PATH
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/X11/bin:/Developer/usr/bin/
+export PATH=$HOME/dotfiles/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/Developer/usr/bin
 #start tmux on startup
 [[ $TERM != "screen" ]] && tmux && exit
 
@@ -57,7 +56,21 @@ alias be='bundle exec'
 export HISTFILESIZE=3000
 export TERM=xterm-color
 export CLICOLOR=1
+alias DerivedData='pd ~/Library/Developer/Xcode/DerivedData'
 
 export TERM="xterm-256color"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+zstyle ':completion:*' verbose yes
+
+zstyle ':completion:*:descriptions' format '%B%d%b'
+
+zstyle ':completion:*:messages' format '%d'
+
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+
+zstyle ':completion:*' group-name ”
+
+export AVR=/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/
+export DDATA=/Users/tcasselman/Library/Developer/Xcode/DerivedData
+export SIM=~/Library/Application\ Support/iPhone\ Simulator/5.1/Applications
