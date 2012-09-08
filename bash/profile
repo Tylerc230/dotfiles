@@ -26,7 +26,7 @@ set -o vi
 alias pd='pushd'
 alias po='popd'
 
-PATH=/Users/tcasselman/Software/cityville_mobile/scripts:/usr/local/sbin:/usr/local/bin:~/dotfiles/bin:$PATH:/Developer/usr/bin/:/usr/local/mysql/bin
+PATH=/usr/local/sbin:/usr/local/bin:~/dotfiles/bin:$PATH
 
 VIMRUNTIME=~/.vim
 export HISTSIZE=3000
@@ -36,14 +36,3 @@ export CLICOLOR=1
 export TERM="xterm-256color"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-#work
-export SVNURL=https://svn.zynga.com/svn/cityville-mobile/project/
-export SVNURL2=https://svn.zynga.com/svn/forestville/project/
-DEPLOYSRV=iphone-dev-01.ec2.zynga.com
-
-export DEV=citymobile-dev-01.ec2.zynga.com
-export DEV2=forestmobile-dev-01.ec2.zynga.com
-export DONE=~/Dropbox/docs/done.txt
-SVNSRV=https://svn.zynga.com/svn/cityville-mobile/server/
-alias localize='php Server/game/scripts/compile_locale_xml.php'
-STAGE=184.72.207.65
