@@ -19,9 +19,6 @@
 [submodule "vim/bundles/nerdcommenter"]
 	path = vim/bundles/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundles/lusty"]
-	path = vim/bundles/lusty
-	url = https://github.com/sjbach/lusty.git
 [submodule "vim/bundles/fugitive"]
 	path = vim/bundles/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
