@@ -1,3 +1,4 @@
+autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 map <tab> <C-w>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -5,6 +6,14 @@ nmap <silent> <leader>m :CtrlPMRU<CR>
 nmap <silent> <leader>t :CtrlP<CR>
 let g:Powerline_symbols = 'fancy'
 set statusline=%p%%\ %f%y\ %(\[%R]%)%=\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%*
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+set exrc            " enable per-directory .vimrc files
+set secure          " disable unsafe commands in local .vimrc files
+augroup reload_vimrc " {
+    autocmd!
+    autocmd BufWritePost *vimrc.* source $MYVIMRC
+augroup END " }
 
 if has("autocmd")
 " When editing a file, always jump to the last cursor position
@@ -50,3 +59,4 @@ let g:tagbar_type_objc = {
     \ }
 "
 
+let g:syntastic_c_include_dirs = [ '../include', 'include', '../lib/Metro' ]
