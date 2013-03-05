@@ -15,14 +15,12 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 syntax on
 "let g:solarized_termcolors=256
 "set background=dark
-set background=light
-colorscheme solarized
+"set background=light
+"colorscheme solarized
 "colorscheme mustang
 "This is for Arduino files
 au BufNewFile,BufRead *.ino set filetype=cpp
 
-set tabstop=4
-set shiftwidth=4
 set autoindent
 set smartindent
 set nowrap
