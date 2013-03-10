@@ -60,3 +60,4 @@ let g:tagbar_type_objc = {
 "
 
 let g:syntastic_c_include_dirs = [ '../include', 'include', '../lib/Metro' ]
+UnBundle 'tpope/vim-surround'
