@@ -74,4 +74,4 @@ zstyle ':completion:*' group-name ”
 
 export AVR=/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/
 export DDATA=/Users/tcasselman/Library/Developer/Xcode/DerivedData
-export SIM=~/Library/Application\ Support/iPhone\ Simulator/5.1/Applications
+export SIM=~/Library/Application\ Support/iPhone\ Simulator/6.1/Applications
