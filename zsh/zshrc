@@ -35,7 +35,7 @@ ZSH_THEME="dogenpunk"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(bundler git brew heroku osx rails3 rake rvm svn vi-mode)
-plugins=(pod git brew osx rails3 rake rvm vi-mode)
+plugins=(pod git brew osx rails rake rvm vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -75,3 +75,4 @@ zstyle ':completion:*' group-name ”
 export AVR=/Applications/Arduino.app/Contents/Resources/Java/hardware/tools/avr/bin/
 export DDATA=/Users/tcasselman/Library/Developer/Xcode/DerivedData
 export SIM=~/Library/Application\ Support/iPhone\ Simulator/6.1/Applications
+alias moment_prod='ssh -i ~/Documents/certs/momentage.pem ubuntu@ec2-54-234-144-164.compute-1.amazonaws.com'
