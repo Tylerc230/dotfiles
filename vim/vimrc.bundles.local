@@ -4,3 +4,4 @@ let g:spf13_no_autochdir = 1
 Bundle 'tpope/vim-sleuth'
 Bundle 'benmills/vimux'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'a.vim'
