@@ -54,6 +54,7 @@ alias po='popd'
 
 #rails
 alias be='bundle exec'
+#alias vim='rm vim_log.txt; vim -V9vim_log.txt'
 
 
 export HISTFILESIZE=3000
