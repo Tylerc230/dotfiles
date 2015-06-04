@@ -1,4 +1,5 @@
-let g:spf13_leader = ';'
+""let g:spf13_leader = "\<Space>"
+let g:spf13_leader = ";"
 let g:spf13_no_autochdir = 1
 Bundle 'tpope/vim-sleuth'
 Bundle 'benmills/vimux'

@@ -32,9 +32,9 @@ bind down:${hyper}   push down  bar-resize:screenSizeY/2
 #bind down:shift;alt  nudge +0   +10%
 
 # Throw Bindings
-bind 1:ctrl;alt         throw 0 resize
-bind 2:ctrl;alt         throw 1 resize
-bind 3:ctrl;alt         throw 2 resize
+#bind 1:ctrl;alt         throw 0 resize
+#bind 2:ctrl;alt         throw 1 resize
+#bind 3:ctrl;alt         throw 2 resize
 bind right:${hyper} throw right resize
 bind left:${hyper}  throw left  resize
 bind up:ctrl;alt;cmd    throw up    resize
@@ -53,8 +53,8 @@ bind esc:cmd hint
 
 bind x:${hyper} focus 'Xcode'
 bind c:${hyper} focus ${browser}
-bind p:${hyper} focus 'Finder'
-bind r:${hyper} focus 'Preview'
+bind i:${hyper} focus 'Finder'
+bind p:${hyper} focus 'Preview'
 bind m:${hyper} focus 'Messages'
 bind f:${hyper} ${full}
 
