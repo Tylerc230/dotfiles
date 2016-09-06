@@ -38,5 +38,6 @@ nmap <Leader>vc :VimuxCloseRunner<CR>
 nmap <Leader>vl :VimuxRunLastCommand<CR>
 nmap <Leader>f :CtrlPMixed<CR>
 nmap <Leader>r :w<CR>:VimuxRunLastCommand<CR>
+nmap <Leader>l :s/\(@".*"\)/NSLocalizedString(\1, @"")/<CR>
 
 

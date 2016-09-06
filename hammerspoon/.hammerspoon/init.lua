@@ -1,16 +1,20 @@
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "LEFT", function()
+local hyper = {"cmd", "alt", "ctrl"}
+hs.hotkey.bind(hyper, "LEFT", function()
   local win = hs.window.focusedWindow()
   moveWindowLeft(win)
   fullscreen(win)
+end, nil, function()
+  local win = hs.window.focusedWindow()
+  fillLeft(win)
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "RIGHT", function()
+hs.hotkey.bind(hyper, "RIGHT", function()
   local win = hs.window.focusedWindow()
   moveWindowRight(win)
   fullscreen(win)
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "F", function()
+hs.hotkey.bind(hyper, "F", function()
   local win = hs.window.focusedWindow()
   fullscreen(win)
 end)
@@ -24,14 +28,22 @@ function moveWindowRight(window)
 end
 
 function fullscreen(window)
+  fillPercent(window, 1.0, 1.0)
+end
+
+function fillLeft(window)
+  fillPercent(window, .5, 1.0)
+end
+
+function fillPercent(window, w, h)
   local f = window:frame()
   local screen = window:screen()
   local max = screen:frame()
 
   f.x = max.x
   f.y = max.y
-  f.w = max.w
-  f.h = max.h
+  f.w = max.w * w
+  f.h = max.h * h
   window:setFrame(f)
 end
 

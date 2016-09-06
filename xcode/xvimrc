@@ -1,0 +1,17 @@
+set ignorecase
+set smartcase
+" Use <space>cm to toggle comments for the selection
+nmap ;o :xccmd openQuickly<CR>
+nmap ;r :xccmd Action:runActiveRunContext<CR>
+nmap ;ci :xccmd commentAndUncommentCurrentLines<CR>
+vmap ;ci :xccmd commentAndUncommentCurrentLines<CR>
+nmap ;ed :xccmd changeToStandardEditor<CR>
+nmap ;vs :xccmd changeToGeniusEditor<CR>
+nmap ;vr :xccmd changeToVersionEditor<CR>
+nmap ;cm :xccmd changeToVersionEditorComparisonView<CR>
+nmap ;l :xccmd changeToVersionEditorBlameView<CR>
+nmap ;b :xccmd toggleBreakpointAtCurrentLine<CR>
+nmap ;j :xccmd moveFocusToEditor<CR>
+nmap ;f :xccmd findSelectedTextInWorkspace<CR>
+vmap ;i :xccmd indentSelection<CR>
+nmap ;i :xccmd indentSelection<CR>
