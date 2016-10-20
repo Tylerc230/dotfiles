@@ -3,8 +3,8 @@ set smartcase
 " Use <space>cm to toggle comments for the selection
 nmap ;t :xccmd openQuickly<CR>
 nmap ;r :xccmd Action:runActiveRunContext<CR>
-nmap ;ci :xccmd commentAndUncommentCurrentLines<CR>
-vmap ;ci :xccmd commentAndUncommentCurrentLines<CR>
+nmap ;ci :xccmd :xcmenucmd Comment Selection<CR>
+vmap ;ci :xccmd :xcmenucmd Comment Selection<CR>
 nmap ;ed :xccmd changeToStandardEditor<CR>
 nmap ;vs :xccmd changeToGeniusEditor<CR>
 nmap ;vr :xccmd changeToVersionEditor<CR>
