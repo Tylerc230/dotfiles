@@ -15,3 +15,7 @@ nmap ;j :xccmd moveFocusToEditor<CR>
 nmap ;f :xccmd findSelectedTextInWorkspace<CR>
 vmap ;i :xccmd indentSelection<CR>
 nmap ;i :xccmd indentSelection<CR>
+nmap <Space>l <C-w>l
+nmap <Space>h <C-w>h
+nmap <Space>k <C-w>k
+nmap <Space>j <C-w>j
