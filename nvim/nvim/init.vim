@@ -1,7 +1,7 @@
 if &compatible
   set nocompatible               " Be iMproved
 endif
-so ./deinrc
+so ~/.config/nvim/deinrc
 " Required:
 filetype plugin indent on
 syntax enable
@@ -10,4 +10,5 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 
