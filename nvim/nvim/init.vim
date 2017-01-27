@@ -66,5 +66,5 @@ nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
 nmap <silent> <leader>s :Gstatus<CR>
-nnoremap <silent> <leader>r :Unite file_rec/async<CR>
+nmap <silent> <leader>r :Unite file_mru directory_mru<CR>
 
