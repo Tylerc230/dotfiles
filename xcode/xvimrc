@@ -4,6 +4,7 @@ set smartcase
 "let mapleader = "\<Space>"
 nmap <Space>t :xccmd openQuickly<CR>
 nmap <Space>r :xccmd Action:runActiveRunContext<CR>
+nmap <Space>u :xcmenucmd Test<CR>
 nmap <Space>ci :xcmenucmd Comment Selection<CR>
 vmap <Space>ci :xcmenucmd Comment Selection<CR>
 nmap <Space>ed :xccmd changeToStandardEditor<CR>
@@ -16,6 +17,7 @@ nmap <Space>j :xccmd moveFocusToEditor<CR>
 nmap <Space>f :xccmd findSelectedTextInWorkspace<CR>
 vmap <Space>i :xccmd indentSelection<CR>
 nmap <Space>i :xccmd indentSelection<CR>
+nmap <Space>df f{V%d
 nmap <Space>l <C-w>l
 nmap <Space>h <C-w>h
 nmap <Space>k <C-w>k
