@@ -14,8 +14,7 @@ endif
 
 set background=dark
 colors gruvbox
-colors hybrid
-"colors flattened
+"colors hybrid
 
 "settings
 let mapleader="\<SPACE>"
@@ -23,6 +22,7 @@ set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 let g:vimfiler_as_default_explorer = 1
 let g:EasyMotion_do_mapping = 1
 set nowrap
+set termguicolors
 
 set showcmd             " Show (partial) command in status line.
 set showmatch           " Show matching brackets.

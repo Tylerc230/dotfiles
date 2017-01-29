@@ -30,6 +30,5 @@ let schemes = [
 
 call dein#add('morhetz/gruvbox', {'loadconf': 1})
 for scheme in schemes
-  "call dein#add(scheme[0], {'script_type' : 'colors'})
   call dein#add(scheme[0]) 
 endfor
