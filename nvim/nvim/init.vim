@@ -14,7 +14,11 @@ endif
 
 set background=dark
 colors gruvbox
+"colors anderson
+"colors flattened_dark
 "colors hybrid
+"colors hybrid_material
+"colors OceanicNext
 
 "settings
 let mapleader="\<SPACE>"
