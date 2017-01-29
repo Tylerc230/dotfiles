@@ -9,6 +9,7 @@ if dein#load_state('~/.cache/dein')
   " Let dein manage dein
   " Required:
   so ~/.config/nvim/plugins.vim
+  so ~/.config/nvim/colorschemes.vim
 
   " Required:
   call dein#end()
