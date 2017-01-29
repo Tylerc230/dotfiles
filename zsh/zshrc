@@ -93,7 +93,7 @@ if [[ ! $TERM =~ screen  ]]; then
     exec tmux
 fi
 . /usr/local/Cellar/z/1.9/etc/profile.d/z.sh
-alias gsi='vim -c Gstatus ./fake.txt'
+alias vim=nvim
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
