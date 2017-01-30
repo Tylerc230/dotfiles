@@ -19,6 +19,8 @@ colors gruvbox
 "colors hybrid
 "colors hybrid_material
 "colors OceanicNext
+set laststatus=2
+so ~/.config/nvim/statusline.vim
 
 "settings
 let mapleader="\<SPACE>"
