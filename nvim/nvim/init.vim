@@ -20,6 +20,9 @@ colors gruvbox
 "colors hybrid_material
 "colors OceanicNext
 set laststatus=2
+"For gitgutter
+set updatetime=250
+let g:gitgutter_map_keys = 0
 so ~/.config/nvim/statusline.vim
 
 "settings
