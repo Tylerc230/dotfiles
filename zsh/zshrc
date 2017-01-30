@@ -94,6 +94,8 @@ if [[ ! $TERM =~ screen  ]]; then
 fi
 . /usr/local/Cellar/z/1.9/etc/profile.d/z.sh
 alias vim=nvim
+alias vi=nvim
+alias gsi='vi -cGstatus fake.txt'
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
