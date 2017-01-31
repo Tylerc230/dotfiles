@@ -1,0 +1,16 @@
+vimfiler
+r			<Plug>(vimfiler_rename_file)
+K			<Plug>(vimfiler_make_directory)
+N			<Plug>(vimfiler_new_file)
+gs			<Plug>(vimfiler_toggle_safe_mode)
+a			<Plug>(vimfiler_choose_action)
+ <Tab>   <Plug>(vimfiler_switch_to_other_window)
+U			<Plug>(vimfiler_clear_mark_all_lines)
+d			<Plug>(vimfiler_delete_file)
+h			<Plug>(vimfiler_smart_h)//open parent
+<BS>			<Plug>(vimfiler_switch_to_parent_directory)
+.			<Plug>(vimfiler_toggle_visible_ignore_files)
+g?			<Plug>(vimfiler_help)
+yy			<Plug>(vimfiler_yank_full_path)
+gr			<Plug>(vimfiler_grep)
+gf			<Plug>(vimfiler_find)
