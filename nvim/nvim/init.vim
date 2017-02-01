@@ -13,9 +13,9 @@ if dein#check_install()
 endif
 
 set background=dark
-colors gruvbox
+"colors gruvbox
 "colors anderson
-"colors flattened_dark
+colors flattened_dark
 "colors hybrid
 "colors hybrid_material
 "colors OceanicNext
@@ -79,6 +79,7 @@ nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
-nmap <silent> <leader>s :Gstatus<CR>
 nmap <silent> <leader>r :Unite file_mru directory_mru<CR>
+nmap <silent> <leader>gs :Gstatus<CR>
+nmap <silent> <leader>gl :Gitv<CR>
 

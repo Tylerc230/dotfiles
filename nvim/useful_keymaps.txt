@@ -14,3 +14,11 @@ g?			<Plug>(vimfiler_help)
 yy			<Plug>(vimfiler_yank_full_path)
 gr			<Plug>(vimfiler_grep)
 gf			<Plug>(vimfiler_find)
+
+gitv
+:Gitv! 
+<CR> open commit
+
+GoldenView
+<C-l> open new split in logical position
+<F8> switch with main view
