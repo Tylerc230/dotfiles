@@ -22,3 +22,6 @@ gitv
 GoldenView
 <C-l> open new split in logical position
 <F8> switch with main view
+
+vim
+:bd delete buffer
