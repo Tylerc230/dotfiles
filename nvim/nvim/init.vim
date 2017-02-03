@@ -77,17 +77,17 @@ let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 "mappings
-nmap <silent> <leader>f :VimFilerExplorer<CR>
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
+nmap <silent> <leader>f :VimFilerExplorer<CR>
 nmap <silent> <leader>r :Unite -buffer-name=MRU -no-split file_mru directory_mru<CR>
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nmap <silent> <leader>t :Unite -no-split -start-insert -buffer-name=CTRLP file_rec<CR>
-nmap <space>/ :Unite grep:.<CR>
+nmap <silent> <leader>t :Unite -no-split -start-insert -buffer-name=CTRLP file_rec/neovim<CR>
+nmap <silent> <leader>/ :Unite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gl :Gitv<CR>
 nmap <silent> <leader>i V=<ESC>
