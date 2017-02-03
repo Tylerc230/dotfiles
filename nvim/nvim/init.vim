@@ -79,6 +79,7 @@ let g:unite_source_grep_default_opts =
 let g:unite_source_grep_recursive_opt = ''
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:vimfiler_no_default_key_mappings = 1
+let g:goldenview__enable_default_mapping = 0
 
 "mappings
 nmap <silent> <leader>h <C-w>h
@@ -91,6 +92,8 @@ nmap <silent> <leader>t :Unite -no-split -start-insert -buffer-name=CTRLP file_r
 nmap <silent> <leader>/ :Unite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gl :Gitv<CR>
+nmap <silent> <leader>s <Plug>GoldenViewSplit
+nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 
