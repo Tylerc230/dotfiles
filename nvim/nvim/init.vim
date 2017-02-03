@@ -78,6 +78,7 @@ let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+let g:vimfiler_no_default_key_mappings = 1
 
 "mappings
 nmap <silent> <leader>h <C-w>h
@@ -93,3 +94,31 @@ nmap <silent> <leader>gl :Gitv<CR>
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 
+autocmd FileType vimfiler call s:vimfiler_settings()
+function! s:vimfiler_settings()
+  nmap <buffer> <silent> j			<Plug>(vimfiler_loop_cursor_down)
+  nmap <buffer> <silent> k			<Plug>(vimfiler_loop_cursor_up)
+  nmap <buffer> <silent> s			<Plug>(vimfiler_split_edit_file)
+  "gg			<Plug>(vimfiler_cursor_top)
+  "<Plug>(vimfiler_switch_to_other_window)
+  "<Space>			<Plug>(vimfiler_toggle_mark_current_line)
+  "U			<Plug>(vimfiler_clear_mark_all_lines)
+  "c			<Plug>(vimfiler_copy_file)
+  "m			<Plug>(vimfiler_move_file)
+  "d			<Plug>(vimfiler_delete_file)
+  "r			<Plug>(vimfiler_rename_file)
+  "K			<Plug>(vimfiler_make_directory)
+  "N			<Plug>(vimfiler_new_file)
+  "<Enter>			<Plug>(vimfiler_cd_or_edit)
+  nmap <buffer> <silent> o			<Plug>(vimfiler_expand_or_edit)
+  "<C-j>			<Plug>(vimfiler_switch_to_history_directory)
+  nmap<buffer> <silent> <BS>			<Plug>(vimfiler_switch_to_parent_directory)
+  nmap <buffer> <silent> .			<Plug>(vimfiler_toggle_visible_ignore_files)
+  "e			<Plug>(vimfiler_edit_file)
+  "E			<Plug>(vimfiler_split_edit_file)
+  "q			<Plug>(vimfiler_hide)
+  "g?			<Plug>(vimfiler_help)
+  "v			<Plug>(vimfiler_preview_file)
+
+  "a			<Plug>(vimfiler_choose_action)
+endfunction
