@@ -77,7 +77,6 @@ let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
 let g:goldenview__enable_default_mapping = 0
 
 "mappings
@@ -86,9 +85,9 @@ nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
 nmap <silent> <leader>f :VimFilerExplorer<CR>
-nmap <silent> <leader>r :Unite -buffer-name=MRU -no-split file_mru directory_mru<CR>
-nmap <silent> <leader>t :Unite -no-split -start-insert -buffer-name=CTRLP file_rec/neovim<CR>
-nmap <silent> <leader>/ :Unite grep:.<CR>
+nmap <silent> <leader>r :Denite -buffer-name=MRU -no-split  file_mru directory_mru<CR>
+nmap <silent> <leader>t :Denite -buffer-name=CTRLP -no-split  file_rec<CR>
+nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gl :Gitv<CR>
 nmap <silent> <leader>s <Plug>GoldenViewSplit
