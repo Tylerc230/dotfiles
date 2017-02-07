@@ -13,9 +13,9 @@ if dein#check_install()
 endif
 
 set background=dark
-"colors gruvbox
+colors gruvbox
 "colors anderson
-colors flattened_dark
+"colors flattened_dark
 "colors hybrid
 "colors hybrid_material
 "colors OceanicNext
