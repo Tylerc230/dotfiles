@@ -7,6 +7,7 @@ nmap <Space>r :xcmenucmd Run<CR>
 nmap <Space>u :xcmenucmd Test<CR>
 nmap <Space>ci :xcmenucmd Comment Selection<CR>
 vmap <Space>ci :xcmenucmd Comment Selection<CR>
+nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
 nmap <Space>ed :xccmd changeToStandardEditor<CR>
 nmap <Space>vs :xccmd changeToGeniusEditor<CR>
 nmap <Space>vr :xccmd changeToVersionEditor<CR>
