@@ -94,6 +94,7 @@ nmap <silent> <leader>s <Plug>GoldenViewSplit
 nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
+nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 
 autocmd FileType vimfiler call s:unite_settings()
 autocmd FileType vimfiler call s:vimfiler_settings()
