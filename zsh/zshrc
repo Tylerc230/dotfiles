@@ -104,3 +104,4 @@ export HISTFILESIZE=3000
 export EDITOR=vim
 set -o vi
 VIMRUNTIME=~/.vim
+DDATA=~/Library/Developer/Xcode/DerivedData
