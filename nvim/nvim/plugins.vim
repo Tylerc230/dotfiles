@@ -14,4 +14,3 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('keith/swift.vim')
 call dein#add('zhaocai/GoldenView.Vim')
 
-call dein#add('lambdalisue/vim-gita')

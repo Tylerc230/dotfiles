@@ -110,3 +110,6 @@ function! s:vimfiler_settings()
   nmap <buffer> <Enter> o
   nmap <buffer> cd <Plug>(vimfiler_cd_or_edit)
 endfunction
+
+call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
+call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
