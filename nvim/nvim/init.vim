@@ -23,6 +23,8 @@ set laststatus=2
 "For gitgutter
 set updatetime=250
 let g:gitgutter_map_keys = 0
+set spell spelllang=en_us
+hi SpellBad gui=underline guifg=red
 so ~/.config/nvim/statusline.vim
 
 "settings
