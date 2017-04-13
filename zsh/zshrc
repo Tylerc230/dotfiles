@@ -95,6 +95,7 @@ fi
 . /usr/local/Cellar/z/1.9/etc/profile.d/z.sh
 alias vim=nvim
 alias vi=nvim
+alias pi='pod install'
 alias gsi='vi -cGstatus fake.txt'
 alias gs='git status'
 alias pd='pushd'
