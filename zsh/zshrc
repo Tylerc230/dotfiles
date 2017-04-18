@@ -99,9 +99,14 @@ alias gsi='vi -cGstatus fake.txt'
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
+alias pi='pod install'
 
 export HISTFILESIZE=3000
 export EDITOR=vim
 set -o vi
 VIMRUNTIME=~/.vim
+export GOPATH=$HOME/gocode
+export PATH=$GOPATH/bin:$PATH
+export ODIN_HOME=$GOPATH/src/github.com/airware/odin
+export PATH=$ODIN_HOME/bin:$PATH
 DDATA=~/Library/Developer/Xcode/DerivedData
