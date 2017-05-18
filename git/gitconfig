@@ -1,0 +1,19 @@
+[user]
+	email = tcasselman@airware.com
+	name = Tyler Casselman
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	required = true
+	clean = git-lfs clean -- %f
+[core]
+	editor = nvim
+
+#driver for merging Xcode project files
+[mergetool "mergepbx"]
+	cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+
+#driver for merging Xcode project files
+[merge "mergepbx"]
+        name = Xcode project files merger
+        driver = mergepbx %O %A %B
+
