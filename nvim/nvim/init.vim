@@ -1,6 +1,8 @@
 if &compatible
   set nocompatible               " Be iMproved
 endif
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 so ~/.config/nvim/deinrc.vim
 "Required:
 filetype plugin indent on
@@ -88,8 +90,8 @@ nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
 nmap <silent> <leader>f :VimFilerExplorer<CR>
-nmap <silent> <leader>r :Denite -buffer-name=MRU -no-split  file_mru directory_mru<CR>
-nmap <silent> <leader>t :Denite -buffer-name=CTRLP -no-split  file_rec<CR>
+nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
+nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
 nmap <silent> <leader>gl :Gitv<CR>
