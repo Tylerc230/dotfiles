@@ -1,7 +1,8 @@
 #!/bin/sh
-rm -rf ~/.vim
-rm -f ~/.vimrc
-touch ~/.profile
-sh ~/dotfiles/bash/setup_bash.sh
-sh ~/dotfiles/vim/setup_vim.sh
+rm -f ~/.config
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+mkdir ~/.config
 sh ~/dotfiles/zsh/setup_zsh.sh
+sh ~/dotfiles/nvim/setup_nvim.sh
+sh ~/dotfiles/tmux/setup_tmux.sh
+sh ~/dotfiles/git/setup_git.sh
