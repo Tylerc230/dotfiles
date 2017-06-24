@@ -1,2 +1,7 @@
+rmdir ~/.cache
+mkdir -p ~/.cache/dein
+brew install python3
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
+sh ~/installer.sh ~/.cache/dein
 brew install neovim/neovim/neovim
-cp -r ~/dotfiles/nvim/nvim ~/.config/
+ln -s ~/dotfiles/nvim/nvim ~/.config/nvim
