@@ -14,4 +14,6 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('keith/swift.vim')
 call dein#add('zhaocai/GoldenView.Vim')
 call dein#add('bfredl/nvim-ipy')
-
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('mitsuse/autocomplete-swift')
+call dein#add('lambdalisue/lista.nvim')

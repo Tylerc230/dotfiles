@@ -69,6 +69,9 @@ if !&sidescrolloff
 endif
 set nostartofline       " Do not jump to first character with page commands.
 
+autocmd BufNewFile,BufRead *.swift set filetype=swift
+" Jump to the first placeholder by typing `<C-k>`.
+autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
    autocmd BufReadPost *
@@ -82,7 +85,8 @@ let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
-
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 "mappings
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
