@@ -121,3 +121,4 @@ endfunction
 
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
+let g:SuperTabDefaultCompletionType = "<c-n>"
