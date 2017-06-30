@@ -98,6 +98,7 @@ alias vi=nvim
 alias pi='pod install'
 alias gsi='vi -cGstatus fake.txt'
 alias gsh='git stash'
+alias gshp='git stash pop'
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
