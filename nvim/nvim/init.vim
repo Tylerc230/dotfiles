@@ -87,6 +87,7 @@ let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+inoremap <expr><ESC>  pumvisible() ? deoplete#smart_close_popup() : "\<ESC>"
 "mappings
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
@@ -122,3 +123,7 @@ endfunction
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabCrMapping = 1
+autocmd! BufWritePost,BufEnter * Neomake
+
+
