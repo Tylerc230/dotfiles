@@ -104,6 +104,7 @@ alias pd='pushd'
 alias po='popd'
 alias pi='pod install'
 
+export PURE_GIT_UNTRACKED_DIRTY=0
 export HISTFILESIZE=3000
 export EDITOR=nvim
 set -o vi
