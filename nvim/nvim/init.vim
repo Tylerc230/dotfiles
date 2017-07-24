@@ -88,7 +88,11 @@ let g:goldenview__enable_default_mapping = 0
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><ESC>  pumvisible() ? deoplete#smart_close_popup() : "\<ESC>"
-tnoremap <Esc> <C-\><C-n>
+"tnoremap <Esc> <C-\><C-n>
+tnoremap <leader>h <C-\><C-n><C-w>h
+tnoremap <leader>j <C-\><C-n><C-w>j
+tnoremap <leader>k <C-\><C-n><C-w>k
+tnoremap <leader>l <C-\><C-n><C-w>l
 "mappings
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
