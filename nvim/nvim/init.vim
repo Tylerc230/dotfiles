@@ -111,6 +111,13 @@ nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map f/ <Plug>(incsearch-fuzzy-/)
+map f? <Plug>(incsearch-fuzzy-?)
+map fg/ <Plug>(incsearch-fuzzy-stay)
+
 autocmd FileType vimfiler call s:unite_settings()
 autocmd FileType vimfiler call s:vimfiler_settings()
 autocmd FileType unite call s:unite_settings()

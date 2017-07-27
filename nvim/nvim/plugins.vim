@@ -16,6 +16,8 @@ call dein#add('bfredl/nvim-ipy')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('lambdalisue/lista.nvim')
 call dein#add('ervandew/supertab')
+call dein#add('haya14busa/incsearch.vim')
+call dein#add('haya14busa/incsearch-fuzzy.vim')
 
 call dein#add('neomake/neomake')
 call dein#add('keith/swift.vim')
