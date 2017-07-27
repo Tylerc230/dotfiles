@@ -132,5 +132,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 autocmd! BufWritePost,BufEnter * Neomake
 hi Search gui=NONE guibg=#505050 guifg=NONE
+set guicursor+=a:blinkon1
+hi! link IncSearch Search
 
 
