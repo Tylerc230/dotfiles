@@ -120,6 +120,13 @@ map f/ <Plug>(incsearch-fuzzy-/)
 map f? <Plug>(incsearch-fuzzy-?)
 map fg/ <Plug>(incsearch-fuzzy-stay)
 
+let test#strategy = 'neoterm'
+nnoremap <silent> <leader>U :TestNearest<CR>
+nnoremap <silent> <leader>u :TestFile<CR>
+"nmap <silent> <leader>a :TestSuite<CR>
+"nmap <silent> <leader>l :TestLast<CR>
+"nmap <silent> <leader>g :TestVisit<CR>
+
 autocmd FileType vimfiler call s:unite_settings()
 autocmd FileType vimfiler call s:vimfiler_settings()
 autocmd FileType unite call s:unite_settings()
