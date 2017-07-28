@@ -34,6 +34,8 @@ so ~/.config/nvim/statusline.vim
 let mapleader="\<SPACE>"
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_ignore_filters = ['matcher_ignore_files', 'matcher_ignore_pattern']
+
 let g:EasyMotion_do_mapping = 1
 set nowrap
 set termguicolors
