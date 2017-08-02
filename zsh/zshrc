@@ -103,6 +103,7 @@ alias gs='git status'
 alias pd='pushd'
 alias po='popd'
 alias pi='pod install'
+alias be='bundle exec'
 
 export PURE_GIT_UNTRACKED_DIRTY=0
 export HISTFILESIZE=3000
