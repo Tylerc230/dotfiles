@@ -71,6 +71,7 @@ if !&sidescrolloff
 endif
 set nostartofline       " Do not jump to first character with page commands.
 
+au BufRead,BufNewFile Podfile set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
 " Jump to the first placeholder by typing `<C-k>`.
 autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
