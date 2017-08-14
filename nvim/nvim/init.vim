@@ -154,3 +154,5 @@ set guicursor+=a:blinkon1
 hi! link IncSearch Search
 
 
+autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
+autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)
