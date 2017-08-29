@@ -73,8 +73,6 @@ set nostartofline       " Do not jump to first character with page commands.
 
 au BufRead,BufNewFile Podfile set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
-" Jump to the first placeholder by typing `<C-k>`.
-autocmd FileType swift imap <buffer> <C-k> <Plug>(autocomplete_swift_jump_to_placeholder)
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
    autocmd BufReadPost *
@@ -103,6 +101,8 @@ nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
+noremap <C-n> <C-o>
+noremap <C-m> <C-i>
 nmap <silent> <leader>f :VimFilerExplorer<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
@@ -149,10 +149,12 @@ call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'nore
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 autocmd! BufWritePost,BufEnter * Neomake
-hi Search gui=NONE guibg=#505050 guifg=NONE
+hi Search gui=NONE guibg=#606060 guifg=NONE
 set guicursor+=a:blinkon1
 hi! link IncSearch Search
 
-
+"vex
+nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<
+vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
 autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
 autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)

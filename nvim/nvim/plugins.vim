@@ -22,6 +22,7 @@ call dein#add('haya14busa/incsearch-fuzzy.vim')
 call dein#add('kassio/neoterm')
 call dein#add('janko-m/vim-test')
 
+call dein#add('gfontenot/vim-xcode')
 call dein#add('neomake/neomake')
 call dein#add('keith/swift.vim')
 "call dein#add('landaire/deoplete-swift')
