@@ -110,3 +110,4 @@ export HISTFILESIZE=3000
 export EDITOR=nvim
 set -o vi
 DDATA=~/Library/Developer/Xcode/DerivedData
+export SOURCEKIT_LOGGING=3
