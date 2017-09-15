@@ -100,12 +100,19 @@ tnoremap <ESC><ESC> <C-\><C-n>
 "mappings
 nmap <C-h> <C-o>
 nmap <C-l> <C-i>
+noremap <C-n> <C-o>
+noremap <C-m> <C-i>
+"windows
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
-noremap <C-n> <C-o>
-noremap <C-m> <C-i>
+" resize current buffer by +/- 5 
+nnoremap <C-right> :vertical resize :5<cr>
+nnoremap <C-left> :vertical resize -5<cr>
+nnoremap <C-up> :resize +5<cr>
+nnoremap <C-down> :resize -5<cr>
+
 nmap <silent> <leader>f :VimFilerExplorer<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
