@@ -89,6 +89,7 @@ let g:goldenview__enable_default_mapping = 0
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><ESC>  pumvisible() ? deoplete#smart_close_popup() : "\<ESC>"
+call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "Terminal stuff
 tnoremap <ESC><ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
@@ -97,6 +98,8 @@ tnoremap <ESC><ESC> <C-\><C-n>
 "tnoremap <leader>l <C-\><C-n><C-w>l
 "autocmd BufWinEnter,WinEnter term://* startinsert
 "mappings
+nmap <C-h> <C-o>
+nmap <C-l> <C-i>
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
@@ -123,6 +126,8 @@ map f? <Plug>(incsearch-fuzzy-?)
 map fg/ <Plug>(incsearch-fuzzy-stay)
 
 let test#strategy = 'neoterm'
+let g:test#python#pytest#options = '-s'
+
 nnoremap <silent> <leader>U :TestNearest<CR>
 nnoremap <silent> <leader>u :TestFile<CR>
 "nmap <silent> <leader>a :TestSuite<CR>
