@@ -24,6 +24,8 @@ call dein#add('janko-m/vim-test')
 
 "Haskell
 call dein#add('parsonsmatt/intero-neovim')
+call dein#add('neovimhaskell/haskell-vim')
+call dein#add('alx741/vim-hindent')
 
 "Swift
 call dein#add('gfontenot/vim-xcode')

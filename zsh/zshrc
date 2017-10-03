@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Personal settings
-export PATH=~/dotfiles/scripts:/Applications/fman.app/Contents/SharedSupport/bin:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
+export PATH=~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
 #start tmux on startup
 #if [[ ! $TERM =~ screen  ]]; then
     #exec tmux

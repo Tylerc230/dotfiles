@@ -189,12 +189,9 @@ augroup interoMaps
   " Reloading (pick one)
   " Automatically reload on save
   au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  "au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
 
   " Load individual modules
-  "au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentFile<CR>
 
   " Type-related information
   " Heads up! These next two differ from the rest.
