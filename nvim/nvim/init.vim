@@ -80,6 +80,7 @@ if has("autocmd")
     \   exe "normal g'\"" |
      \ endif
 endif
+autocmd InsertLeave * call ClosePopup()
 
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
@@ -88,7 +89,12 @@ let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
-inoremap <expr><ESC>  pumvisible() ? deoplete#smart_close_popup() : "\<ESC>"
+function! ClosePopup()
+  if pumvisible()
+    call deoplete#smart_close_popup()
+  endif
+endfunction
+
 call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "Terminal stuff
 tnoremap <ESC><ESC> <C-\><C-n>
