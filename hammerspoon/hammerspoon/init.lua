@@ -1,4 +1,29 @@
 local hyper = {"cmd", "alt", "ctrl"}
+
+-- application launching 
+hs.hotkey.bind(hyper, 't', function()
+  hs.application.launchOrFocus('Things3')
+end)
+
+hs.hotkey.bind(hyper, 'x', function()
+  hs.application.launchOrFocus('Xcode')
+end)
+hs.hotkey.bind(hyper, 'h', function()
+  hs.application.launchOrFocus('Finder')
+end)
+hs.hotkey.bind(hyper, 's', function()
+  hs.application.launchOrFocus('Slack')
+end)
+hs.hotkey.bind(hyper, 'z', function()
+  hs.application.launchOrFocus('Zeplin')
+end)
+hs.hotkey.bind(hyper, 'm', function()
+  hs.application.launchOrFocus('Messages')
+end)
+hs.hotkey.bind(hyper, 'c', function()
+  hs.application.launchOrFocus('Google Chrome')
+end)
+-- window movement
 hs.hotkey.bind(hyper, "LEFT", function()
   local win = hs.window.focusedWindow()
   moveWindowLeft(win)
