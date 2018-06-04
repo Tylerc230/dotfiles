@@ -180,6 +180,9 @@ hi Search gui=NONE guibg=#606060 guifg=NONE
 set guicursor+=a:blinkon1
 hi! link IncSearch Search
 
+cabbrev wqa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'w\|close' : 'wqa')<CR>
+cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
+
 "nvr
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
