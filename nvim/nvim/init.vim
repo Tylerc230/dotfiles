@@ -71,6 +71,11 @@ if !&sidescrolloff
 endif
 set nostartofline       " Do not jump to first character with page commands.
 
+":Topen open the terminal
+":Ttoggle toggle
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
+
 au BufRead,BufNewFile Podfile set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
 " When editing a file, always jump to the last cursor position
@@ -156,6 +161,10 @@ function! s:unite_settings()
 endfunction
 
 function! s:vimfiler_settings()
+  nunmap <buffer> <C-l>
+  nmap <buffer> R <Plug>(vimfiler_redraw_screen)
+  nunmap <buffer> *
+  nmap <buffer> <silent> * <Plug>(vimfiler_toggle_mark_current_line)
   unmap <buffer> E
   nmap <buffer> <silent> s <Plug>(vimfiler_split_edit_file)
   nmap <buffer> <Enter> o
@@ -170,6 +179,12 @@ autocmd! BufWritePost,BufEnter * Neomake
 hi Search gui=NONE guibg=#606060 guifg=NONE
 set guicursor+=a:blinkon1
 hi! link IncSearch Search
+
+"nvr
+if has('nvim')
+  let $VISUAL = 'nvr -cc split --remote-wait'
+endif
+
 
 "vex
 nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<

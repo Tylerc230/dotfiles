@@ -2,11 +2,12 @@
 	email = tylerc230@gmail.com
 	name = Tyler Casselman
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	required = true
 	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 [core]
-	editor = nvim
+  editor = nvr --remote-wait-silent
 	excludesfile = /Users/tyler/.gitignore
 
 [color]
@@ -33,3 +34,13 @@
         name = Xcode project files merger
         driver = mergepbx %O %A %B
 
+[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
