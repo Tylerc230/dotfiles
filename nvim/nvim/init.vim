@@ -119,7 +119,7 @@ nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
 " resize current buffer by +/- 5 
-nnoremap <C-right> :vertical resize :5<cr>
+nnoremap <C-right> :vertical resize +5<cr>
 nnoremap <C-left> :vertical resize -5<cr>
 nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
@@ -135,6 +135,7 @@ nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
+nmap <silent> <leader>v :Ttoggle<CR>
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)

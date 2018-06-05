@@ -1,0 +1,42 @@
+###vimfiler###
+gs - toggle safe mode
+cd - make current directory the root
+* - mark current file
+N - new file
+d - delete file
+R - redraw screen
+r - rename file
+k - make dir
+~	- cd to home dir
+<BS> - cd to parent dir
+g<C-g> - toggle maximize window
+<C-g> - print file name
+yy - yank full path
+
+###surrounds###
+cs”’ - switch double quotes to single
+cs’<q> - switch from single to <q>
+cst” - switch from tag  to double
+ds” - remove double quotes
+ysiw(delimiter) - surrounds word with delimiter
+yss(delimiter) - surrounds line with delimiter
+ySS(delim) - surround and put on its own line
+
+###window sizing
+<C-Up> - make window taller
+<C-Down> - make window smaller
+<C-Left> - make window narrower
+<C-Right> - make window wider
+
+###terminal
+<leader>v - toggle terminal
+
+##folding##
+za - toggle folded code
+zM - fold everything
+zR - unfold everything
+
+
+###visual mode
+Vi{ - select everything in the curly braces
+
