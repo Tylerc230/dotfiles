@@ -22,6 +22,10 @@ ysiw(delimiter) - surrounds word with delimiter
 yss(delimiter) - surrounds line with delimiter
 ySS(delim) - surround and put on its own line
 
+###navigation
+<C-S-Right> - forward
+<C-S-Left> - back to previous place
+
 ###window sizing
 <C-Up> - make window taller
 <C-Down> - make window smaller

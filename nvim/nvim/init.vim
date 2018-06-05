@@ -108,11 +108,9 @@ tnoremap <ESC><ESC> <C-\><C-n>
 "tnoremap <leader>k <C-\><C-n><C-w>k
 "tnoremap <leader>l <C-\><C-n><C-w>l
 "autocmd BufWinEnter,WinEnter term://* startinsert
-"mappings
-nmap <C-h> <C-o>
-nmap <C-l> <C-i>
-noremap <C-n> <C-o>
-noremap <C-m> <C-i>
+"navigation
+nmap <C-S-left> <C-o>
+nmap <C-S-right> <C-i>
 "windows
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
