@@ -4,6 +4,8 @@ cd - make current directory the root
 * - mark current file
 N - new file
 d - delete file
+m - move 
+c - copy (destination relative to file current location)
 R - redraw screen
 r - rename file
 k - make dir
@@ -12,6 +14,9 @@ k - make dir
 g<C-g> - toggle maximize window
 <C-g> - print file name
 yy - yank full path
+gr - grep
+gf - find
+
 
 ###surrounds###
 cs”’ - switch double quotes to single

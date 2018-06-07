@@ -27,13 +27,13 @@ set laststatus=2
 set updatetime=250
 let g:gitgutter_map_keys = 0
 set spell spelllang=en_us
-hi SpellBad gui=underline guifg=red
-so ~/.config/nvim/statusline.vim
-
-"settings
-let mapleader="\<SPACE>"
+hi SpellBad gui=underline guifg=red                                 
+so ~/.config/nvim/statusline.vim                                    
+                                                                    
+"settings                                                           
+let mapleader="\<SPACE>"                                            
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
-let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_as_default_explorer = 1                              
 let g:vimfiler_ignore_filters = ['matcher_ignore_pattern']
 
 let g:EasyMotion_do_mapping = 1
@@ -92,13 +92,13 @@ let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-function! ClosePopup()
-  if pumvisible()
-    call deoplete#smart_close_popup()
-  endif
-endfunction
+" Use deoplete.                                                     
+let g:deoplete#enable_at_startup = 1                                
+function! ClosePopup()                                              
+  if pumvisible()                                                   
+    call deoplete#smart_close_popup()                               
+  endif                                                             
+endfunction                                                         
 
 call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "Terminal stuff
@@ -116,6 +116,8 @@ nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
+nmap <silent> <leader>w <Plug>(choosewin)
+nmap  -  <Plug>(choosewin)
 " resize current buffer by +/- 5 
 nnoremap <C-right> :vertical resize +5<cr>
 nnoremap <C-left> :vertical resize -5<cr>
@@ -127,7 +129,6 @@ nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus<CR>
-nmap <silent> <leader>gl :Gitv<CR>
 nmap <silent> <leader>s <Plug>GoldenViewSplit
 nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
 nmap <silent> <leader>i V=<ESC>
@@ -160,13 +161,16 @@ function! s:unite_settings()
 endfunction
 
 function! s:vimfiler_settings()
+  let g:vimfiler_quick_look_command = 'qlmanage -p'
+  nunmap <buffer> v
+  nmap <buffer>v <Plug>(vimfiler_quick_look)
   nunmap <buffer> <C-l>
   nmap <buffer> R <Plug>(vimfiler_redraw_screen)
   nunmap <buffer> *
   nmap <buffer> <silent> * <Plug>(vimfiler_toggle_mark_current_line)
   unmap <buffer> E
   nmap <buffer> <silent> s <Plug>(vimfiler_split_edit_file)
-  nmap <buffer> <Enter> o
+  nmap <buffer> <Enter> <Plug>(vimfiler_expand_or_edit)
   nmap <buffer> cd <Plug>(vimfiler_cd_or_edit)
 endfunction
 
