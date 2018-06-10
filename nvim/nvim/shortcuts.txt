@@ -8,7 +8,7 @@ m - move
 c - copy (destination relative to file current location)
 R - redraw screen
 r - rename file
-k - make dir
+K - make dir
 ~	- cd to home dir
 <BS> - cd to parent dir
 g<C-g> - toggle maximize window
@@ -16,6 +16,14 @@ g<C-g> - toggle maximize window
 yy - yank full path
 gr - grep
 gf - find
+
+###choosewin
+-<window> - move to window
+<leader>w<window> - move to window
+
+###fugitive
+gstatus:
+ U - checkout (blow away local changes)
 
 
 ###surrounds###

@@ -1,4 +1,3 @@
-brew install tmux
 brew install z
 brew install zsh
 sudo chsh -s `which zsh` tyler
