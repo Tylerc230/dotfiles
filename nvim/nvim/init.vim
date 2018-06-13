@@ -35,6 +35,7 @@ let mapleader="\<SPACE>"
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 let g:vimfiler_as_default_explorer = 1                              
 let g:vimfiler_ignore_filters = ['matcher_ignore_pattern']
+let g:vimfiler_quick_look_command = 'qlmanage -p'
 
 let g:EasyMotion_do_mapping = 1
 set nowrap
@@ -124,11 +125,11 @@ nnoremap <C-left> :vertical resize -5<cr>
 nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 
-nmap <silent> <leader>f :VimFilerExplorer<CR>
+nmap <silent> <leader>f :VimFilerExplorer -auto-cd<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
-nmap <silent> <leader>gs :Gstatus<CR>
+nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 nmap <silent> <leader>s <Plug>GoldenViewSplit
 nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
 nmap <silent> <leader>i V=<ESC>
@@ -161,7 +162,6 @@ function! s:unite_settings()
 endfunction
 
 function! s:vimfiler_settings()
-  let g:vimfiler_quick_look_command = 'qlmanage -p'
   nunmap <buffer> v
   nmap <buffer>v <Plug>(vimfiler_quick_look)
   nunmap <buffer> <C-l>
@@ -172,6 +172,7 @@ function! s:vimfiler_settings()
   nmap <buffer> <silent> s <Plug>(vimfiler_split_edit_file)
   nmap <buffer> <Enter> <Plug>(vimfiler_expand_or_edit)
   nmap <buffer> cd <Plug>(vimfiler_cd_or_edit)
+
 endfunction
 
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
