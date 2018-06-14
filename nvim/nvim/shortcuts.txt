@@ -1,3 +1,9 @@
+###vanilla vim
+tabnew - new tab
+tabclose - close tab
+tabnext - go to next tab
+tabprev - go to last tab
+
 ###vimfiler###
 gs - toggle safe mode
 cd - make current directory the root
