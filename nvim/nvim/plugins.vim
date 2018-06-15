@@ -1,5 +1,6 @@
 call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-surround')
 call dein#add('Shougo/denite.nvim')
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler.vim')

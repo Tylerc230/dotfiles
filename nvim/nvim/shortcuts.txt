@@ -3,6 +3,7 @@ tabnew - new tab
 tabclose - close tab
 tabnext - go to next tab
 tabprev - go to last tab
+set ft=text - set wrap and nav keys go by virtual line
 
 ###vimfiler###
 gs - toggle safe mode
@@ -22,6 +23,7 @@ g<C-g> - toggle maximize window
 yy - yank full path
 gr - grep
 gf - find
+x - open file in finder (ie open dir in finder or open file in preview etc)
 
 ###choosewin
 -<window> - move to window
@@ -30,6 +32,16 @@ gf - find
 ###fugitive
 gstatus:
  U - checkout (blow away local changes)
+
+##surrounds##
+cst" - Change surronding tag to "
+cst<em> - Change surrounding tag to <em>
+dst - Remove tag
+ysiw] - surround the inner word with ] (using [ would add spaces)
+in visual mode
+S<p class="import"> - Wrap entire line in <p ...></p>
+2dst - delete the second most inner tag
+b, B, r and a == ), }, ], >
 
 
 ###surrounds###
