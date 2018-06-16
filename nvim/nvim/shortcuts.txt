@@ -24,6 +24,8 @@ yy - yank full path
 gr - grep
 gf - find
 x - open file in finder (ie open dir in finder or open file in preview etc)
+b - bookmark current file
+ob - open bookmarks window
 
 ###choosewin
 -<window> - move to window

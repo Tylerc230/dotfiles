@@ -118,7 +118,6 @@ nmap <silent> <leader>j <C-w>j
 nmap <silent> <leader>k <C-w>k
 nmap <silent> <leader>l <C-w>l
 nmap <silent> <leader>w <Plug>(choosewin)
-nmap  -  <Plug>(choosewin)
 " resize current buffer by +/- 5 
 nnoremap <C-right> :vertical resize +5<cr>
 nnoremap <C-left> :vertical resize -5<cr>
@@ -126,6 +125,7 @@ nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 
 nmap <silent> <leader>f :VimFilerExplorer -auto-cd<CR>
+nmap <silent> <leader>ob :Unite -default-action=vimfiler_explorer bookmark<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
@@ -162,6 +162,7 @@ function! s:unite_settings()
 endfunction
 
 function! s:vimfiler_settings()
+  nnoremap <buffer><silent><expr> b vimfiler#do_action('bookmark')
   nunmap <buffer> v
   nmap <buffer>v <Plug>(vimfiler_quick_look)
   nunmap <buffer> <C-l>
@@ -184,8 +185,8 @@ hi Search gui=NONE guibg=#606060 guifg=NONE
 set guicursor+=a:blinkon1
 hi! link IncSearch Search
 
-cabbrev wqa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'w\|close' : 'wqa')<CR>
-cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
+"cabbrev wqa <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'w\|close' : 'wqa')<CR>
+"cabbrev q <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'close' : 'q')<CR>
 
 "nvr
 if has('nvim')
@@ -235,3 +236,9 @@ augroup interoMaps
   au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
 augroup END
 
+let explorer = {  'is_selectable' : 1,  }
+function! explorer.func(candidates)
+  execute ':VimFilerExplorer -no-toggle ' . a:candidates[0].action__path
+endfunction
+call unite#custom#action('cdable', 'vimfiler_explorer', explorer)
+unlet explorer
