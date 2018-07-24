@@ -7,7 +7,7 @@
 	process = git-lfs filter-process
 	required = true
 [core]
-  editor = nvr --remote-wait-silent
+  editor = nvr --remote-tab-silent
 	excludesfile = /Users/tyler/.gitignore
 
 [color]
