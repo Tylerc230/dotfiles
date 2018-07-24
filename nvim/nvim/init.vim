@@ -74,7 +74,6 @@ set nostartofline       " Do not jump to first character with page commands.
 
 ":Topen open the terminal
 ":Ttoggle toggle
-autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
 au BufRead,BufNewFile Podfile set filetype=ruby
@@ -131,7 +130,7 @@ nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 nmap <silent> <leader>s <Plug>GoldenViewSplit
-nmap <silent> <leader>m <Plug>GoldenViewSwitchMain
+nmap <silent> <leader>m <Plug>GoldenViewSwitchToggle
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
