@@ -93,8 +93,13 @@ export PATH=~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew -
     #exec tmux
 #fi
 . /usr/local/Cellar/z/1.9/etc/profile.d/z.sh
-alias vim=nvim
-alias vi=nvim
+if [[ ! -z "$NVIM_LISTEN_ADDRESS" ]];
+then 
+  alias vim='nvr -s --remote-silent'
+else
+  alias vim=nvim
+fi
+alias vi=vim
 alias pi='pod install'
 alias gsi='nvr -s --remote-tab-silent -cGstatus fake.txt'
 alias gsh='git stash'
