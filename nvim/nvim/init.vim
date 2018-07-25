@@ -129,8 +129,8 @@ nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
-nmap <silent> <leader>s <Plug>GoldenViewSplit
-nmap <silent> <leader>m <Plug>GoldenViewSwitchToggle
+nmap <silent> <leader>s <Plug>TilerNew
+nmap <silent> <leader>m <Plug>TilerFocus
 nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
