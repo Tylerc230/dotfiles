@@ -1,29 +1,37 @@
 set ignorecase
 set smartcase
 set laststatus=1
+set clipboard=unnamed
+"set debug
+"set hlsearch
 " Use <space>cm to toggle comments for the selection
 "let mapleader = "\<Space>"
 nmap <Space>t :xccmd openQuickly<CR>
 nmap <Space>m :xcmenucmd Show Document Items<CR>
 nmap <Space>r :xcmenucmd Run<CR>
 nmap <Space>u :xcmenucmd Test<CR>
+nmap <Space>f :xcmenucmd Step Into<CR>
+nmap <Space>d :xcmenucmd Step Over<CR>
+nmap <Space>s :xcmenucmd Step Out<CR>
+nmap <Space>g :xcmenucmd Continue<CR>
+nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
 nmap <Space>ci :xcmenucmd Toggle Comments<CR>
 vmap <Space>ci :xcmenucmd Toggle Comments<CR>
-vmap <Space>ni :xcmenucmd Jump to Next Issue<CR>
-vmap <Space>pi :xcmenucmd Jump to Previous Issue<CR>
-nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
-nmap <Space>ed :xccmd changeToStandardEditor<CR>
-nmap <Space>vs :xccmd changeToGeniusEditor<CR>
-nmap <Space>vr :xccmd changeToVersionEditor<CR>
-nmap <Space>cm :xccmd changeToVersionEditorComparisonView<CR>
-nmap <Space>l :xccmd changeToVersionEditorBlameView<CR>
 nmap <Space>b :xccmd toggleBreakpointAtCurrentLine<CR>
-nmap <Space>j :xccmd moveFocusToEditor<CR>
-nmap <Space>f :xccmd findSelectedTextInWorkspace<CR>
 vmap <Space>i :xccmd indentSelection<CR>
 nmap <Space>i :xccmd indentSelection<CR>
-nmap <Space>df f{V%d
 nmap <Space>l <C-w>l
 nmap <Space>h <C-w>h
 nmap <Space>k <C-w>k
 nmap <Space>j <C-w>j
+
+vmap <Space>ni :xcmenucmd Jump to Next Issue<CR>
+vmap <Space>pi :xcmenucmd Jump to Previous Issue<CR>
+nmap <Space>ed :xccmd changeToStandardEditor<CR>
+nmap <Space>vs :xccmd changeToGeniusEditor<CR>
+nmap <Space>vr :xccmd changeToVersionEditor<CR>
+"nmap <Space>cm :xccmd changeToVersionEditorComparisonView<CR>
+"nmap <Space>l :xccmd changeToVersionEditorBlameView<CR>
+"nmap <Space>j :xccmd moveFocusToEditor<CR>
+"nmap <Space>f :xccmd findSelectedTextInWorkspace<CR>
+"nmap <Space>df f{V%d
