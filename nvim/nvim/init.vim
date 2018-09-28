@@ -145,6 +145,8 @@ map fg/ <Plug>(incsearch-fuzzy-stay)
 
 let test#strategy = 'neoterm'
 let g:test#python#pytest#options = '-s'
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_autoinsert = 1
 
 nnoremap <silent> <leader>U :TestNearest<CR>
 nnoremap <silent> <leader>u :TestFile<CR>
