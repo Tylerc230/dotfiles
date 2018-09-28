@@ -1,0 +1,8 @@
+mafredri/zsh-async
+marszall87/lambda-pure
+rupa/z
+robbyrussell/oh-my-zsh folder:plugins/git
+robbyrussell/oh-my-zsh folder:plugins/command-not-found
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting

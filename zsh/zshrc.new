@@ -1,0 +1,32 @@
+source <(antibody init)
+antibody bundle < ~/.zsh_plugins.txt
+export PATH=~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
+# Personal settings
+#start tmux on startup
+#if [[ ! $TERM =~ screen  ]]; then
+    #exec tmux
+#fi
+if [[ ! -z "$NVIM_LISTEN_ADDRESS" ]];
+then 
+  alias vim='nvr -s --remote-silent'
+else
+  alias vim=nvim
+fi
+alias vi=vim
+alias pi='pod install'
+alias gsi='nvr -s --remote-tab-silent -cGstatus fake.txt'
+alias gsh='git stash'
+alias gshp='git stash pop'
+alias gs='git status'
+alias pd='pushd'
+alias po='popd'
+alias pi='pod install'
+alias be='bundle exec'
+
+export PURE_GIT_UNTRACKED_DIRTY=0
+export HISTFILESIZE=3000
+export EDITOR=nvim
+set -o vi
+DDATA=~/Library/Developer/Xcode/DerivedData
+export SOURCEKIT_LOGGING=4
+eval "$(rbenv init -)"
