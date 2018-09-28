@@ -62,9 +62,6 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-antigen bundle mafredri/zsh-async
-antigen bundle marszall87/lambda-pure
-antigen apply
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
