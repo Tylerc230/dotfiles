@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+source ~/dotfiles/zsh/antigen.zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -61,6 +62,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+antigen bundle mafredri/zsh-async
+antigen bundle marszall87/lambda-pure
+antigen apply
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
