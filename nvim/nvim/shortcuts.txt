@@ -5,6 +5,9 @@ tabnext - go to next tab
 tabprev - go to last tab
 set ft=text - set wrap and nav keys go by virtual line
 gq - Format selected text (fix line width)
+copen - shows quickfix list
+cnext - show next previous revision
+cprev - show more recent revision
 
 ###denite###
 :Denite line - Filter lines of current buffer
@@ -49,12 +52,11 @@ gstatus:
  Glog -- % - loads commit objects touching current file into quickfix
  Glog --grep=sometext -- - Search commit messages for text
  Glog --Ssometext -- - Search commits for when text was added or remove from sourcecode
- copen - shows list
- cnext - show next previous revision
- cprev - show more recent revision
  Gedit - Go back to current working copy
+ Gedit branch:% - Look at version on branch (replace % with path also works)
 
  Ggrep: searches files in git and adds them to quickfix
+ :Gdiff develop - diff current file with develop
 
 ##surrounds##
 cst" - Change surronding tag to "

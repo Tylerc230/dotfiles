@@ -91,7 +91,7 @@ antigen apply
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # Personal settings
-export PATH=~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
 #start tmux on startup
 #if [[ ! $TERM =~ screen  ]]; then
     #exec tmux
