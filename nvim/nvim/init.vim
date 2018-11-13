@@ -1,6 +1,7 @@
 if &compatible
   set nocompatible               " Be iMproved
 endif
+set hidden
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 so ~/.config/nvim/deinrc.vim
@@ -75,6 +76,7 @@ set nostartofline       " Do not jump to first character with page commands.
 ":Topen open the terminal
 ":Ttoggle toggle
 autocmd BufLeave term://* stopinsert
+autocmd BufEnter term://* call fugitive#detect(@%)
 
 au BufRead,BufNewFile Podfile set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
@@ -100,9 +102,9 @@ function! ClosePopup()
   endif                                                             
 endfunction                                                         
 
-call deoplete#enable_logging('DEBUG', 'deoplete.log')
+"call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "Terminal stuff
-tnoremap <ESC><ESC> <C-\><C-n>
+tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
 "tnoremap <leader>j <C-\><C-n><C-w>j
 "tnoremap <leader>k <C-\><C-n><C-w>k
@@ -147,6 +149,7 @@ let test#strategy = 'neoterm'
 let g:test#python#pytest#options = '-s'
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
+nmap <silent> <leader>n :vert Tnew<CR>
 
 nnoremap <silent> <leader>U :TestNearest<CR>
 nnoremap <silent> <leader>u :TestFile<CR>

@@ -6,8 +6,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-;[core]
-  ;editor = vim
+[core]
+  ;editor = nvr --remote-wait-silent
+  editor = nvr --remote-tab-wait-silent
 
 	excludesfile = /Users/tyler/.gitignore
 
