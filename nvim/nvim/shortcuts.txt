@@ -8,6 +8,7 @@ gq - Format selected text (fix line width)
 copen - shows quickfix list
 cnext - show next previous revision
 cprev - show more recent revision
+:windo bd - delete all buffers in tab
 
 ###denite###
 :Denite line - Filter lines of current buffer
@@ -58,6 +59,9 @@ gstatus:
  Ggrep: searches files in git and adds them to quickfix
  :Gdiff develop - diff current file with develop
 
+Gblame,
+  P - Look at first parent commit of commit  at line
+  O - Look at commit for line in tab
 ##surrounds##
 cst" - Change surronding tag to "
 cst<em> - Change surrounding tag to <em>

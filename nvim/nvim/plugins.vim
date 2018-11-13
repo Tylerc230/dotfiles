@@ -17,7 +17,6 @@ call dein#add('ervandew/supertab')
 call dein#add('haya14busa/incsearch.vim')
 call dein#add('haya14busa/incsearch-fuzzy.vim')
 call dein#add('t9md/vim-choosewin')
-call dein#add('zhamlin/tiler.vim')
 
 
 call dein#add('kassio/neoterm')
@@ -33,4 +32,4 @@ call dein#add('gfontenot/vim-xcode')
 call dein#add('neomake/neomake')
 call dein#add('keith/swift.vim')
 "call dein#add('landaire/deoplete-swift')
-call dein#add('~/Dropbox/shared_code/vex/vex-complete')
+"call dein#add('~/Dropbox/shared_code/vex/vex-complete')
