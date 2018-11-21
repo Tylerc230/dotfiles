@@ -79,6 +79,7 @@ autocmd BufLeave term://* stopinsert
 autocmd BufEnter term://* call fugitive#detect(@%)
 
 au BufRead,BufNewFile Podfile set filetype=ruby
+au BufRead,BufNewFile *.podspec set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
