@@ -12,6 +12,7 @@ cprev - show more recent revision
 
 ###denite###
 :Denite line - Filter lines of current buffer
+:Denite grep - search files for strin
 
 ###vimfiler###
 gs - toggle safe mode
