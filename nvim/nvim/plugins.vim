@@ -30,6 +30,10 @@ call dein#add('alx741/vim-hindent')
 "Swift
 call dein#add('gfontenot/vim-xcode')
 call dein#add('neomake/neomake')
+call dein#add('autozimu/LanguageClient-neovim', {
+      \ 'rev': 'next',
+      \ 'build': 'bash install.sh',
+      \ })
 call dein#add('keith/swift.vim')
 "call dein#add('landaire/deoplete-swift')
 "call dein#add('~/Dropbox/shared_code/vex/vex-complete')

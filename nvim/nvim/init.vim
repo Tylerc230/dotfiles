@@ -97,6 +97,10 @@ let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
 " Use deoplete.                                                     
 let g:deoplete#enable_at_startup = 1                                
+let g:LanguageClient_serverCommands = { 'python': ['/usr/local/bin/pyls'], 'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'] }
+let g:LanguageClient_rootMarkers = {
+      \ 'swift': ['Package.swift'],
+      \ }
 function! ClosePopup()                                              
   if pumvisible()                                                   
     call deoplete#smart_close_popup()                               
@@ -114,6 +118,7 @@ tnoremap <ESC> <C-\><C-n>
 "navigation
 nmap <C-S-left> <C-o>
 nmap <C-S-right> <C-i>
+cnoreabbrev wb w <bar> bp <bar> bd #
 "windows
 nmap <silent> <leader>h <C-w>h
 nmap <silent> <leader>j <C-w>j
@@ -131,10 +136,12 @@ nmap <silent> <leader>ob :Unite -default-action=vimfiler_explorer bookmark<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
+nmap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 nmap <silent> <leader>s <Plug>TilerNew
 nmap <silent> <leader>m <Plug>TilerFocus
-nmap <silent> <leader>i V=<ESC>
+"format selection
+nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
 nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 nmap <silent> <leader>v :Ttoggle<CR>
@@ -200,10 +207,10 @@ endif
 
 
 "vex
-nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<
-vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
-autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
-autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)
+"nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<
+"vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
+"autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
+"autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)
 
 "intero
 augroup interoMaps

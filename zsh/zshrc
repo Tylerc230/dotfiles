@@ -36,6 +36,7 @@ export EDITOR=vim
 set -o vi
 bindkey -M viins '^s' vi-cmd-mode
 DDATA=~/Library/Developer/Xcode/DerivedData
-export SOURCEKIT_LOGGING=4
+export SOURCEKIT_LOGGING=3
+export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-25-a.xctoolchain
 eval "$(rbenv init -)"
 export FASTLANE_USER=tylerc230@gmail.com
