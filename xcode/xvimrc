@@ -10,9 +10,6 @@ nmap <Space>t :xccmd openQuickly<CR>
 nmap <Space>m :xcmenucmd Show Document Items<CR>
 nmap <Space>r :xcmenucmd Run<CR>
 nmap <Space>u :xcmenucmd Test<CR>
-nmap <Space>f :xcmenucmd Step Into<CR>
-nmap <Space>d :xcmenucmd Step Over<CR>
-nmap <Space>s :xcmenucmd Step Out<CR>
 nmap <Space>g :xcmenucmd Continue<CR>
 nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
 nmap <Space>ci :xcmenucmd Toggle Comments<CR>

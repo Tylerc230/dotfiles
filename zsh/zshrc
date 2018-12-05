@@ -25,7 +25,7 @@ alias d='docker'
 alias dc='docker-compose'
 alias dm='docker-machine'
 alias dcon='docker container'
-alias dim='docker image"
+alias dim='docker image'
 function dm-env() {
   eval "$(docker-machine env "${1:-default}")"
 }
