@@ -95,9 +95,20 @@ let g:unite_source_grep_default_opts =
   \ '--line-numbers --nocolor --nogroup --hidden --ignore '
 let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
+
 " Use deoplete.                                                     
+let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
+let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
 let g:deoplete#enable_at_startup = 1                                
-let g:LanguageClient_serverCommands = { 'python': ['/usr/local/bin/pyls'], 'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'] }
+
+      "\'cpp': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
+      "\'c': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
+      "\'objc': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
+let g:LanguageClient_serverCommands = {
+      \'python': ['/usr/local/bin/pyls'],
+      \'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
+      \}
 let g:LanguageClient_rootMarkers = {
       \ 'swift': ['Package.swift'],
       \ }
@@ -214,9 +225,9 @@ endif
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
     nnoremap <buffer> <silent> gi :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <buffer> <silent> <leader>lc :Denite contextMenu<cr>
+    nnoremap <buffer> <silent> <leader>gm :Denite contextMenu<cr>
     nnoremap <buffer> <silent> <leader>m :Denite documentSymbol<cr>
-    nnoremap <buffer> <silent> <leader>k :Denite references<cr>
+    nnoremap <buffer> <silent> <leader>gr :Denite references<cr>
     nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
     nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
   endif

@@ -9,6 +9,17 @@ copen - shows quickfix list
 cnext - show next previous revision
 cprev - show more recent revision
 :windo bd - delete all buffers in tab
+:new  - open an empty buffer
+:tabe - edit in new tab
+<c-w>H - window full height
+<c-w>K - window full width
+set scrollbind - locks a buffer to be scrolled
+<line>zt - move line to top
+
+### vim diff
+diffthis - add buffer to be diffed
+diffupdate - refresh a buffer diff
+diffoff! - stop diff
 
 ####folding
 zR - open all folds
@@ -17,6 +28,9 @@ zA - toggle current fold
 zO - Open folds at cursor
 zC - Close fold at cursor
 lower case operates on one level of folds deep
+
+####misc
+:%!python -m json.tool - format json
 
 ###denite###
 :Denite line - Filter lines of current buffer

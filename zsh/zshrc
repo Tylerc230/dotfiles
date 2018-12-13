@@ -40,3 +40,13 @@ export SOURCEKIT_LOGGING=3
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-25-a.xctoolchain
 eval "$(rbenv init -)"
 export FASTLANE_USER=tylerc230@gmail.com
+
+
+# This function calls the script below when loaded by
+# the shell inside of neovim. It must be placed somewhere in
+# your default shell's rc file e.g. ~/.zshrc
+
+neovim_autocd() {
+    [[ $NVIM_LISTEN_ADDRESS ]] && ~/dotfiles/scripts/neovim_autocd.py
+}
+chpwd_functions+=( neovim_autocd )
