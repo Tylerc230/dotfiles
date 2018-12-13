@@ -10,9 +10,25 @@ cnext - show next previous revision
 cprev - show more recent revision
 :windo bd - delete all buffers in tab
 
+####folding
+zR - open all folds
+zM - Close all folds
+zA - toggle current fold
+zO - Open folds at cursor
+zC - Close fold at cursor
+lower case operates on one level of folds deep
+
 ###denite###
 :Denite line - Filter lines of current buffer
-:Denite grep - search files for strin
+<leader>/  - :Denite grep - search files for strin
+
+###Language Client###
+<leader>lc - context menu
+gi - documentation
+<leader>m - show symbols in document
+<leader>k - show all references
+gd - go to definition
+
 
 ###vimfiler###
 gs - toggle safe mode

@@ -116,8 +116,8 @@ tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>l <C-\><C-n><C-w>l
 "autocmd BufWinEnter,WinEnter term://* startinsert
 "navigation
-nmap <C-S-left> <C-o>
-nmap <C-S-right> <C-i>
+nnoremap <C-i> <C-o>
+nnoremap <C-o> <C-i>
 cnoreabbrev wb w <bar> bp <bar> bd #
 "windows
 nmap <silent> <leader>h <C-w>h
@@ -136,7 +136,6 @@ nmap <silent> <leader>ob :Unite -default-action=vimfiler_explorer bookmark<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
-nmap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 nmap <silent> <leader>s <Plug>TilerNew
 nmap <silent> <leader>m <Plug>TilerFocus
@@ -211,7 +210,19 @@ endif
 "vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
 "autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)
+"
+function LC_maps()
+  if has_key(g:LanguageClient_serverCommands, &filetype)
+    nnoremap <buffer> <silent> gi :call LanguageClient#textDocument_hover()<cr>
+    nnoremap <buffer> <silent> <leader>lc :Denite contextMenu<cr>
+    nnoremap <buffer> <silent> <leader>m :Denite documentSymbol<cr>
+    nnoremap <buffer> <silent> <leader>k :Denite references<cr>
+    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+  endif
+endfunction
 
+autocmd FileType * call LC_maps()
 "intero
 augroup interoMaps
   au!
