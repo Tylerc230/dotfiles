@@ -3,6 +3,7 @@ tabnew - new tab
 tabclose - close tab
 tabnext - go to next tab
 tabprev - go to last tab
+tabedit % - Open current window in new tab
 set ft=text - set wrap and nav keys go by virtual line
 gq - Format selected text (fix line width)
 copen - shows quickfix list

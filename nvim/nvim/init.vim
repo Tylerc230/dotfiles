@@ -164,6 +164,7 @@ map f? <Plug>(incsearch-fuzzy-?)
 map fg/ <Plug>(incsearch-fuzzy-stay)
 
 let test#strategy = 'neoterm'
+let test#python#runner = 'pytest'
 let g:test#python#pytest#options = '-s'
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
