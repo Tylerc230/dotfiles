@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UDID</key>
+	<string>6B816EA3-C19F-4A2B-9A05-3A04D5E71EE0</string>
+	<key>deviceType</key>
+	<string>com.apple.dt.Xcode.IBSimDeviceType.iPad-1x</string>
+	<key>name</key>
+	<string>IBSimDeviceTypeiPad1x</string>
+	<key>runtime</key>
+	<string>com.apple.CoreSimulator.SimRuntime.iOS-9-3</string>
+	<key>state</key>
+	<integer>1</integer>
+</dict>
+</plist>

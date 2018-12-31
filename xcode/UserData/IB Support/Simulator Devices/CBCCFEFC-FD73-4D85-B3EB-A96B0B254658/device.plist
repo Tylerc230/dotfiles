@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UDID</key>
+	<string>CBCCFEFC-FD73-4D85-B3EB-A96B0B254658</string>
+	<key>deviceType</key>
+	<string>com.apple.CoreSimulator.SimDeviceType.iPhone-SE</string>
+	<key>isDeleted</key>
+	<false/>
+	<key>name</key>
+	<string>iPhone SE</string>
+	<key>runtime</key>
+	<string>com.apple.CoreSimulator.SimRuntime.iOS-12-1</string>
+	<key>state</key>
+	<integer>3</integer>
+</dict>
+</plist>

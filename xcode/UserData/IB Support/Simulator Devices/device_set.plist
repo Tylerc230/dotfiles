@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DefaultDevices</key>
+	<dict>
+		<key>version</key>
+		<integer>0</integer>
+	</dict>
+	<key>DevicePairs</key>
+	<dict/>
+	<key>Version</key>
+	<integer>0</integer>
+</dict>
+</plist>

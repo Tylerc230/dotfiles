@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>com.apple.CoreSimulator.IndigoFramebufferBridge</string>
+	<key>MachServices</key>
+	<dict>
+		<key>PurpleFBServer</key>
+		<false/>
+		<key>PurpleFBTVOutServer</key>
+		<false/>
+		<key>com.apple.CoreSimulator.IndigoFramebufferBridge.IndigoFramebufferService</key>
+		<true/>
+	</dict>
+	<key>Program</key>
+	<string>/Library/Developer/PrivateFrameworks/CoreSimulator.framework/Resources/Platforms/iphoneos/usr/libexec/IndigoFramebufferBridge</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/libexec/IndigoFramebufferBridge</string>
+	</array>
+	<key>RootedSimulatorPath</key>
+	<true/>
+</dict>
+</plist>
