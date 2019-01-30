@@ -36,6 +36,8 @@ lower case operates on one level of folds deep
 ###denite###
 :Denite line - Filter lines of current buffer
 <leader>/  - :Denite grep - search files for strin
+<C-o> - Enter normal mode
+t (in normal mode) - Open in tab
 
 ###Language Client###
 <leader>lc - context menu
@@ -77,7 +79,7 @@ b - bookmark current file
 
 ###fugitive
 gstatus:
- U - checkout (blow away local changes)
+ X - checkout (blow away local changes)
 
  Glog: show's committed version of current file (without local changes)
  Glog -10 - Load last 10 commits for that file

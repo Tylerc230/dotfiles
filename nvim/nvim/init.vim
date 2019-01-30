@@ -72,6 +72,7 @@ if !&sidescrolloff
   set sidescrolloff=5   " Show next 5 columns while side-scrolling.
 endif
 set nostartofline       " Do not jump to first character with page commands.
+set exrc                " Source _nvimrc in local folder
 
 ":Topen open the terminal
 ":Ttoggle toggle
@@ -101,6 +102,8 @@ let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
 let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
 let g:deoplete#enable_at_startup = 1                                
+"call deoplete#enable_logging('DEBUG', 'deoplete.log')
+"call deoplete#custom#option('profile', v:true)
 
       "\'cpp': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
       "\'c': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
@@ -118,7 +121,6 @@ function! ClosePopup()
   endif                                                             
 endfunction                                                         
 
-"call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "Terminal stuff
 tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
@@ -142,14 +144,11 @@ nnoremap <C-left> :vertical resize -5<cr>
 nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 
-nmap <silent> <leader>f :VimFilerExplorer -auto-cd<CR>
-nmap <silent> <leader>ob :Unite -default-action=vimfiler_explorer bookmark<CR>
-nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru unite:directory_mru<CR>
+nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle<CR>
+nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
-nmap <silent> <leader>s <Plug>TilerNew
-nmap <silent> <leader>m <Plug>TilerFocus
 "format selection
 nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
@@ -166,41 +165,34 @@ map fg/ <Plug>(incsearch-fuzzy-stay)
 let test#strategy = 'neoterm'
 let test#python#runner = 'pytest'
 let g:test#python#pytest#options = '-s'
+
+
+
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
 nmap <silent> <leader>n :vert Tnew<CR>
 
 nnoremap <silent> <leader>U :TestNearest<CR>
 nnoremap <silent> <leader>u :TestFile<CR>
-"nmap <silent> <leader>a :TestSuite<CR>
+nnoremap <silent> <leader>a :TestSuite<CR>
 "nmap <silent> <leader>l :TestLast<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 
-autocmd FileType vimfiler call s:unite_settings()
-autocmd FileType vimfiler call s:vimfiler_settings()
-autocmd FileType unite call s:unite_settings()
-
-function! s:unite_settings()
-  unmap <buffer> <Space>
-endfunction
-
-function! s:vimfiler_settings()
-  nnoremap <buffer><silent><expr> b vimfiler#do_action('bookmark')
-  nunmap <buffer> v
-  nmap <buffer>v <Plug>(vimfiler_quick_look)
-  nunmap <buffer> <C-l>
-  nmap <buffer> R <Plug>(vimfiler_redraw_screen)
-  nunmap <buffer> *
-  nmap <buffer> <silent> * <Plug>(vimfiler_toggle_mark_current_line)
-  unmap <buffer> E
-  nmap <buffer> <silent> s <Plug>(vimfiler_split_edit_file)
-  nmap <buffer> <Enter> <Plug>(vimfiler_expand_or_edit)
-  nmap <buffer> cd <Plug>(vimfiler_cd_or_edit)
-
-endfunction
 
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#source('file_mru', 'sorters', ['sorter/rank'])
+call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
+call denite#custom#source('file_rec', 'sorters', ['sorter/rank'])
+call denite#custom#source('file_rec', 'matchers', ['matcher/cpsm'])
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 autocmd! BufWritePost,BufEnter * Neomake
@@ -271,9 +263,51 @@ augroup interoMaps
   au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
 augroup END
 
-let explorer = {  'is_selectable' : 1,  }
-function! explorer.func(candidates)
-  execute ':VimFilerExplorer -no-toggle ' . a:candidates[0].action__path
+call defx#custom#column('mark', {
+      \ 'directory_icon': '',
+      \ 'readonly_icon': '',
+      \ 'selected_icon': '✭',
+      \ })
+let g:defx_git#indicators = {
+  \ 'Modified'  : '',
+  \ 'Staged'    : '',
+  \ 'Untracked' : '',
+  \ 'Renamed'   : '➜',
+  \ 'Unmerged'  : '═',
+  \ 'Ignored'   : '☒',
+  \ 'Deleted'   : '',
+  \ 'Unknown'   : '?'
+  \ }
+autocmd FileType defx call s:defx_my_settings()
+function! s:defx_my_settings() abort
+  " Define mappings
+  nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
+  nnoremap <silent><buffer><expr> o defx#do_action('open')
+  nnoremap <silent><buffer><expr> c defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m defx#do_action('move')
+  nnoremap <silent><buffer><expr> p defx#do_action('paste')
+  nnoremap <silent><buffer><expr> s defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> P defx#do_action('open', 'pedit')
+  nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> N defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'git:mark:filename:type:size:time')
+  nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> d defx#do_action('remove')
+  nnoremap <silent><buffer><expr> r defx#do_action('rename')
+  nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
+  nnoremap <silent><buffer><expr> <BS> defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
+  nnoremap <silent><buffer><expr> q defx#do_action('quit')
+  nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+  nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
+  nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
+  nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
+  nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
 endfunction
-call unite#custom#action('cdable', 'vimfiler_explorer', explorer)
-unlet explorer
