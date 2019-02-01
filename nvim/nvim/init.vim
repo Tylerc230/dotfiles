@@ -34,9 +34,6 @@ so ~/.config/nvim/statusline.vim
 "settings                                                           
 let mapleader="\<SPACE>"                                            
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
-let g:vimfiler_as_default_explorer = 1                              
-let g:vimfiler_ignore_filters = ['matcher_ignore_pattern']
-let g:vimfiler_quick_look_command = 'qlmanage -p'
 
 let g:EasyMotion_do_mapping = 1
 set nowrap
@@ -73,6 +70,8 @@ if !&sidescrolloff
 endif
 set nostartofline       " Do not jump to first character with page commands.
 set exrc                " Source _nvimrc in local folder
+set undofile " Maintain undo history between sessions
+set undodir=~/.cache/undodir
 
 ":Topen open the terminal
 ":Ttoggle toggle
@@ -148,6 +147,7 @@ nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -w
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
+nmap <silent> <leader>z :Denite z<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 "format selection
 nmap <silent> <leader>i V=<ESC> 
@@ -281,13 +281,13 @@ let g:defx_git#indicators = {
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
   " Define mappings
-  nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
-  nnoremap <silent><buffer><expr> o defx#do_action('open')
+  nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+  nnoremap <silent><buffer><expr> o defx#do_action('drop')
   nnoremap <silent><buffer><expr> c defx#do_action('copy')
   nnoremap <silent><buffer><expr> m defx#do_action('move')
   nnoremap <silent><buffer><expr> p defx#do_action('paste')
-  nnoremap <silent><buffer><expr> s defx#do_action('open', 'vsplit')
-  nnoremap <silent><buffer><expr> P defx#do_action('open', 'pedit')
+  nnoremap <silent><buffer><expr> s defx#do_action('drop', 'vsplit')
+  nnoremap <silent><buffer><expr> P defx#do_action('drop', 'pedit')
   nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
   nnoremap <silent><buffer><expr> N defx#do_action('new_file')
   nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
