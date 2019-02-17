@@ -77,6 +77,7 @@ set undodir=~/.cache/undodir
 ":Ttoggle toggle
 autocmd BufLeave term://* stopinsert
 autocmd BufEnter term://* call fugitive#detect(@%)
+autocmd FileType neoterm  set nospell
 
 au BufRead,BufNewFile Podfile set filetype=ruby
 au BufRead,BufNewFile *.podspec set filetype=ruby
@@ -99,8 +100,12 @@ let g:goldenview__enable_default_mapping = 0
 " Use deoplete.                                                     
 let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
+let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
+let g:LanguageClient_loggingFile = expand('~/.config/nvim/LanguageClient.log')
+let g:LanguageClient_loggingLevel = "DEBUG"
+
 let g:deoplete#enable_at_startup = 1                                
+call deoplete#custom#option('auto_complete_delay', 1000)
 "call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "call deoplete#custom#option('profile', v:true)
 
@@ -132,11 +137,11 @@ nnoremap <C-i> <C-o>
 nnoremap <C-o> <C-i>
 cnoreabbrev wb w <bar> bp <bar> bd #
 "windows
-nmap <silent> <leader>h <C-w>h
-nmap <silent> <leader>j <C-w>j
-nmap <silent> <leader>k <C-w>k
-nmap <silent> <leader>l <C-w>l
-nmap <silent> <leader>w <Plug>(choosewin)
+nnoremap <silent> <leader>h <C-w>h
+nnoremap <silent> <leader>j <C-w>j
+nnoremap <silent> <leader>k <C-w>k
+nnoremap <silent> <leader>l <C-w>l
+nnoremap <silent> <leader>w :ChooseWin<cr>
 " resize current buffer by +/- 5 
 nnoremap <C-right> :vertical resize +5<cr>
 nnoremap <C-left> :vertical resize -5<cr>
@@ -149,10 +154,12 @@ nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>z :Denite z<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
+"nmap <silent> <leader>gl :Denite -auto-preview gitlog:all -mode=normal -vertical-preview <CR>
+"nmap <silent> <leader>gl :Denite gitlog:all -mode=normal -vertical-preview <CR>
+nmap <silent> <leader>gl :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 "format selection
 nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
-nmap <silent> <leader>eb :VimFilerBuffer -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<CR>
 nmap <silent> <leader>v :Ttoggle<CR>
 
 map /  <Plug>(incsearch-forward)
@@ -180,6 +187,30 @@ nnoremap <silent> <leader>a :TestSuite<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 
 
+call denite#custom#map(
+      \ 'normal',
+      \ '<Space>j',
+      \ '<denite:wincmd:j>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'normal',
+      \ '<Space>h',
+      \ '<denite:wincmd:h>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'normal',
+      \ '<Space>k',
+      \ '<denite:wincmd:k>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'normal',
+      \ '<Space>l',
+      \ '<denite:wincmd:l>',
+      \ 'noremap'
+      \)
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
 call denite#custom#var('grep', 'command', ['ag'])
@@ -193,9 +224,9 @@ call denite#custom#source('file_mru', 'sorters', ['sorter/rank'])
 call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('file_rec', 'sorters', ['sorter/rank'])
 call denite#custom#source('file_rec', 'matchers', ['matcher/cpsm'])
+call denite#custom#source('gitlog', 'sorters', [])
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
-autocmd! BufWritePost,BufEnter * Neomake
 hi Search gui=NONE guibg=#606060 guifg=NONE
 set guicursor+=a:blinkon1
 hi! link IncSearch Search
@@ -280,6 +311,7 @@ let g:defx_git#indicators = {
   \ }
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
+set nospell
   " Define mappings
   nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
   nnoremap <silent><buffer><expr> o defx#do_action('drop')

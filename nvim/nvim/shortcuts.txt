@@ -14,6 +14,7 @@ cprev - show more recent revision
 :tabe - edit in new tab
 <c-w>H - window full height
 <c-w>K - window full width
+<c-w>p - go to preview window
 set scrollbind - locks a buffer to be scrolled
 <line>zt - move line to top
 
@@ -38,6 +39,7 @@ lower case operates on one level of folds deep
 <leader>/  - :Denite grep - search files for strin
 <C-o> - Enter normal mode
 t (in normal mode) - Open in tab
+<tab> choose action
 
 ###Language Client###
 <leader>lc - context menu
@@ -72,6 +74,8 @@ b - bookmark current file
 ###choosewin
 -<window> - move to window
 <leader>w<window> - move to window
+<leader>ws <window> - swap current window with window
+<leader>wS <window> - swap current window with window and stay in window
 
 ###GoldenView
 <leader>s  - split view

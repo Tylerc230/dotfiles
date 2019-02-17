@@ -1,0 +1,26 @@
+{
+  "clients": {
+    "pyls": {
+      "command": [
+        "pyls"
+      ],
+      "enabled": false,
+      "languageId": "python",
+      "scopes": [
+        "source.python"
+      ],
+      "settings": {
+        "pyls": {
+          "plugins": {
+            "pycodestyle": {
+              "enabled": true
+            }
+          }
+        }
+      },
+      "syntaxes": [
+        "Packages/Python/Python.sublime-syntax"
+      ]
+    }
+  }
+}
