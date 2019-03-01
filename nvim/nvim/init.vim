@@ -89,7 +89,6 @@ if has("autocmd")
     \   exe "normal g'\"" |
      \ endif
 endif
-autocmd InsertLeave * call ClosePopup()
 
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_default_opts =
@@ -105,26 +104,24 @@ let g:LanguageClient_loggingFile = expand('~/.config/nvim/LanguageClient.log')
 let g:LanguageClient_loggingLevel = "DEBUG"
 
 let g:deoplete#enable_at_startup = 1                                
-call deoplete#custom#option('auto_complete_delay', 1000)
+call deoplete#custom#option('auto_complete_delay', 250)
 "call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "call deoplete#custom#option('profile', v:true)
 
       "\'cpp': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
       "\'c': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
       "\'objc': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
+"\'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
 let g:LanguageClient_serverCommands = {
-      \'python': ['/usr/local/bin/pyls'],
-      \'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
+      \'python': ['/usr/local/bin/pyls']
       \}
 let g:LanguageClient_rootMarkers = {
       \ 'swift': ['Package.swift'],
       \ }
-function! ClosePopup()                                              
-  if pumvisible()                                                   
-    call deoplete#smart_close_popup()                               
-  endif                                                             
-endfunction                                                         
 
+let g:delimitMate_expand_cr = 1
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
 "Terminal stuff
 tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
@@ -148,19 +145,21 @@ nnoremap <C-left> :vertical resize -5<cr>
 nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 
-nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle<CR>
+nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -resume -listed<CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>z :Denite z<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
-"nmap <silent> <leader>gl :Denite -auto-preview gitlog:all -mode=normal -vertical-preview <CR>
-"nmap <silent> <leader>gl :Denite gitlog:all -mode=normal -vertical-preview <CR>
-nmap <silent> <leader>gl :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gll :Denite gitlog -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 "format selection
 nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
 nmap <silent> <leader>v :Ttoggle<CR>
+"copy file path to clipboard
+nmap <silent> <leader>cp :let @+ = expand("%")<cr>
+
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -178,6 +177,8 @@ let g:test#python#pytest#options = '-s'
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
+let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
+let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
 nmap <silent> <leader>n :vert Tnew<CR>
 
 nnoremap <silent> <leader>U :TestNearest<CR>
@@ -220,7 +221,7 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#source('file_mru', 'sorters', ['sorter/rank'])
+call denite#custom#source('file_mru', 'sorters', [])
 call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('file_rec', 'sorters', ['sorter/rank'])
 call denite#custom#source('file_rec', 'matchers', ['matcher/cpsm'])
@@ -343,3 +344,20 @@ set nospell
   nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
   nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
 endfunction
+
+
+function! s:check_out(context)
+  let commit = a:context['targets'][0].source__commit
+  echom "checkout ".commit
+  execute "!git checkout ".commit
+endfunction
+call denite#custom#action('gitlog', 'check_out', function('s:check_out'))
+call denite#custom#map(
+      \ 'normal',
+      \ 'C',
+      \ '<denite:do_action:check_out>',
+      \ 'noremap'
+      \)
+
+
+
