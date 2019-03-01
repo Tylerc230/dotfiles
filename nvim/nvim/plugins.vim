@@ -1,6 +1,9 @@
 call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-sleuth')
+call dein#add('Raimondi/delimitMate')
+
 call dein#add('Shougo/denite.nvim')
 call dein#add('rafi/vim-denite-z')
 call dein#add('neoclide/denite-git')
