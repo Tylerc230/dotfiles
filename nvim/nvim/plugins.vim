@@ -38,7 +38,6 @@ call dein#add('neovimhaskell/haskell-vim')
 call dein#add('alx741/vim-hindent')
 
 "Swift
-call dein#add('gfontenot/vim-xcode')
 call dein#add('keith/swift.vim')
 "call dein#add('neomake/neomake')
 "call dein#add('landaire/deoplete-swift')

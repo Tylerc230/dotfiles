@@ -78,6 +78,7 @@ set undodir=~/.cache/undodir
 autocmd BufLeave term://* stopinsert
 autocmd BufEnter term://* call fugitive#detect(@%)
 autocmd FileType neoterm  set nospell
+autocmd FileType fugitive set spell
 
 au BufRead,BufNewFile Podfile set filetype=ruby
 au BufRead,BufNewFile *.podspec set filetype=ruby
@@ -97,6 +98,7 @@ let g:unite_source_grep_recursive_opt = ''
 let g:goldenview__enable_default_mapping = 0
 
 " Use deoplete.                                                     
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
 let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
@@ -105,23 +107,23 @@ let g:LanguageClient_loggingLevel = "DEBUG"
 
 let g:deoplete#enable_at_startup = 1                                
 call deoplete#custom#option('auto_complete_delay', 250)
-"call deoplete#enable_logging('DEBUG', 'deoplete.log')
+call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "call deoplete#custom#option('profile', v:true)
 
       "\'cpp': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
       "\'c': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
       "\'objc': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
-"\'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
 let g:LanguageClient_serverCommands = {
-      \'python': ['/usr/local/bin/pyls']
+      \'python': ['/usr/local/bin/pyls'],
+      \'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
       \}
 let g:LanguageClient_rootMarkers = {
       \ 'swift': ['Package.swift'],
       \ }
 
-let g:delimitMate_expand_cr = 1
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <CR>  pumvisible() ? "\<C-y>" : "\<CR>"
+let g:delimitMate_expand_cr = 0
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"
+imap <expr> <CR>  pumvisible() ? "\<C-y>" : "<Plug>delimitMateCR"
 "Terminal stuff
 tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
@@ -146,13 +148,17 @@ nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 
 nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -resume -listed<CR>
+nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -listed <CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>z :Denite z<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
-nmap <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+map <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gll :Denite gitlog -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gb :Denite gitbranch -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+
+nmap <silent> U :UndotreeToggle<cr>
 "format selection
 nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
@@ -246,7 +252,12 @@ endif
 "vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
 "autocmd BufReadPost *.swift call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "autocmd BufReadPost *.swift call deoplete#custom#source('Swift', 'debug_enabled', 1)
-"
+
+function ShowGstatus()
+  execute "Gstatus | wincmd T | set previewwindow"
+  "execute "tab Gstatus"
+endfunction
+
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
     nnoremap <buffer> <silent> gi :call LanguageClient#textDocument_hover()<cr>
