@@ -52,6 +52,9 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_gui"
+                                        ],
+                                        "optional": [
+                                            "any"
                                         ]
                                     }
                                 },

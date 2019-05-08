@@ -23,6 +23,7 @@ colors gruvbox
 "colors hybrid
 "colors hybrid_material
 "colors OceanicNext
+hi ColorColumn ctermbg=0 guibg=#363636
 set laststatus=2
 "For gitgutter
 set updatetime=250
@@ -72,12 +73,14 @@ set nostartofline       " Do not jump to first character with page commands.
 set exrc                " Source _nvimrc in local folder
 set undofile " Maintain undo history between sessions
 set undodir=~/.cache/undodir
+set signcolumn=yes
 
 ":Topen open the terminal
 ":Ttoggle toggle
 autocmd BufLeave term://* stopinsert
 autocmd BufEnter term://* call fugitive#detect(@%)
 autocmd FileType neoterm  set nospell
+autocmd FileType denite  set nospell
 autocmd FileType fugitive set spell
 
 au BufRead,BufNewFile Podfile set filetype=ruby
@@ -99,6 +102,7 @@ let g:goldenview__enable_default_mapping = 0
 
 " Use deoplete.                                                     
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_useVirtualText = 0
 let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
 let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
@@ -107,7 +111,7 @@ let g:LanguageClient_loggingLevel = "DEBUG"
 
 let g:deoplete#enable_at_startup = 1                                
 call deoplete#custom#option('auto_complete_delay', 250)
-call deoplete#enable_logging('DEBUG', 'deoplete.log')
+"call deoplete#enable_logging('DEBUG', 'deoplete.log')
 "call deoplete#custom#option('profile', v:true)
 
       "\'cpp': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
@@ -150,13 +154,14 @@ nnoremap <C-down> :resize -5<cr>
 nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -resume -listed<CR>
 nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -listed <CR>
 nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
-nmap <silent> <leader>t :Denite -buffer-name=CTRLP file_rec<CR>
+nmap <silent> <leader>t :Denite -buffer-name=CTRLP file/rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
-nmap <silent> <leader>z :Denite z<CR>
+nmap <silent> <leader>? :Denite grep:.:-s<CR>
+nmap <silent> <leader>z :Denite z -sorters=""<CR>
 nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
 map <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gll :Denite gitlog -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gb :Denite gitbranch -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gb :Denite gitbranch -auto-resume -vertical-preview -sorters=""<CR>
 
 nmap <silent> U :UndotreeToggle<cr>
 "format selection
@@ -232,6 +237,10 @@ call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('file_rec', 'sorters', ['sorter/rank'])
 call denite#custom#source('file_rec', 'matchers', ['matcher/cpsm'])
 call denite#custom#source('gitlog', 'sorters', [])
+
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+      \ ['git', 'ls-files', '-co', '--exclude-standard'])
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 hi Search gui=NONE guibg=#606060 guifg=NONE
@@ -326,7 +335,7 @@ function! s:defx_my_settings() abort
 set nospell
   " Define mappings
   nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-  nnoremap <silent><buffer><expr> o defx#do_action('drop')
+  nnoremap <silent><buffer><expr> o defx#do_action('open_or_close_tree')
   nnoremap <silent><buffer><expr> c defx#do_action('copy')
   nnoremap <silent><buffer><expr> m defx#do_action('move')
   nnoremap <silent><buffer><expr> p defx#do_action('paste')
