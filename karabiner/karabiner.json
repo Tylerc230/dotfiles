@@ -51,7 +51,7 @@
                                     "key_code": "right_gui",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_gui"
+                                            "left_shift"
                                         ],
                                         "optional": [
                                             "any"
