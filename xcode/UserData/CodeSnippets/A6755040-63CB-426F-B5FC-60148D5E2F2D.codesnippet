@@ -9,7 +9,7 @@
 		<string>ClassInterfaceMethods</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (nonatomic, &lt;#retention#&gt;) IBOutlet &lt;#type#&gt; *&lt;#name#&gt;;</string>
+	<string></string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>A6755040-63CB-426F-B5FC-60148D5E2F2D</string>
 	<key>IDECodeSnippetLanguage</key>
