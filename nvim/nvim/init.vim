@@ -119,7 +119,7 @@ call deoplete#custom#option('auto_complete_delay', 250)
       "\'objc': ['~/tools/cquery/build/cquery', '--log-file=/tmp/cq.log'],
 let g:LanguageClient_serverCommands = {
       \'python': ['/usr/local/bin/pyls'],
-      \'swift': ['~/Desktop/vim_lsp/sourcekit-lsp/.build/debug/sourcekit-lsp'],
+      \'swift': ['~/tools/sourcekit-lsp/.build/debug/sourcekit-lsp'],
       \}
 let g:LanguageClient_rootMarkers = {
       \ 'swift': ['Package.swift'],
@@ -158,7 +158,7 @@ nmap <silent> <leader>t :Denite -buffer-name=CTRLP file/rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>? :Denite grep:.:-s<CR>
 nmap <silent> <leader>z :Denite z -sorters=""<CR>
-nmap <silent> <leader>gs :Gstatus <bar>wincmd T<bar>set previewwindow<CR>
+nmap <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gll :Denite gitlog -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gb :Denite gitbranch -auto-resume -vertical-preview -sorters=""<CR>
