@@ -14,7 +14,7 @@ else
 fi
 alias vi=vim
 alias pi='pod install'
-alias gsi='nvr -s --remote-tab-silent -cGstatus fake.txt'
+alias gsi='nvr -s --remote-silent -cGstatus'
 alias gsh='git stash'
 alias gshp='git stash pop'
 alias gs='git status'
