@@ -199,6 +199,8 @@ nnoremap <silent> <leader>a :TestSuite<CR>
 "nmap <silent> <leader>g :TestVisit<CR>
 
 
+autocmd FileType denite-filter call deoplete#custom#buffer_option('auto_complete', v:false)
+
 call denite#custom#map(
       \ 'normal',
       \ '<Space>j',
@@ -223,6 +225,18 @@ call denite#custom#map(
       \ '<denite:wincmd:l>',
       \ 'noremap'
       \)
+let s:denite_options = {
+      \ 'prompt' : '❯',
+      \ 'split': 'floating',
+      \ 'start_filter': 1,
+      \ 'auto_resize': 1,
+      \ 'source_names': 'short',
+      \ 'direction': 'botright',
+      \ 'highlight_filter_background': 'CursorLine',
+      \ 'highlight_matched_char': 'Type',
+      \ 'reversed': 'true',
+      \ }
+call denite#custom#option('default', s:denite_options)
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
 call denite#custom#var('grep', 'command', ['ag'])
@@ -232,10 +246,10 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#source('file_mru', 'sorters', [])
+call denite#custom#source('file_mru', 'sorters', ['sorter/rank'])
 call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
-call denite#custom#source('file_rec', 'sorters', ['sorter/rank'])
-call denite#custom#source('file_rec', 'matchers', ['matcher/cpsm'])
+"call denite#custom#source('file/rec', 'sorters', ['sorter/rank'])
+call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitlog', 'sorters', [])
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
@@ -365,7 +379,25 @@ set nospell
   nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
 endfunction
 
-
+autocmd FileType denite call s:denite_my_settings()
+"https://github.com/Shougo/denite.nvim/issues/654#issuecomment-502355991
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <tab> denite#do_map('choose_action')
+  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> T denite#do_map('do_action', 'tabopen')
+  nnoremap <silent><buffer><expr> v denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> h denite#do_map('do_action', 'split')
+  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+  nnoremap <nowait> <silent><buffer><expr> y denite#do_map('do_action', 'yank')
+  nnoremap <silent><buffer><expr> c denite#do_map('do_action', 'cd')
+  nnoremap <silent><buffer><expr> e denite#do_map('do_action', 'edit')
+  nnoremap <nowait> <silent><buffer><expr> o denite#do_map('do_action', 'drop')
+  nnoremap <silent><buffer><expr> V denite#do_map('toggle_select')
+  nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
+endfunction
 function! s:check_out(context)
   let commit = a:context['targets'][0].source__commit
   echom "checkout ".commit
