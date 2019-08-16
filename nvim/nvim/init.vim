@@ -24,6 +24,7 @@ colors gruvbox
 "colors hybrid_material
 "colors OceanicNext
 hi ColorColumn ctermbg=0 guibg=#363636
+highlight Normal guibg=none
 set laststatus=2
 "For gitgutter
 set updatetime=250
@@ -78,12 +79,25 @@ set signcolumn=yes
 ":Topen open the terminal
 ":Ttoggle toggle
 autocmd BufLeave term://* stopinsert
-autocmd BufEnter term://* call fugitive#detect(@%)
+function! FugitiveReDetect()
+  unlet! b:git_dir
+  call fugitive#detect(getcwd())
+endfunction
+
+augroup fugitive-ov
+  au BufEnter term://* call fugitive#detect(@%)
+  au BufNew * call FugitiveReDetect()
+  au BufNewFile * call FugitiveReDetect()
+  au BufRead * call FugitiveReDetect()
+  au CmdwinEnter * call FugitiveReDetect()
+  au DirChanged * bufdo call FugitiveReDetect()
+  au VimEnter * call FugitiveReDetect()
+augroup END
 autocmd FileType neoterm  set nospell
 autocmd FileType denite  set nospell
 autocmd FileType fugitive set spell
 
-au BufRead,BufNewFile Podfile set filetype=ruby
+au BufRead,BufNewFile Podfile, Fastfile set filetype=ruby
 au BufRead,BufNewFile *.podspec set filetype=ruby
 autocmd BufNewFile,BufRead *.swift set filetype=swift
 " When editing a file, always jump to the last cursor position
