@@ -5,7 +5,7 @@ export KEYTIMEOUT=1
 source <(antibody init)
 antibody bundle < $HOME/dotfiles/zsh/zsh_plugins.txt
 
-export PATH=/opt/local/bin:/opt/local/sbin:~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:/usr/local/opt/ruby/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
 if [[ ! -z "$NVIM_LISTEN_ADDRESS" ]];
 then 
   alias vim='nvr -s --remote-silent'
@@ -13,14 +13,13 @@ else
   alias vim=nvim
 fi
 alias vi=vim
-alias pi='pod install'
+alias pi='be pod install'
 alias gsi='nvr -s --remote-silent -cGstatus'
 alias gsh='git stash'
 alias gshp='git stash pop'
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
-alias pi='pod install'
 alias be='bundle exec'
 alias d='docker'
 alias dc='docker-compose'
@@ -28,6 +27,7 @@ alias dm='docker-machine'
 alias dcon='docker container'
 alias dim='docker image'
 alias hg='history | grep '
+alias js='python -m json.tool'
 function dm-env() {
   eval "$(docker-machine env "${1:-default}")"
 }
