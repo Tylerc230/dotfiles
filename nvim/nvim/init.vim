@@ -59,7 +59,6 @@ set ignorecase          " Make searching case insensitive
 set smartcase           " ... unless the query has capital letters.
 set gdefault            " Use 'g' flag by default with :s/foo/bar/.
 set magic               " Use 'magic' patterns (extended regular expressions).
-
 " More natural splits
 set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
@@ -75,6 +74,11 @@ set exrc                " Source _nvimrc in local folder
 set undofile " Maintain undo history between sessions
 set undodir=~/.cache/undodir
 set signcolumn=yes
+
+"Auto reload buffer if it changes on disk
+set autoread            
+au CursorHold,CursorHoldI * checktime
+au FocusGained,BufEnter * :checktime
 
 ":Topen open the terminal
 ":Ttoggle toggle
