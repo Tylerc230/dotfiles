@@ -8,8 +8,6 @@ set runtimepath+=~/code/forks/denite-git/
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
 
-  " Let dein manage dein
-  " Required:
   so ~/.config/nvim/plugins.vim
   so ~/.config/nvim/colorschemes.vim
 
