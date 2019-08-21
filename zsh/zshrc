@@ -14,7 +14,6 @@ else
 fi
 alias vi=vim
 alias pi='be pod install'
-alias gsi='nvr -s --remote-silent -cGstatus'
 alias gsh='git stash'
 alias gshp='git stash pop'
 alias gs='git status'
@@ -28,6 +27,7 @@ alias dcon='docker container'
 alias dim='docker image'
 alias hg='history | grep '
 alias js='python -m json.tool'
+unalias gsi
 function dm-env() {
   eval "$(docker-machine env "${1:-default}")"
 }
