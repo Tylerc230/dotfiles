@@ -1,14 +1,16 @@
 "denite
 
 
-nmap <silent> <leader>r :Denite -buffer-name=MRU file_mru<CR>
+nmap <silent> <leader>r :Denite -no-start-filter -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file/rec<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>? :Denite grep:.:-s<CR>
 nmap <silent> <leader>z :Denite z -sorters=""<CR>
-map <silent> <leader>gla :Denite gitlog:all -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gll :Denite gitlog -mode=normal -auto-resume -vertical-preview -sorters=""<CR>
+map <silent> <leader>gll :Denite gitlog:all -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>glf :Denite gitlog -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gc :Denite gitchanged -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gb :Denite gitbranch -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gf :Denite gitfiles -auto-resume -vertical-preview -sorters=""<CR>
 autocmd FileType denite-filter call deoplete#custom#buffer_option('auto_complete', v:false)
 
 call denite#custom#map(
@@ -38,15 +40,15 @@ call denite#custom#map(
 let s:denite_options = {
       \ 'prompt' : '❯',
       \ 'split': 'floating',
+      \ 'empty': v:false,
       \ 'start_filter': 1,
       \ 'auto_resize': 1,
       \ 'source_names': 'short',
       \ 'direction': 'botright',
       \ 'highlight_filter_background': 'CursorLine',
       \ 'highlight_matched_char': 'Type',
-      \ 'reversed': 'true',
       \ }
-call denite#custom#option('default', s:denite_options)
+call denite#custom#option('_', s:denite_options)
 call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>', 'noremap' )
 call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>', 'noremap' )
 call denite#custom#var('grep', 'command', ['ag'])
@@ -56,10 +58,9 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#source('file_mru', 'sorters', ['sorter/rank'])
-call denite#custom#source('file_mru', 'matchers', ['matcher/cpsm'])
-"call denite#custom#source('file/rec', 'sorters', ['sorter/rank'])
+call denite#custom#source('file_mru', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+call denite#custom#source('gitfiles', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitlog', 'sorters', [])
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
@@ -101,8 +102,12 @@ call denite#custom#map(
 
 
 "defx
-nmap <silent> <leader>f :Defx -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -buffer-name="Defx" -toggle -resume -listed -auto-cd <CR>
-nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft -auto-cd -buffer-name="Defx" -toggle -listed <CR>
+nmap <silent> <leader>f :Defx -split=vertical -winwidth=50 -direction=topleft -buffer-name="Defx" -toggle -resume -listed -auto-cd <CR>
+nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')`  -split=vertical -winwidth=50 -direction=topleft  -buffer-name="Defx" -toggle -listed -auto-cd<CR>
+
+call defx#custom#option('_', {
+      \ 'columns': 'git:mark:indent:icon:filename:type:size:time',
+      \ })
 call defx#custom#column('mark', {
       \ 'directory_icon': '',
       \ 'readonly_icon': '',
