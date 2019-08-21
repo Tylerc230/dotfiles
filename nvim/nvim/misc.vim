@@ -1,4 +1,5 @@
-au BufRead,BufNewFile Podfile, Fastfile set filetype=ruby
+au BufRead,BufNewFile Podfile set filetype=ruby
+au BufRead,BufNewFile Fastfile set filetype=ruby
 au BufRead,BufNewFile *.podspec set filetype=ruby
 
 "navigation
@@ -103,3 +104,8 @@ function! s:Filter_lines(cmd, filter)
   0
 endfunction
 command! -nargs=? Scriptnames call s:Filter_lines('scriptnames', <q-args>)
+
+filetype plugin indent on
+filetype plugin on
+syntax enable
+

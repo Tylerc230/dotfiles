@@ -1,7 +1,4 @@
 "Required:
-filetype plugin indent on
-filetype plugin on
-syntax enable
 set clipboard=unnamed
 
 " If you want to install not installed plugins on startup.
