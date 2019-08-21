@@ -2,7 +2,6 @@
 " Required:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 set runtimepath+=~/dotfiles/nvim/nvim/bin
-set runtimepath+=~/code/forks/denite-git/
 
 " Required:
 if dein#load_state('~/.cache/dein')
