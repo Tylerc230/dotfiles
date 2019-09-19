@@ -37,12 +37,27 @@ export HISTFILESIZE=3000
 export EDITOR=vim
 set -o vi
 bindkey -M viins '^s' vi-cmd-mode
+# ZLE hooks for prompt's vi mode status
+function zle-line-init zle-keymap-select {
+	# Change the cursor style depending on keymap mode.
+	case $KEYMAP {
+		vicmd)
+			printf '\e[0 q' # Box.
+			;;
+
+		viins|main)
+			printf '\e[6 q' # Vertical bar.
+			;;
+	}
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
 DDATA=~/Library/Developer/Xcode/DerivedData
 export SOURCEKIT_LOGGING=3
-export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-DEVELOPMENT-SNAPSHOT-2018-11-25-a.xctoolchain
+export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain
 eval "$(rbenv init -)"
 export FASTLANE_USER=tylerc230@gmail.com
-
+export PILOT_USERNAME=tylerc230@gmail.com                          
 
 # This function calls the script below when loaded by
 # the shell inside of neovim. It must be placed somewhere in
