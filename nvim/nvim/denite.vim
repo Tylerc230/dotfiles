@@ -3,13 +3,16 @@
 
 nmap <silent> <leader>r :Denite -no-start-filter -buffer-name=MRU file_mru<CR>
 nmap <silent> <leader>t :Denite -buffer-name=CTRLP file/rec<CR>
+nmap <silent> <leader>b :Denite -buffer-name=Buffers -no-start-filter buffer<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>? :Denite grep:.:-s<CR>
 nmap <silent> <leader>z :Denite z -sorters=""<CR>
-map <silent> <leader>gll :Denite gitlog:all -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>e :Denite quickfix -no-start-filter -buffer-name=quickfix -sorters=""<CR>
+"nmap <silent> <leader>gll :Denite output:!hist_list.sh<CR>
+nmap <silent> <leader>gll :Denite gitlog:all -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>glf :Denite gitlog -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gc :Denite gitchanged -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gb :Denite gitbranch -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gb :Denite gitbranch -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gf :Denite gitfiles -auto-resume -vertical-preview -sorters=""<CR>
 autocmd FileType denite-filter call deoplete#custom#buffer_option('auto_complete', v:false)
 
@@ -58,10 +61,16 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
+
+call denite#custom#var('file/rec', 'command',
+      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 call denite#custom#source('file_mru', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
-call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+call denite#custom#source('file/rec', 'matchers', ['matcher/hide_hidden_files','converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitfiles', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitlog', 'sorters', [])
+
+"call denite#custom#alias('source', 'zsh_history', 'output')
+"call denite#custom#var('zsh_history', 'command', ['hist_list.sh'])
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
