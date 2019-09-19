@@ -6,6 +6,8 @@ set clipboard=unnamed
 "set hlsearch
 " Use <space>cm to toggle comments for the selection
 "let mapleader = "\<Space>"
+"cnoremap q xcmenucmd Close Editor
+nmap ZZ :xcmenucmd Close Editor<CR>
 nmap <Space>t :xccmd openQuickly<CR>
 nmap <Space>m :xcmenucmd Show Document Items<CR>
 nmap <Space>r :xcmenucmd Run<CR>
@@ -21,6 +23,9 @@ nmap <Space>l <C-w>l
 nmap <Space>h <C-w>h
 nmap <Space>k <C-w>k
 nmap <Space>j <C-w>j
+"nmap <Tab> :xcmenucmd Jump to Next Placeholder<CR>
+"nmap <Tab> /<#<CR>va<
+nmap <Tab> /<#<CR>i<Right>
 
 vmap <Space>ni :xcmenucmd Jump to Next Issue<CR>
 vmap <Space>pi :xcmenucmd Jump to Previous Issue<CR>
