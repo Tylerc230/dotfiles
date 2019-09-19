@@ -21,7 +21,6 @@ nmap <silent> U :UndotreeToggle<cr>
 "format selection
 nmap <silent> <leader>i V=<ESC> 
 vmap <silent> <leader>i =
-nmap <silent> <leader>v :Ttoggle<CR>
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
 

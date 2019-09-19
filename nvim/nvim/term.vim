@@ -10,6 +10,7 @@ let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
 let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
+nmap <silent> <leader>v :Ttoggle<CR>
 nmap <silent> <leader>n :vert Tnew<CR>
 
 nnoremap <silent> <leader>U :TestNearest<CR>
@@ -21,7 +22,7 @@ nnoremap <silent> <leader>a :TestSuite<CR>
 ":Ttoggle toggle
 autocmd BufLeave term://* stopinsert
 autocmd FileType neoterm  set nospell
-"Terminal stuff
+autocmd FileType neoterm  nnoremap <silent><buffer> q :Tclose<CR>
 tnoremap <ESC> <C-\><C-n>
 "tnoremap <leader>h <C-\><C-n><C-w>h
 "tnoremap <leader>j <C-\><C-n><C-w>j
