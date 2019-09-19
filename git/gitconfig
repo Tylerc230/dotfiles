@@ -11,7 +11,8 @@
   editor = nvr --remote-tab-wait-silent
 
 	excludesfile = /Users/tyler/.gitignore
-
+[core]
+    hooksPath = ~/dotfiles/git/hooks
 [color]
   ui = true
 	diff = auto
@@ -28,13 +29,6 @@
   new = green bold
 [push]
 	default = upstream
-
-[mergetool "mergepbx"]
-	cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
-
-[merge "mergepbx"]
-        name = Xcode project files merger
-        driver = mergepbx %O %A %B
 
 [merge]
   tool = vimdiff
