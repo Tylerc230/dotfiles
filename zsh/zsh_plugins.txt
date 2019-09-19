@@ -1,5 +1,6 @@
 rupa/z
 robbyrussell/oh-my-zsh
 mafredri/zsh-async
-marszall87/lambda-pure
+#marszall87/lambda-pure
+sindresorhus/pure
 zsh-users/zsh-syntax-highlighting
