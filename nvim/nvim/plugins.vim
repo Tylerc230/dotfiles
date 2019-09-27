@@ -31,8 +31,12 @@ call dein#add('ervandew/supertab')
 call dein#add('haya14busa/incsearch.vim')
 call dein#add('haya14busa/incsearch-fuzzy.vim')
 call dein#add('t9md/vim-choosewin')
+
+call dein#add('sakhnik/nvim-gdb', {
+                  \'build': './install.sh'
+                  \})
 call dein#add('autozimu/LanguageClient-neovim', {
-      \ 'rev': 'next',
+      \ 'branch': 'next',
       \ 'build': 'bash install.sh',
       \ })
 
