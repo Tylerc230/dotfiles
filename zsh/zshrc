@@ -33,7 +33,7 @@ function dm-env() {
 }
 
 export PURE_GIT_UNTRACKED_DIRTY=0
-export HISTFILESIZE=3000
+export HISTFILESIZE=30000
 export EDITOR=vim
 set -o vi
 bindkey -M viins '^s' vi-cmd-mode
@@ -53,11 +53,15 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 DDATA=~/Library/Developer/Xcode/DerivedData
-export SOURCEKIT_LOGGING=3
+#export SOURCEKIT_LOGGING=3
 export SOURCEKIT_TOOLCHAIN_PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain
+#export NVIM_PYTHON_LOG_LEVEL=DEBUG
+#export NVIM_PYTHON_LOG_FILE=~/dotfiles/nvim/nvim/plugins.log
 eval "$(rbenv init -)"
 export FASTLANE_USER=tylerc230@gmail.com
+export FASTLANE_SKIP_UPDATE_CHECK=1
 export PILOT_USERNAME=tylerc230@gmail.com                          
+unalias history
 
 # This function calls the script below when loaded by
 # the shell inside of neovim. It must be placed somewhere in

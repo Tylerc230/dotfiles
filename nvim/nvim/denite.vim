@@ -6,9 +6,9 @@ nmap <silent> <leader>t :Denite -buffer-name=CTRLP file/rec<CR>
 nmap <silent> <leader>b :Denite -buffer-name=Buffers -no-start-filter buffer<CR>
 nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>? :Denite grep:.:-s<CR>
-nmap <silent> <leader>z :Denite z -sorters=""<CR>
+nmap <silent> <leader>zz :Denite z -sorters=""<CR>
 nmap <silent> <leader>e :Denite quickfix -no-start-filter -buffer-name=quickfix -sorters=""<CR>
-"nmap <silent> <leader>gll :Denite output:!hist_list.sh<CR>
+nmap <silent> <leader>zh :Denite zsh_history -no-start-filter -buffer-name="zsh history"<CR>
 nmap <silent> <leader>gll :Denite gitlog:all -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>glf :Denite gitlog -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gc :Denite gitchanged -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
@@ -42,7 +42,7 @@ call denite#custom#map(
       \)
 let s:denite_options = {
       \ 'prompt' : '❯',
-      \ 'split': 'floating',
+      \ 'split': 'horizontal',
       \ 'empty': v:false,
       \ 'start_filter': 1,
       \ 'auto_resize': 1,
@@ -69,12 +69,36 @@ call denite#custom#source('file/rec', 'matchers', ['matcher/hide_hidden_files','
 call denite#custom#source('gitfiles', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitlog', 'sorters', [])
 
-"call denite#custom#alias('source', 'zsh_history', 'output')
-"call denite#custom#var('zsh_history', 'command', ['hist_list.sh'])
+call denite#custom#alias('source', 'zsh_history', 'output')
+call denite#custom#source('zsh_history', 'args', ['!hist_list.sh'])
+call denite#custom#source('zsh_history', 'sorters', ['sorter/reverse'])
+call denite#custom#source('zsh_history', 'default_action', 'send_to_shell')
+function! s:send_to_shell(context)
+  let command = a:context['targets'][0]['word']
+  echom "executing ".command
+  execute "T  ".command
+endfunction
+
+call denite#custom#action('word', 'send_to_shell', function('s:send_to_shell'))
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',
       \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+function! s:check_out(context)
+  let commit = a:context['targets'][0].source__commit
+  echom "checkout ".commit
+  execute "!git checkout ".commit
+endfunction
+call denite#custom#action('gitlog', 'check_out', function('s:check_out'))
+call denite#custom#map(
+      \ 'normal',
+      \ 'C',
+      \ '<denite:do_action:check_out>',
+      \ 'noremap'
+      \)
+
+
 
 autocmd FileType denite call s:denite_my_settings()
 "https://github.com/Shougo/denite.nvim/issues/654#issuecomment-502355991
@@ -95,24 +119,9 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> V denite#do_map('toggle_select')
   nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
 endfunction
-function! s:check_out(context)
-  let commit = a:context['targets'][0].source__commit
-  echom "checkout ".commit
-  execute "!git checkout ".commit
-endfunction
-call denite#custom#action('gitlog', 'check_out', function('s:check_out'))
-call denite#custom#map(
-      \ 'normal',
-      \ 'C',
-      \ '<denite:do_action:check_out>',
-      \ 'noremap'
-      \)
-
-
-
 "defx
-nmap <silent> <leader>f :Defx -split=vertical -winwidth=50 -direction=topleft -toggle -resume -listed -auto-cd <CR>
-nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')`  -split=vertical -winwidth=50 -direction=topleft -toggle -listed -auto-cd<CR>
+nmap <silent> <leader>f :Defx -split=vertical -winwidth=50 -direction=topleft -toggle -resume -listed <CR>
+nmap <silent> <leader>F :Defx `expand('%:p:h')` -search=`expand('%:p')`  -split=vertical -winwidth=50 -direction=topleft -toggle -listed<CR>
 
 call defx#custom#option('_', {
       \ 'columns': 'git:mark:indent:icons:filename:type:size:time',

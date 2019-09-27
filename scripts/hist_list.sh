@@ -1,4 +1,5 @@
 #!/bin/zsh --login
 export HISTFILE=~/.zsh_history 
+export HISTSIZE=50000
 fc -R
-fc -l 0
+fc -ln 0
