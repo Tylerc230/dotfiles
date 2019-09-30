@@ -71,15 +71,26 @@ call denite#custom#source('gitlog', 'sorters', [])
 
 call denite#custom#alias('source', 'zsh_history', 'output')
 call denite#custom#source('zsh_history', 'args', ['!hist_list.sh'])
-call denite#custom#source('zsh_history', 'sorters', ['sorter/reverse'])
+call denite#custom#source('zsh_history', 'sorters', [])
+call denite#custom#source('zsh_history', 'max_candidates', 100000)
 call denite#custom#source('zsh_history', 'default_action', 'send_to_shell')
+let g:historyRegex = ' \([0-9]\+\)  \(.*\)'
 function! s:send_to_shell(context)
-  let command = a:context['targets'][0]['word']
+  let numberAndCommand = a:context['targets'][0]['word']
+  let command = substitute(numberAndCommand, g:historyRegex, '\2', '')
   echom "executing ".command
   execute "T  ".command
 endfunction
 
+function! s:edit_in_shell(context)
+  let numberAndCommand = a:context['targets'][0]['word']
+  let historyNumber = substitute(numberAndCommand, g:historyRegex, '\1', '')
+  echom "editing ".historyNumber
+  execute "T  !".historyNumber
+endfunction
+
 call denite#custom#action('word', 'send_to_shell', function('s:send_to_shell'))
+call denite#custom#action('word', 'edit_in_shell', function('s:edit_in_shell'))
 
 call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 call denite#custom#var('file/rec/git', 'command',

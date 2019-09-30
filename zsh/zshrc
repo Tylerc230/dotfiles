@@ -25,7 +25,7 @@ alias dc='docker-compose'
 alias dm='docker-machine'
 alias dcon='docker container'
 alias dim='docker image'
-alias hg='history | grep '
+alias hg='history 0 | grep '
 alias js='python -m json.tool'
 unalias gsi
 function dm-env() {
