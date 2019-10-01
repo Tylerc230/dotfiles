@@ -16,42 +16,14 @@
                 },
                 "rules": [
                     {
-                        "description": "Remap ESC to Option-ESC in Safari only",
+                        "description": "Change right_command+hjkl to arrow keys",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com.apple.Safari",
-                                            "^com.amazon.Kindle"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
                                 "from": {
-                                    "key_code": "escape"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "escape",
-                                        "modifiers": [
-                                            "left_option"
-                                        ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "manipulators": [
-                            {
-                                "description": "Change right command + left command to ctrl+command+alt",
-                                "from": {
-                                    "key_code": "right_gui",
+                                    "key_code": "h",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_shift"
+                                            "right_command"
                                         ],
                                         "optional": [
                                             "any"
@@ -60,11 +32,64 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "left_command",
-                                        "modifiers": [
-                                            "left_option",
-                                            "left_control"
+                                        "key_code": "left_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
                                         ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "down_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "up_arrow"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command"
+                                        ],
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_arrow"
                                     }
                                 ],
                                 "type": "basic"
@@ -72,9 +97,9 @@
                         ]
                     },
                     {
+                        "description": "Change right command to command+alt",
                         "manipulators": [
                             {
-                                "description": "Change right command to command+alt",
                                 "from": {
                                     "key_code": "right_gui",
                                     "modifiers": {
