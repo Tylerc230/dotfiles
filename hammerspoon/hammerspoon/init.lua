@@ -1,6 +1,8 @@
+hs.logger.defaultLogLevel="info"
 local subHyper = {"cmd", "alt"}
 local hyper = {"cmd", "alt", "ctrl"}
 local superHyper = {"shift", "cmd", "alt", "ctrl"}
+local logger = hs.logger.new("my_logger", "debug")
 
 -- application launching 
 hs.hotkey.bind(subHyper, 't', function()
@@ -48,8 +50,11 @@ end)
 
 --focus
 hs.hotkey.bind(hyper, "h", function()
-  wm("window --focus west")
-  --check if this fails and then switch focus to monitor 1
+  local rc = wm("window --focus west")
+  if rc == 1 then
+    wm("display --focus 2")
+  end
+  --check if this fails and then switch focus to monitor 2
 end)
 hs.hotkey.bind(hyper, "j", function()
   wm("window --focus south")
@@ -58,7 +63,10 @@ hs.hotkey.bind(hyper, "k", function()
   wm("window --focus north")
 end)
 hs.hotkey.bind(hyper, "l", function()
-  wm("window --focus east")
+  local rc = wm("window --focus east")
+  if rc == 1 then
+    wm("display --focus 1")
+  end
 end)
 
 
@@ -94,6 +102,8 @@ end)
 function wm(command)
   --local output, status, type, rc = hs.execute("/usr/local/bin/chunkc "..command, false)
   local output, status, type, rc = hs.execute("/usr/local/bin/yabai -m "..command, false)
+  logger.df("output %s status %s rc %s", output, tostring(status), rc)
+  return rc
 end
 
 function reloadConfig(files)

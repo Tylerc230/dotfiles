@@ -2,7 +2,7 @@
 
 # bar settings
 yabai -m config status_bar                   on
-yabai -m config status_bar_text_font         "FuraCode Nerd Font:Retina:12.0"
+yabai -m config status_bar_text_font         "FuraCode Nerd Font:Retina:16.0"
 yabai -m config status_bar_icon_font         "FuraCode Nerd Font:Retina:18.0"
 yabai -m config status_bar_background_color  0xff202020
 yabai -m config status_bar_foreground_color  0xffa8a8a8
@@ -46,10 +46,11 @@ yabai -m rule --add app=Dash manage=off sticky=on
 yabai -m rule --add app=Xcode title="" manage=off border=off
 
 #yabai -m query --windows to query windows
+#https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
 
 center_grid='26:26:5:5:16:16'
 yabai -m rule --add app='Messages' manage=off sticky=on grid="$center_grid"
-yabai -m rule --add app='Things' manage=off sticky=on grid="$center_grid"
+yabai -m rule --add app='Things' manage=off grid="$center_grid"
 yabai -m rule --add app='Spotify' manage=off sticky=on grid="$center_grid"
 yabai -m rule --add app='iTerm2' manage=off
 yabai -m rule --add app='System Preferences' manage=off sticky=on grid="$center_grid"
