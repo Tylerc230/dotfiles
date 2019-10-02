@@ -1,0 +1,183 @@
+rules:
+- description: Change right command+hjkl to arrow keys
+  maps:
+  - from:
+      code: h
+      mod: [right_command]
+    to:
+      code: left_arrow
+  - from:
+      code: j
+      mod: [right_command]
+    to:
+      code: down_arrow
+  - from:
+      code: k
+      mod: [right_command]
+    to:
+      code: up_arrow
+  - from:
+      code: l
+      mod: [right_command]
+    to:
+      code: right_arrow
+- description: Open Alfred opener
+  maps:
+    - from:
+        code: o
+        mod: [right_command]
+      to:
+        code: o
+        mod: [left_command, left_option]
+- description: iTerm window
+  maps:
+    - from:
+        code: f
+        mod: [right_command]
+      to:
+        code: f
+        mod: [left_command, left_option]
+- description: Dash
+  maps:
+    - from:
+        code: g
+        mod: [right_command]
+      to:
+        code: g
+        mod: [left_command, left_option]
+- description: Xcode
+  maps:
+    - from:
+        code: v
+        mod: [right_command]
+      to:
+        code: v
+        mod: [left_command, left_option]
+- description: Sim
+  maps:
+    - from:
+        code: s
+        mod: [right_command]
+      to:
+        code: s
+        mod: [left_command, left_option]
+- description: Slack
+  maps:
+    - from:
+        code: a
+        mod: [right_command]
+      to:
+        code: a
+        mod: [left_command, left_option]
+- description: Zeplin
+  maps:
+    - from:
+        code: z
+        mod: [right_command]
+      to:
+        code: z
+        mod: [left_command, left_option]
+- description: Messages
+  maps:
+    - from:
+        code: m
+        mod: [right_command]
+      to:
+        code: m
+        mod: [left_command, left_option]
+- description: Chrome
+  maps:
+    - from:
+        code: c
+        mod: [right_command]
+      to:
+        code: c
+        mod: [left_command, left_option]
+- description: Notes
+  maps:
+    - from:
+        code: n
+        mod: [right_command]
+      to:
+        code: n
+        mod: [left_command, left_option]
+
+- description: Window Navigations
+  maps:
+    - from:
+        code: h
+        mod: [right_command, left_command]
+      to:
+        code: h
+        mod: [left_command, left_option, left_control]
+    - from:
+        code: j
+        mod: [right_command, left_command]
+      to:
+        code: j
+        mod: [left_command, left_option, left_control]
+    - from:
+        code: k
+        mod: [right_command, left_command]
+      to:
+        code: k
+        mod: [left_command, left_option, left_control]
+    - from:
+        code: l
+        mod: [right_command, left_command]
+      to:
+        code: l
+        mod: [left_command, left_option, left_control]
+- description: Fullscreen
+  maps:
+    - from:
+        code: f
+        mod: [right_command, left_command]
+      to:
+        code: f
+        mod: [left_command, left_option, left_control]
+- description: Close window
+  maps:
+    - from:
+        code: x
+        mod: [right_command]
+      to:
+        code: x
+        mod: [left_command, left_option, left_control]
+- description: Mirror Display
+  maps:
+    - from:
+        code: m
+        mod: [right_command]
+      to:
+        code: m
+        mod: [left_command, left_option, left_control]
+- description: Warp Window
+  maps:
+    - from:
+        code: h
+        mod: [left_shift, right_command, left_command]
+      to:
+        code: h
+        mod: [left_shift, left_command, left_option, left_control]
+    - from:
+        code: j
+        mod: [left_shift, right_command, left_command]
+      to:
+        code: j
+        mod: [left_shift, left_command, left_option, left_control]
+    - from:
+        code: k
+        mod: [left_shift, right_command, left_command]
+      to:
+        code: k
+        mod: [left_shift, left_command, left_option, left_control]
+    - from:
+        code: l
+        mod: [left_shift, right_command, left_command]
+      to:
+        code: l
+        mod: [left_shift, left_command, left_option, left_control]
+
+
+
