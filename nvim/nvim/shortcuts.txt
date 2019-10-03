@@ -15,6 +15,7 @@ cprev - show more recent revision
 <c-w>H - window full height
 <c-w>K - window full width
 <c-w>p - go to preview window
+<c-w>= - make windows equal size
 set scrollbind - locks a buffer to be scrolled
 <line>zt - move line to top
 
@@ -49,37 +50,11 @@ gi - documentation
 gd - go to definition
 
 
-###vimfiler###
-gs - toggle safe mode
-cd - make current directory the root
-* - mark current file
-N - new file
-d - delete file
-m - move 
-c - copy (destination relative to file current location)
-R - redraw screen
-r - rename file
-K - make dir
-~	- cd to home dir
-<BS> - cd to parent dir
-g<C-g> - toggle maximize window
-<C-g> - print file name
-yy - yank full path
-gr - grep
-gf - find
-x - open file in finder (ie open dir in finder or open file in preview etc)
-b - bookmark current file
-<leader>ob - open bookmarks window from any screen
-
 ###choosewin
 -<window> - move to window
 <leader>w<window> - move to window
 <leader>ws <window> - swap current window with window
 <leader>wS <window> - swap current window with window and stay in window
-
-###GoldenView
-<leader>s  - split view
-<leader>m - Move current buffer to main view
 
 ###fugitive
 gstatus:
@@ -120,9 +95,6 @@ ysiw(delimiter) - surrounds word with delimiter
 yss(delimiter) - surrounds line with delimiter
 ySS(delim) - surround and put on its own line
 
-###navigation
-<C-S-Right> - forward
-<C-S-Left> - back to previous place
 
 ###window sizing
 <C-Up> - make window taller

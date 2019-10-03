@@ -106,6 +106,125 @@
                         ]
                     },
                     {
+                        "description": "Warp Window",
+                        "manipulators": [
+ 
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "left_shift",
+                                         "right_command",
+                                         "left_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "h",
+                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+ 
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "left_shift",
+                                         "right_command",
+                                         "left_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "j",
+                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+ 
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "left_shift",
+                                         "right_command",
+                                         "left_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "k",
+                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+ 
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "left_shift",
+                                         "right_command",
+                                         "left_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "l",
+                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Fullscreen",
+                        "manipulators": [
+ 
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "right_command",
+                                         "left_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "f",
+                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Change caps lock to escape",
                         "manipulators": [
  
@@ -508,32 +627,6 @@
                         ]
                     },
                     {
-                        "description": "Fullscreen",
-                        "manipulators": [
- 
-                            {
-                                "from": {
-                                    "key_code": "f",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "f",
-                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Close window",
                         "manipulators": [
  
@@ -576,99 +669,6 @@
                                     {
                                     "key_code": "m",
                                     "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Warp Window",
-                        "manipulators": [
- 
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "left_shift",
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "h",
-                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "left_shift",
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "j",
-                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "left_shift",
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "k",
-                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "left_shift",
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "l",
-                                    "modifiers": [  "left_shift",  "left_command",  "left_option",  "left_control"  ]
                                      
                                     }
                                 ],

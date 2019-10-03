@@ -23,8 +23,10 @@ nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
+au FileType json nmap <silent> <leader>i :%!python -m json.tool<CR>
+au FileType yaml nmap <silent> <leader>i :YAMLFormat<CR>
 
-
+nnoremap <silent> <leader> <leader> / :let @/=""<CR>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
