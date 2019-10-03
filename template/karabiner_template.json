@@ -23,27 +23,33 @@
                             {% for map in rule.maps %} 
                             {
                                 "from": {
-                                    "key_code": "{{ map.from.code }}"{% if map.from.mod %},
+                                    "key_code": "{{ map.from.code }}",
                                     "modifiers": {
+                                        {% if map.from.mod %}
                                         "mandatory": [
                                          {% for mod in map.from.mod %}
                                          "{{ mod }}"{{ "," if not loop.last }}
                                          {% endfor %}
-                                        ]
+                                        ],
+                                        {% endif %}
+                                        "optional": ["any"]
                                     }
-                                    {% endif %}
                                 },
                                 "to": [
                                     {
                                     "key_code": "{{ map.to.code }}"{% if map.to.mod %},
-                                    "modifiers": [
-                                         {% for mod in map.to.mod %}
-                                         "{{ mod }}"{{ "," if not loop.last }}
-                                         {% endfor %}
-                                         ]
+                                    "modifiers": [ {% for mod in map.to.mod %} "{{ mod }}"{{ "," if not loop.last }} {% endfor %} ]
                                      {% endif %}
+                                     
                                     }
                                 ],
+                                {% if map.to.if_alone %}
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "{{ map.to.if_alone }}"
+                                    }
+                                ],
+                                {% endif %}
                                 "type": "basic"
                             }{{ "," if not loop.last }}
                             {% endfor %}

@@ -22,6 +22,9 @@ end)
 hs.hotkey.bind(subHyper, 'z', function()
   hs.application.launchOrFocus('Zeplin')
 end)
+hs.hotkey.bind(subHyper, 'p', function()
+  hs.application.launchOrFocus('Spotify')
+end)
 hs.hotkey.bind(subHyper, 'm', function()
   hs.application.launchOrFocus('Messages')
 end)
@@ -46,6 +49,11 @@ end)
 
 hs.hotkey.bind(hyper, 'g', function()
   wm("space --layout float")
+end)
+
+hs.hotkey.bind(hyper, 'r', function()
+  wm("window --toggle float")
+  wm("window --grid 26:26:5:1:13:24")
 end)
 
 --focus
