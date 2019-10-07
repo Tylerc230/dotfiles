@@ -4,6 +4,45 @@ local hyper = {"cmd", "alt", "ctrl"}
 local superHyper = {"shift", "cmd", "alt", "ctrl"}
 local logger = hs.logger.new("my_logger", "debug")
 
+modal = hs.hotkey.modal.new(hyper, "w", "Enter Window Mode")
+function modal:entered ()
+  showHighlight(true)
+end
+function modal:exited() 
+  showHighlight(false)
+end
+modal:bind("","j", "", nil, function() 
+  focus("south")
+end, nil)
+modal:bind("","k", "", nil, function() 
+  focus("north")
+end, nil)
+modal:bind("","h", "", nil, function() 
+  focus("west")
+end, nil)
+modal:bind("","l", "", nil, function() 
+  focus("east")
+end, nil)
+modal:bind("","f", "", nil, function() 
+  wm("window --toggle zoom-fullscreen")
+end, nil)
+modal:bind("","r", "", nil, function() 
+  wm("window --toggle float")
+  wm("window --grid 26:26:5:1:13:24")
+end, nil)
+modal:bind("","LEFT", "", nil, function() 
+  sendLeft()
+end, nil)
+modal:bind("","RIGHT", "", nil, function() 
+  sendRight()
+end, nil)
+modal:bind("","x", "", nil, function() 
+  closeWindow()
+end, nil)
+modal:bind(hyper, "w", "Exit window mode", nil, function() modal:exit() end, nil)
+
+
+
 -- application launching 
 hs.hotkey.bind(subHyper, 't', function()
   hs.application.launchOrFocus('Things3')
@@ -51,60 +90,59 @@ hs.hotkey.bind(hyper, 'g', function()
   wm("space --layout float")
 end)
 
-hs.hotkey.bind(hyper, 'r', function()
-  wm("window --toggle float")
-  wm("window --grid 26:26:5:1:13:24")
-end)
-
---focus
-hs.hotkey.bind(hyper, "h", function()
-  local rc = wm("window --focus west")
-  if rc == 1 then
-    wm("display --focus 2")
-  end
-  --check if this fails and then switch focus to monitor 2
-end)
-hs.hotkey.bind(hyper, "j", function()
-  wm("window --focus south")
-end)
-hs.hotkey.bind(hyper, "k", function()
-  wm("window --focus north")
-end)
-hs.hotkey.bind(hyper, "l", function()
-  local rc = wm("window --focus east")
-  if rc == 1 then
-    wm("display --focus 1")
-  end
-end)
-
-
---moving windows
 hs.hotkey.bind(hyper, 'x', function()
-  wm('window --close')
-  --wm('window --focus prev')
+  closeWindow()
 end)
+
 hs.hotkey.bind(superHyper , 'h', function()
-  wm("window --warp west")
+  warp("west")
 end)
 hs.hotkey.bind(superHyper, "j", function()
-  wm("window --warp south")
+  warp("south")
 end)
 hs.hotkey.bind(superHyper, "k", function()
-  wm("window --warp north")
+  warp("north")
 end)
 hs.hotkey.bind(superHyper, "l", function()
-  wm("window --warp east")
+  warp("east")
 end)
 
-hs.hotkey.bind(hyper, "LEFT", function()
+function focus(direction)
+  local rc = wm("window --focus "..direction)
+  if rc == 1 and direction == "west" then
+    wm("display --focus 2")
+  end
+  if rc == 1 and direction == "east" then
+    wm("display --focus 1")
+  end
+end
+
+function warp(direction)
+  wm("window --warp "..direction)
+end
+
+function closeWindow() 
+  wm('window --close')
+  --wm('window --focus prev')
+end
+
+function showHighlight(show)
+  if show then
+    wm('config window_border on')
+  else
+    wm('config window_border off')
+  end
+end
+
+function sendLeft() 
   wm("window --display 2")
   wm("display --focus 2")
-end)
+end
 
-hs.hotkey.bind(hyper, "RIGHT", function()
+function sendRight() 
   wm("window --display 1")
   wm("display --focus 1")
-end)
+end
 
 
 function wm(command)

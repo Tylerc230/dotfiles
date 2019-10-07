@@ -1,46 +1,12 @@
 rules:
-- description: Window Navigations
+- description: Window Mode
   maps:
   - from:
-      code: h
+      code: w
       mod:
       - right_command
-      - left_command
     to:
-      code: h
-      mod:
-      - left_command
-      - left_option
-      - left_control
-  - from:
-      code: j
-      mod:
-      - right_command
-      - left_command
-    to:
-      code: j
-      mod:
-      - left_command
-      - left_option
-      - left_control
-  - from:
-      code: k
-      mod:
-      - right_command
-      - left_command
-    to:
-      code: k
-      mod:
-      - left_command
-      - left_option
-      - left_control
-  - from:
-      code: l
-      mod:
-      - right_command
-      - left_command
-    to:
-      code: l
+      code: w
       mod:
       - left_command
       - left_option
@@ -99,7 +65,6 @@ rules:
       - left_command
       - left_option
       - left_control
-
 - description: Fullscreen
   maps:
   - from:
@@ -303,3 +268,4 @@ rules:
       - left_command
       - left_option
       - left_control
+
