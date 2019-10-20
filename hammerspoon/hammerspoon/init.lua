@@ -6,11 +6,13 @@ local logger = hs.logger.new("my_logger", "debug")
 
 modal = hs.hotkey.modal.new(hyper, "w", "Enter Window Mode")
 function modal:entered ()
-  showHighlight(true)
+  showWindowMode(true)
 end
 function modal:exited() 
-  showHighlight(false)
+  showWindowMode(false)
 end
+
+--Focus
 modal:bind("","j", "", nil, function() 
   focus("south")
 end, nil)
@@ -23,12 +25,26 @@ end, nil)
 modal:bind("","l", "", nil, function() 
   focus("east")
 end, nil)
+
+--Warp
+modal:bind("shift","j", "", nil, function() 
+  warp("south")
+end, nil)
+modal:bind("shift","k", "", nil, function() 
+  warp("north")
+end, nil)
+modal:bind("shift","h", "", nil, function() 
+  warp("west")
+end, nil)
+modal:bind("shift","l", "", nil, function() 
+  warp("east")
+end, nil)
+
 modal:bind("","f", "", nil, function() 
   wm("window --toggle zoom-fullscreen")
 end, nil)
 modal:bind("","r", "", nil, function() 
-  wm("window --toggle float")
-  wm("window --grid 26:26:5:1:13:24")
+  readingMode()
 end, nil)
 modal:bind("","LEFT", "", nil, function() 
   sendLeft()
@@ -55,8 +71,8 @@ hs.hotkey.bind(subHyper, 's', function()
   hs.application.launchOrFocus('Simulator')
 end)
 hs.hotkey.bind(subHyper, 'a', function()
-  hs.application.launchOrFocus('WorkSlack')
-  --hs.application.launchOrFocus('Slack')
+  --hs.application.launchOrFocus('WorkSlack')
+  hs.application.launchOrFocus('Slack')
 end)
 hs.hotkey.bind(subHyper, 'z', function()
   hs.application.launchOrFocus('Zeplin')
@@ -82,6 +98,9 @@ hs.hotkey.bind(hyper, 'f', function()
   wm("window --toggle zoom-fullscreen")
 end)
 
+hs.hotkey.bind(hyper, 'r', function()
+  readingMode()
+end)
 hs.hotkey.bind(hyper, "m", function()
   wm("space --mirror vertical")
 end)
@@ -123,14 +142,16 @@ end
 
 function closeWindow() 
   wm('window --close')
-  --wm('window --focus prev')
+  wm('window --focus prev')
 end
 
-function showHighlight(show)
+function showWindowMode(show)
   if show then
-    wm('config window_border on')
+    wm("config active_window_border_color   0xff61b2f7")
+    wm("config normal_window_border_color   0xffffffff")
   else
-    wm('config window_border off')
+    wm("config active_window_border_color   0xffd58946")
+    wm("config normal_window_border_color   0xff505050")
   end
 end
 
@@ -143,6 +164,12 @@ function sendRight()
   wm("window --display 1")
   wm("display --focus 1")
 end
+
+function readingMode()
+  wm("window --toggle float")
+  wm("window --grid 26:26:5:1:13:24")
+end
+
 
 
 function wm(command)
