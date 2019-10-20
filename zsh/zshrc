@@ -36,7 +36,7 @@ export PURE_GIT_UNTRACKED_DIRTY=0
 export HISTFILESIZE=30000
 export EDITOR=vim
 set -o vi
-bindkey -M viins '^s' vi-cmd-mode
+bindkey -M viins '^k' vi-cmd-mode
 # ZLE hooks for prompt's vi mode status
 function zle-line-init zle-keymap-select {
 	# Change the cursor style depending on keymap mode.
