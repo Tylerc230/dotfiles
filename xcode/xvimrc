@@ -14,11 +14,12 @@ nmap <Space>r :xcmenucmd Run<CR>
 nmap <Space>u :xcmenucmd Test<CR>
 nmap <Space>g :xcmenucmd Continue<CR>
 nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
-nmap <Space>ci :xcmenucmd Toggle Comments<CR>
-vmap <Space>ci :xcmenucmd Toggle Comments<CR>
+nmap <Space>ci :xcmenucmd Comment Selection<CR>
+vmap <Space>ci :xcmenucmd Comment Selection<CR>
 nmap <Space>b :xccmd toggleBreakpointAtCurrentLine<CR>
 vmap <Space>i :xccmd indentSelection<CR>
 nmap <Space>i :xccmd indentSelection<CR>
+nmap <Space>v :xcmenucmd Activate Console<CR>
 nmap <Space>l <C-w>l
 nmap <Space>h <C-w>h
 nmap <Space>k <C-w>k
