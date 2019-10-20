@@ -1,6 +1,7 @@
 au BufRead,BufNewFile Podfile set filetype=ruby
 au BufRead,BufNewFile Fastfile set filetype=ruby
 au BufRead,BufNewFile *.podspec set filetype=ruby
+au BufRead,BufNewFile *.ino set filetype=cpp
 
 "navigation
 nnoremap <C-i> <C-o>
@@ -23,10 +24,9 @@ nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
-au FileType json nmap <silent> <leader>i :%!python -m json.tool<CR>
-au FileType yaml nmap <silent> <leader>i :YAMLFormat<CR>
-
-nnoremap <silent> <leader> <leader> / :let @/=""<CR>
+"au FileType json nnoremap <silent> <leader>i :%!python -m json.tool<CR>
+"au FileType yaml nnoremap <silent> <leader>i :YAMLFormat<CR>
+"nnoremap <silent> <leader> <leader> / :let @/=""<CR>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)

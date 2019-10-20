@@ -6,15 +6,16 @@ let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
 
 let g:deoplete#enable_at_startup = 1                                
 call deoplete#custom#option('auto_complete_delay', 250)
-
+call deoplete#custom#source('_', 'converters', ['converter_auto_paren'])
 "Debug stuff
-"let g:LanguageClient_loggingFile = expand('~/.config/nvim/LanguageClient.log')
-"call deoplete#enable_logging('Debug', expand('~/.config/nvim/deoplete.log'))
+let g:LanguageClient_loggingFile = expand('~/.config/nvim/LanguageClient.log')
+call deoplete#enable_logging('Debug', expand('~/.config/nvim/deoplete.log'))
 "call deoplete#custom#option('profile', v:true)
-"let g:LanguageClient_loggingLevel = "INFO"
-"let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
+let g:LanguageClient_loggingLevel = "INFO"
+let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 
 let g:LanguageClient_serverCommands = {
+      \'cpp': ['/usr/local/opt/llvm/bin/clangd', '--query-driver', '/Users/tyler/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc'],
       \'python': ['/usr/local/bin/pyls'],
       \'swift': ['/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin/sourcekit-lsp',
       \ '-Xswiftc', '-sdk',
@@ -24,11 +25,13 @@ let g:LanguageClient_serverCommands = {
       \}
 
 call deoplete#custom#option('sources', {
-      \'swift': ['LanguageClient']
+      \'swift': ['LanguageClient'],
+      \'cpp': ['LanguageClient']
 \})
 
 let g:LanguageClient_rootMarkers = {
       \ 'swift': ['Package.swift'],
+      \ 'cpp': ['compile_commands.json']
       \ }
 let g:delimitMate_expand_cr = 0
 

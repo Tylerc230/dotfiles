@@ -33,6 +33,7 @@ call dein#add('haya14busa/incsearch.vim')
 call dein#add('haya14busa/incsearch-fuzzy.vim')
 call dein#add('t9md/vim-choosewin')
 
+call dein#add('bfrg/vim-cpp-modern')
 call dein#add('sakhnik/nvim-gdb', {
                   \'build': './install.sh'
                   \})
