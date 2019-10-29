@@ -42,95 +42,6 @@
                         ]
                     },
                     {
-                        "description": "Window Navigations",
-                        "manipulators": [
- 
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "h",
-                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "j",
-                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "k",
-                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            },
- 
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                         "right_command",
-                                         "left_command"
-                                        ],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                    "key_code": "l",
-                                    "modifiers": [  "left_command",  "left_option",  "left_control"  ]
-                                     
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Warp Window",
                         "manipulators": [
  
@@ -242,6 +153,31 @@
                                     {
                                     "key_code": "f",
                                     "modifiers": [  "left_command",  "left_option",  "left_control"  ]
+                                     
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Zsh escape",
+                        "manipulators": [
+ 
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "mandatory": [
+                                         "right_command"
+                                        ],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                    "key_code": "k",
+                                    "modifiers": [  "left_control"  ]
                                      
                                     }
                                 ],

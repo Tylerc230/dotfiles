@@ -78,6 +78,16 @@ rules:
       - left_command
       - left_option
       - left_control
+- description: Zsh escape
+  maps:
+  - from:
+      code: caps_lock
+      mod:
+      - right_command
+    to:
+      code: k
+      mod:
+      - left_control
 - description: Change caps lock to escape
   maps:
   - from:
