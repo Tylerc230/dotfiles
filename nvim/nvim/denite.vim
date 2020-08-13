@@ -8,7 +8,7 @@ nmap <silent> <leader>/ :Denite grep:.<CR>
 nmap <silent> <leader>? :Denite grep:.:-s<CR>
 nmap <silent> <leader>zz :Denite z -sorters=""<CR>
 nmap <silent> <leader>e :Denite quickfix -no-start-filter -buffer-name=quickfix -sorters=""<CR>
-nmap <silent> <leader>zh :Denite zsh_history -no-start-filter -buffer-name="zsh history"<CR>
+nmap <silent> <leader>zh :Denite zsh_history -unique -no-start-filter -buffer-name="zsh history"<CR>
 nmap <silent> <leader>gll :Denite gitlog:all -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>glf :Denite gitlog -auto-resume -vertical-preview -sorters=""<CR>
 nmap <silent> <leader>gc :Denite gitchanged -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
@@ -68,13 +68,16 @@ call denite#custom#source('file_mru', 'matchers', ['converter/tail_path', 'match
 call denite#custom#source('file/rec', 'matchers', ['matcher/hide_hidden_files','converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitfiles', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 call denite#custom#source('gitlog', 'sorters', [])
+call denite#custom#source('gitlog', 'default_action', 'check_out')
 
 call denite#custom#alias('source', 'zsh_history', 'output')
+"histlist returns '<num> <cmd>' so can't unique it.
 call denite#custom#source('zsh_history', 'args', ['!hist_list.sh'])
 call denite#custom#source('zsh_history', 'sorters', [])
+call denite#custom#source('zsh_history', 'matchers', ['matcher/substring'])
 call denite#custom#source('zsh_history', 'max_candidates', 100000)
 call denite#custom#source('zsh_history', 'default_action', 'send_to_shell')
-let g:historyRegex = ' \([0-9]\+\)  \(.*\)'
+let g:historyRegex = ' *\([0-9]\+\)  \(.*\)'
 function! s:send_to_shell(context)
   let numberAndCommand = a:context['targets'][0]['word']
   let command = substitute(numberAndCommand, g:historyRegex, '\2', '')
