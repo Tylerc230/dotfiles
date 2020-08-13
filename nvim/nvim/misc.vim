@@ -24,9 +24,10 @@ nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
-"au FileType json nnoremap <silent> <leader>i :%!python -m json.tool<CR>
+nnoremap <silent> <leader>op :new <C-R>+<cr>
+au FileType json nnoremap <silent> <leader>i :%!python -m json.tool<CR>
 "au FileType yaml nnoremap <silent> <leader>i :YAMLFormat<CR>
-"nnoremap <silent> <leader> <leader> / :let @/=""<CR>
+nnoremap <silent> <leader><leader>/ :let @/=""<CR>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -41,6 +42,8 @@ hi! link IncSearch Search
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
+
+map <leader>ci <plug>NERDCommenterToggle
 "vex
 "nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<
 "vnoremap <Tab> <Esc>/<#<CR>:nohlsearch<cr>va<
@@ -111,4 +114,4 @@ filetype plugin on
 syntax enable
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:>
-
+nmap <silent> <Leader>of :FSHere<cr>
