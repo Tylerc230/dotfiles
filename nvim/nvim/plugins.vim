@@ -7,6 +7,8 @@ call dein#add('blueyed/vim-diminactive')
 call dein#add('AndrewRadev/linediff.vim')
 call dein#add('rickhowe/diffchar.vim')
 call dein#add('tarekbecker/vim-yaml-formatter')
+call dein#add('derekwyatt/vim-fswitch')
+
 
 
 call dein#add('Shougo/denite.nvim')
