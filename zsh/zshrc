@@ -15,7 +15,9 @@ fi
 alias vi=vim
 alias pi='be pod install'
 alias gsh='git stash'
+alias gshki='git stash --keep-index'
 alias gshp='git stash pop'
+alias gshs='git stash show -p'
 alias gs='git status'
 alias pd='pushd'
 alias po='popd'
