@@ -78,6 +78,46 @@
 				<key>Alternate</key>
 				<string>NO</string>
 				<key>CommandID</key>
+				<string>IDESourceEditorExtension:com.charcoaldesign.SwiftFormat-for-Xcode.SourceEditorExtension,IDESourceEditorExtensionCommand:com.charcoaldesign.SwiftFormat-for-Xcode.SourceEditorExtension.FormatEntireFileCommand</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>SwiftFormat</string>
+				<key>Title</key>
+				<string>Format Entire File</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>_invokeSourceEditorExtensionCommand:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
+				<string>IDESourceEditorExtension:com.charcoaldesign.SwiftFormat-for-Xcode.SourceEditorExtension,IDESourceEditorExtensionCommand:com.charcoaldesign.SwiftFormat-for-Xcode.SourceEditorExtension.FormatSelectedSourceCommand</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>SwiftFormat</string>
+				<key>Title</key>
+				<string>Format Selected Source</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>_invokeSourceEditorExtensionCommand:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandID</key>
 				<string>IDESourceEditorExtension:io.quicktype.quicktype-xcode,IDESourceEditorExtensionCommand:io.quicktype.quicktype-xcode.PasteJSONAsCode</string>
 				<key>Group</key>
 				<string>Editor Menu for Source Code</string>
@@ -554,6 +594,26 @@
 			</dict>
 			<dict>
 				<key>Action</key>
+				<string>jumpToLine:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
+				<key>Group</key>
+				<string>Navigate Menu for Xcode.IDESourceControlUI.EditorDocument.PullRequestChangesEditorDocument-title</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Navigate</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Title</key>
+				<string>Jump to…</string>
+			</dict>
+			<dict>
+				<key>Action</key>
 				<string>changeToFindNavigator:</string>
 				<key>Alternate</key>
 				<string>NO</string>
@@ -909,6 +969,78 @@
 				<string>Structure</string>
 				<key>Title</key>
 				<string>Re-Indent</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>addMissingSwitchCases:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>Group</key>
+				<string>Editor Menu for Asset Catalog Comparison</string>
+				<key>GroupID</key>
+				<string>Xcode.IDESourceCodeComparisonPegasusEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>$@X</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>Refactor</string>
+				<key>Title</key>
+				<string>Add Missing Switch Cases</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>addMissingSwitchCases:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code</string>
+				<key>GroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>$@X</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>Refactor</string>
+				<key>Title</key>
+				<string>Add Missing Switch Cases</string>
+			</dict>
+			<dict>
+				<key>Action</key>
+				<string>addMissingSwitchCases:</string>
+				<key>Alternate</key>
+				<string>NO</string>
+				<key>CommandGroupID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>CommandID</key>
+				<string>Xcode.IDEPegasusSourceEditor.CmdDefinition.Refactor.AddMissingSwitchCases</string>
+				<key>Group</key>
+				<string>Editor Menu for Source Code Comparison</string>
+				<key>GroupID</key>
+				<string>Xcode.IDESourceCodeComparisonPegasusEditor.MenuDefinition.Editor</string>
+				<key>GroupedAlternate</key>
+				<string>NO</string>
+				<key>Keyboard Shortcut</key>
+				<string>$@X</string>
+				<key>Navigation</key>
+				<string>NO</string>
+				<key>Parent Title</key>
+				<string>Refactor</string>
+				<key>Title</key>
+				<string>Add Missing Switch Cases</string>
 			</dict>
 			<dict>
 				<key>Action</key>
