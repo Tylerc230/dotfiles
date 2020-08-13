@@ -46,13 +46,15 @@ center_grid='26:26:5:5:16:16'
 #https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
 yabai -m rule --add app=Simulator manage=off border=off display=2
 yabai -m rule --add app=Dash manage=off sticky=on grid="26:26:3:3:20:20"
-#yabai -m rule --add app=Xcode title="^$" manage=off border=off
+yabai -m rule --add app="A Companion for SwiftUI" border=off manage=off
+yabai -m rule --add app=Xcode title="^$" manage=off border=off
 
 
 yabai -m rule --add app='Messages' manage=off sticky=on grid="$center_grid"
 yabai -m rule --add app='Things' manage=off grid="$center_grid"
 yabai -m rule --add app='Spotify' manage=off sticky=on grid="$center_grid"
 yabai -m rule --add app='iTerm2' manage=off
+yabai -m rule --add app='Alfred' manage=off
 yabai -m rule --add app='System Preferences' manage=off sticky=on grid="$center_grid"
 
 echo "yabai configuration loaded.."
