@@ -3,7 +3,7 @@ local subHyper = {"cmd", "alt"}
 local hyper = {"cmd", "alt", "ctrl"}
 local superHyper = {"shift", "cmd", "alt", "ctrl"}
 local logger = hs.logger.new("my_logger", "debug")
-
+hs.hints.showTitleThresh = 0
 modal = hs.hotkey.modal.new(hyper, "w", "Enter Window Mode")
 function modal:entered ()
   showWindowMode(true)
@@ -25,7 +25,10 @@ end, nil)
 modal:bind("","l", "", nil, function() 
   focus("east")
 end, nil)
-
+modal:bind("","w", "", nil, function() 
+  hs.hints.windowHints(nil, function()
+  end, nil)
+end, nil)
 --Warp
 modal:bind("shift","j", "", nil, function() 
   warp("south")
@@ -41,7 +44,7 @@ modal:bind("shift","l", "", nil, function()
 end, nil)
 
 modal:bind("","f", "", nil, function() 
-  wm("window --toggle zoom-fullscreen")
+  fullscreen()
 end, nil)
 modal:bind("","r", "", nil, function() 
   readingMode()
@@ -55,7 +58,19 @@ end, nil)
 modal:bind("","x", "", nil, function() 
   closeWindow()
 end, nil)
-modal:bind(hyper, "w", "Exit window mode", nil, function() modal:exit() end, nil)
+modal:bind("","m", "", nil, function() 
+  wm("space --mirror vertical")
+end, nil)
+modal:bind("","t", "", nil, function() 
+  wm("space --rotate 90")
+end, nil)
+modal:bind("","1", "", nil, function() 
+  wm("display --focus 1")
+end, nil)
+modal:bind("","2", "", nil, function() 
+  wm("display --focus 2")
+end, nil)
+modal:bind("", "escape", "Exit window mode", nil, function() modal:exit() end, nil)
 
 
 
@@ -90,40 +105,16 @@ hs.hotkey.bind(subHyper, 'n', function()
   hs.application.launchOrFocus('Notes')
 end)
 
-hs.hotkey.bind(hyper, 'b', function()
-  wm("space --layout bsp")
-end)
-
 hs.hotkey.bind(hyper, 'f', function()
-  wm("window --toggle zoom-fullscreen")
+  fullscreen()
 end)
 
 hs.hotkey.bind(hyper, 'r', function()
   readingMode()
 end)
-hs.hotkey.bind(hyper, "m", function()
-  wm("space --mirror vertical")
-end)
-
-hs.hotkey.bind(hyper, 'g', function()
-  wm("space --layout float")
-end)
 
 hs.hotkey.bind(hyper, 'x', function()
   closeWindow()
-end)
-
-hs.hotkey.bind(superHyper , 'h', function()
-  warp("west")
-end)
-hs.hotkey.bind(superHyper, "j", function()
-  warp("south")
-end)
-hs.hotkey.bind(superHyper, "k", function()
-  warp("north")
-end)
-hs.hotkey.bind(superHyper, "l", function()
-  warp("east")
 end)
 
 function focus(direction)
@@ -134,6 +125,10 @@ function focus(direction)
   if rc == 1 and direction == "east" then
     wm("display --focus 1")
   end
+end
+
+function fullscreen()
+  wm("window --toggle zoom-fullscreen")
 end
 
 function warp(direction)
