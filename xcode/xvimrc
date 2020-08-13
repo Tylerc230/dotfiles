@@ -7,12 +7,13 @@ set clipboard=unnamed
 " Use <space>cm to toggle comments for the selection
 "let mapleader = "\<Space>"
 "cnoremap q xcmenucmd Close Editor
+:command vs xcmenucmd Editor<CR>
+nmap <Space>gd :xcmenucmd Show Code Review<CR>
 nmap ZZ :xcmenucmd Close Editor<CR>
 nmap <Space>t :xccmd openQuickly<CR>
 nmap <Space>m :xcmenucmd Show Document Items<CR>
 nmap <Space>r :xcmenucmd Run<CR>
 nmap <Space>u :xcmenucmd Test<CR>
-nmap <Space>g :xcmenucmd Continue<CR>
 nmap <Space>a :xcmenucmd Find Call Hierarchy<CR>
 nmap <Space>ci :xcmenucmd Comment Selection<CR>
 vmap <Space>ci :xcmenucmd Comment Selection<CR>
@@ -20,10 +21,13 @@ nmap <Space>b :xccmd toggleBreakpointAtCurrentLine<CR>
 vmap <Space>i :xccmd indentSelection<CR>
 nmap <Space>i :xccmd indentSelection<CR>
 nmap <Space>v :xcmenucmd Activate Console<CR>
+nmap <Space>ga :xcmenucmd Authors<CR>
+nmap <Space>w :xcmenucmd Move Focus to Editor...<CR>
 nmap <Space>l <C-w>l
 nmap <Space>h <C-w>h
 nmap <Space>k <C-w>k
 nmap <Space>j <C-w>j
+nmap <Space>cp :!echo "%" | pbcopy<CR>
 "nmap <Tab> :xcmenucmd Jump to Next Placeholder<CR>
 "nmap <Tab> /<#<CR>va<
 nmap <Tab> /<#<CR>i<Right>
