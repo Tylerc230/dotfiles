@@ -1,7 +1,7 @@
 
 function! FugitiveReDetect()
   unlet! b:git_dir
-  call fugitive#detect(getcwd())
+  call FugitiveDetect(getcwd())
 endfunction
 
 augroup fugitive-ov
