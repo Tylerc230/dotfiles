@@ -9,11 +9,11 @@ nmap <silent> <leader>? :Denite grep:.:-s<CR>
 nmap <silent> <leader>zz :Denite z -sorters=""<CR>
 nmap <silent> <leader>e :Denite quickfix -no-start-filter -buffer-name=quickfix -sorters=""<CR>
 nmap <silent> <leader>zh :Denite zsh_history -unique -no-start-filter -buffer-name="zsh history"<CR>
-nmap <silent> <leader>gll :Denite gitlog:all -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>glf :Denite gitlog -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gc :Denite gitchanged -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gb :Denite gitbranch -no-start-filter -auto-resume -vertical-preview -sorters=""<CR>
-nmap <silent> <leader>gf :Denite gitfiles -auto-resume -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gll :Denite gitlog:all -no-start-filter  -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>glf :Denite gitlog -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gc :Denite gitchanged -no-start-filter  -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gb :Denite gitbranch -no-start-filter -vertical-preview -sorters=""<CR>
+nmap <silent> <leader>gf :Denite gitfiles -vertical-preview -sorters=""<CR>
 autocmd FileType denite-filter call deoplete#custom#buffer_option('auto_complete', v:false)
 
 call denite#custom#map(
