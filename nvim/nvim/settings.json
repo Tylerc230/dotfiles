@@ -1,26 +1,29 @@
 {
-  "clients": {
-    "pyls": {
-      "command": [
-        "pyls"
-      ],
-      "enabled": false,
-      "languageId": "python",
-      "scopes": [
-        "source.python"
-      ],
-      "settings": {
+    "clients": {
         "pyls": {
-          "plugins": {
-            "pycodestyle": {
-              "enabled": true
-            }
-          }
+            "command": [
+                "pyls"
+            ],
+            "configurationSources": [
+                "flake8"
+            ],
+            "enabled": true,
+            "languageId": "python",
+            "scopes": [
+                "source.python"
+            ],
+            "settings": {
+                "pyls": {
+                    "plugins": {
+                        "pycodestyle": {
+                            "enabled": true
+                        }
+                    }
+                }
+            },
+            "syntaxes": [
+                "Packages/Python/Python.sublime-syntax"
+            ]
         }
-      },
-      "syntaxes": [
-        "Packages/Python/Python.sublime-syntax"
-      ]
     }
-  }
 }
