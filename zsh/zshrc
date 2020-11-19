@@ -73,3 +73,4 @@ neovim_autocd() {
     [[ $NVIM_LISTEN_ADDRESS ]] && ~/dotfiles/scripts/neovim_autocd.py
 }
 chpwd_functions+=( neovim_autocd )
+alias ry="brew services restart koekeishiya/formulae/yabai"
