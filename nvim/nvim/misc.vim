@@ -20,7 +20,7 @@ nnoremap <C-up> :resize +5<cr>
 nnoremap <C-down> :resize -5<cr>
 nmap <silent> U :UndotreeToggle<cr>
 "format selection
-nmap <silent> <leader>i V=<ESC> 
+nmap <silent> <leader>i V=<ESC>
 vmap <silent> <leader>i =
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
