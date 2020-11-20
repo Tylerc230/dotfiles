@@ -74,13 +74,16 @@ modal:bind("", "escape", "Exit window mode", nil, function() modal:exit() end, n
 
 
 
--- application launching 
+ --application launching 
 hs.hotkey.bind(subHyper, 't', function()
-  hs.application.launchOrFocus('Things3')
+  hs.application.launchOrFocus('Things')
 end)
 
 hs.hotkey.bind(subHyper, 'v', function()
   hs.application.launchOrFocus('Xcode')
+end)
+hs.hotkey.bind(subHyper, 'b', function()
+  hs.application.launchOrFocus('Parallels Desktop')
 end)
 hs.hotkey.bind(subHyper, 's', function()
   hs.application.launchOrFocus('Simulator')
@@ -142,11 +145,11 @@ end
 
 function showWindowMode(show)
   if show then
-    wm("config active_window_border_color   0xff61b2f7")
-    wm("config normal_window_border_color   0xffffffff")
+    wm("config active_window_border_color 0xff61b2f7")
+    wm("config normal_window_border_color 0xffffffff")
   else
-    wm("config active_window_border_color   0xffd58946")
-    wm("config normal_window_border_color   0xff505050")
+    wm("config active_window_border_color 0xffd58946")
+    wm("config normal_window_border_color 0xff505050")
   end
 end
 
@@ -168,10 +171,19 @@ end
 
 
 function wm(command)
-  --local output, status, type, rc = hs.execute("/usr/local/bin/chunkc "..command, false)
-  local output, status, type, rc = hs.execute("/usr/local/bin/yabai -m "..command, false)
-  logger.df("output %s status %s rc %s", output, tostring(status), rc)
-  return rc
+  local args =  split_string("-m "..command, " ")
+  hs.task.new("/usr/local/bin/yabai", nil, args):start()
+end
+
+function split_string (inputstr, sep)
+        if sep == nil then
+                sep = "%s"
+        end
+        local t={}
+        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+                table.insert(t, str)
+        end
+        return t
 end
 
 function reloadConfig(files)
