@@ -140,7 +140,7 @@ end
 
 function closeWindow() 
   wm('window --close')
-  wm('window --focus prev')
+  --wm('window --focus prev')
 end
 
 function showWindowMode(show)
