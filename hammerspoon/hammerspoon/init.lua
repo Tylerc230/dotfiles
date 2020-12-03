@@ -145,9 +145,11 @@ end
 
 function showWindowMode(show)
   if show then
+    hs.osascript.applescript("tell application \"HazeOver\" to set enabled to true")
     wm("config active_window_border_color 0xff61b2f7")
     wm("config normal_window_border_color 0xffffffff")
   else
+    hs.osascript.applescript("tell application \"HazeOver\" to set enabled to false")
     wm("config active_window_border_color 0xffd58946")
     wm("config normal_window_border_color 0xff505050")
   end
@@ -197,5 +199,7 @@ function reloadConfig(files)
         hs.reload()
     end
 end
+
+hs.osascript.applescript("tell application \"HazeOver\" to set enabled to false")
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
