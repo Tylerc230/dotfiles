@@ -47,6 +47,13 @@ call dein#add('janko-m/vim-test')
 call dein#add('sakhnik/nvim-gdb', {
                   \'build': './install.sh'
                   \})
+"JS
+"tsx files
+call dein#add('HerringtonDarkholme/yats.vim')
+"Syntax highlighter
+call dein#add('maxmellon/vim-jsx-pretty')
+call dein#add('Valloric/MatchTagAlways')
+
 "cpp
 "syntax highlighter
 call dein#add('bfrg/vim-cpp-modern')

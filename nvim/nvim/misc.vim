@@ -25,7 +25,7 @@ vmap <silent> <leader>i =
 "copy file path to clipboard
 nmap <silent> <leader>cp :let @+ = expand("%")<cr>
 nnoremap <silent> <leader>op :new <C-R>+<cr>
-au FileType json nnoremap <silent> <leader>i :%!python -m json.tool<CR>
+"au FileType json nnoremap <silent> <leader>i :%!python -m json.tool<CR>
 "au FileType yaml nnoremap <silent> <leader>i :YAMLFormat<CR>
 nnoremap <silent> <leader><leader>/ :let @/=""<CR>
 map /  <Plug>(incsearch-forward)
@@ -42,7 +42,14 @@ hi! link IncSearch Search
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
-
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'typescriptreact': 1,
+    \}
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
 map <leader>ci <plug>NERDCommenterToggle
 "vex
 "nnoremap <Tab> /<#<CR>:nohlsearch<cr>va<

@@ -22,7 +22,9 @@ let g:LanguageClient_serverCommands = {
       \ '-Xswiftc', '-sdk',
       \ '-Xswiftc', '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator13.0.sdk',
       \ '-Xswiftc', '-target',
-      \ '-Xswiftc', 'x86_64-apple-ios13-simulator']
+      \ '-Xswiftc', 'x86_64-apple-ios13-simulator'],
+      \ 'typescript': ['typescript-language-server', '--stdio', '--tsserver-path', 'node_modules/.bin/tsserver'],
+      \ 'typescriptreact': ['typescript-language-server', '--stdio', '--tsserver-path', 'node_modules/.bin/tsserver']
       \}
 
 call deoplete#custom#option('sources', {
@@ -36,12 +38,13 @@ let g:LanguageClient_rootMarkers = {
       \ }
 let g:delimitMate_expand_cr = 0
 
+let g:gitgutter_sign_priority = 1
 inoremap <expr> <Esc> pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"
 imap <expr> <CR>  pumvisible() ? "\<C-y>" : "<Plug>delimitMateCR"
 function LC_maps()
   if has_key(g:LanguageClient_serverCommands, &filetype)
     nnoremap <buffer> <silent> gi :call LanguageClient#textDocument_hover()<cr>
-    vnoremap <buffer> <silent> <leader>i :call LanguageClient_textDocument_rangeFormatting()<cr>
+    "vnoremap <buffer> <silent> <leader>i :call LanguageClient_textDocument_rangeFormatting()<cr>
     nnoremap <buffer> <silent> <leader>gm :Denite contextMenu<cr>
     nnoremap <buffer> <silent> <leader>m :Denite documentSymbol<cr>
     nnoremap <buffer> <silent> <leader>gr :Denite references<cr>
