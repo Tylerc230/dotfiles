@@ -78,7 +78,7 @@ rules:
       mod:
       - left_command
       - left_option
-- description: iTerm window
+- description: iTerm Hotkey window
   maps:
   - from:
       code: f
@@ -120,6 +120,17 @@ rules:
     to:
       code: s
       mod:
+      - left_command
+      - left_option
+- description: Terminal window
+  maps:
+  - from:
+      code: t
+      mod:
+      - right_command
+    to:
+      code: t
+      mod: 
       - left_command
       - left_option
 - description: Slack
