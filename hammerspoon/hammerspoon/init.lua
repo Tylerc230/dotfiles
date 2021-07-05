@@ -73,10 +73,17 @@ end, nil)
 modal:bind("", "escape", "Exit window mode", nil, function() modal:exit() end, nil)
 
 
-
+--term_filter = hs.window.filter.new(false):setAppFilter('iTerm2',{allowTitles='iTerm Default'})
+--term_filter = hs.window.filter.new(false):setAppFilter('iTerm2')
  --application launching 
 hs.hotkey.bind(subHyper, 't', function()
-  hs.application.launchOrFocus('Things')
+  hs.application.launchOrFocus('iTerm')
+  --local window = term_filter:getWindows()[0]
+    --logger.df("term attempt"..window)
+  --if window then
+    --logger.df("term activated")
+    --window:focus()
+  --end
 end)
 
 hs.hotkey.bind(subHyper, 'v', function()
