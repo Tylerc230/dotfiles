@@ -1,21 +1,33 @@
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-set hidden
-" configure nvcode-color-schemes
-let g:nvcode_termcolors=256
-
-syntax on
-colorscheme nvcode " Or whatever colorscheme you make
+"Required:
 set clipboard=unnamed
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+set background=dark
+colors gruvbox
+"colors anderson
+"colors flattened_dark
+"colors hybrid
+"colors hybrid_material
+"colors OceanicNext
 hi ColorColumn ctermbg=0 guibg=#363636
-"highlight Normal guibg=none
+highlight Normal guibg=none
 set laststatus=2
+"For gitgutter
 set updatetime=250
 let g:gitgutter_map_keys = 0
 set spell spelllang=en_us
 hi SpellBad gui=underline guifg=red                                 
+so ~/.config/nvim/statusline.vim                                    
+                                                                    
+"settings                                                           
+let mapleader="\<SPACE>"                                            
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
+
+let g:EasyMotion_do_mapping = 1
 set nowrap
 set termguicolors
 
@@ -57,6 +69,7 @@ set signcolumn=yes
 set autoread            
 au CursorHold,CursorHoldI * checktime
 au FocusGained,BufEnter * :checktime
+autocmd FileType denite  set nospell
 autocmd FileType fugitive set spell
 
 " When editing a file, always jump to the last cursor position
@@ -67,45 +80,3 @@ if has("autocmd")
      \ endif
 endif
 
-
-" checks if your terminal has 24-bit color support
-if (has("termguicolors"))
-    set termguicolors
-    hi LineNr ctermbg=NONE guibg=NONE
-endif
-
-
-hi Search gui=NONE guibg=#606060 guifg=NONE
-set guicursor+=a:blinkon1
-hi! link IncSearch Search
-if has('nvim')
-  let $VISUAL = 'nvr -cc split --remote-wait'
-endif
-
-
-
-function! FugitiveReDetect()
-  unlet! b:git_dir
-  call FugitiveDetect(getcwd())
-endfunction
-
-augroup fugitive-ov
-  au BufEnter * call FugitiveReDetect()
-  au BufNew * call FugitiveReDetect()
-  au BufNewFile * call FugitiveReDetect()
-  au BufRead * call FugitiveReDetect()
-  au CmdwinEnter * call FugitiveReDetect()
-  au DirChanged * call FugitiveReDetect()
-  au VimEnter * call FugitiveReDetect()
-augroup END
-
-
-let g:neoterm_default_mod = 'botright'
-let g:neoterm_autoinsert = 1
-let g:neoterm_autoscroll = 1
-let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
-let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
-autocmd BufLeave term://* stopinsert
-autocmd FileType neoterm  set nospell
-autocmd FileType neoterm  nnoremap <silent><buffer> q :Tclose<CR>
-tnoremap <ESC> <C-\><C-n>
