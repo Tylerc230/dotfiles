@@ -12,51 +12,7 @@
 				<key>Alternate</key>
 				<string>NO</string>
 				<key>CommandID</key>
-				<string>2D242C52-EC45-4D88-9CAF-FFDE7A706F71-36557-0002B51A9AA70928</string>
-				<key>Group</key>
-				<string>Xcode Menu</string>
-				<key>GroupID</key>
-				<string>Xcode.IDEKit.MenuDefinition.Xcode</string>
-				<key>GroupedAlternate</key>
-				<string>NO</string>
-				<key>Keyboard Shortcut</key>
-				<string>$@S</string>
-				<key>Navigation</key>
-				<string>NO</string>
-				<key>Parent Title</key>
-				<string>Behaviors</string>
-				<key>Title</key>
-				<string>Open Storyboard</string>
-			</dict>
-			<dict>
-				<key>Action</key>
-				<string>performAlertEvent:</string>
-				<key>Alternate</key>
-				<string>NO</string>
-				<key>CommandID</key>
-				<string>968B0040-8406-40DB-9FE5-8BCE0D37C1BE-24485-000292685C10CC13</string>
-				<key>Group</key>
-				<string>Xcode Menu</string>
-				<key>GroupID</key>
-				<string>Xcode.IDEKit.MenuDefinition.Xcode</string>
-				<key>GroupedAlternate</key>
-				<string>NO</string>
-				<key>Keyboard Shortcut</key>
-				<string>$@E</string>
-				<key>Navigation</key>
-				<string>NO</string>
-				<key>Parent Title</key>
-				<string>Behaviors</string>
-				<key>Title</key>
-				<string>Open Editor</string>
-			</dict>
-			<dict>
-				<key>Action</key>
-				<string>performAlertEvent:</string>
-				<key>Alternate</key>
-				<string>NO</string>
-				<key>CommandID</key>
-				<string>B3E797CB-5A92-4297-82F6-E996029B1050-2141-00006DDBB2DEA544</string>
+				<string>759F5D60-5AFE-40D2-8319-AEF78DF139F6-50381-00007D7267DCA9F2</string>
 				<key>Group</key>
 				<string>Xcode Menu</string>
 				<key>GroupID</key>
@@ -70,7 +26,7 @@
 				<key>Parent Title</key>
 				<string>Behaviors</string>
 				<key>Title</key>
-				<string>Focus Mode</string>
+				<string>Focus</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -490,7 +446,7 @@
 				<key>Parent Title</key>
 				<string>Inspectors</string>
 				<key>Title</key>
-				<string>Show Inspectors</string>
+				<string>Show Inspector</string>
 			</dict>
 			<dict>
 				<key>Action</key>
@@ -594,26 +550,6 @@
 			</dict>
 			<dict>
 				<key>Action</key>
-				<string>jumpToLine:</string>
-				<key>Alternate</key>
-				<string>NO</string>
-				<key>CommandGroupID</key>
-				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
-				<key>CommandID</key>
-				<string>Xcode.IDEKit.CmdDefinition.JumpTo</string>
-				<key>Group</key>
-				<string>Navigate Menu for Xcode.IDESourceControlUI.EditorDocument.PullRequestChangesEditorDocument-title</string>
-				<key>GroupID</key>
-				<string>Xcode.IDEPegasusSourceEditor.MenuDefinition.Navigate</string>
-				<key>GroupedAlternate</key>
-				<string>NO</string>
-				<key>Navigation</key>
-				<string>NO</string>
-				<key>Title</key>
-				<string>Jump to…</string>
-			</dict>
-			<dict>
-				<key>Action</key>
 				<string>changeToFindNavigator:</string>
 				<key>Alternate</key>
 				<string>NO</string>
@@ -630,7 +566,7 @@
 				<key>Parent Title</key>
 				<string>Navigators</string>
 				<key>Title</key>
-				<string>Show Find Navigator</string>
+				<string>Find</string>
 			</dict>
 			<dict>
 				<key>Action</key>

@@ -5,23 +5,23 @@
 	<key>DVTConsoleDebuggerInputTextColor</key>
 	<string>0.815696 0.482945 0.278154 1</string>
 	<key>DVTConsoleDebuggerInputTextFont</key>
-	<string>Menlo-Bold - 11.0</string>
+	<string>SFMono-Bold - 11.0</string>
 	<key>DVTConsoleDebuggerOutputTextColor</key>
 	<string>0.866241 0.805785 0.62265 1</string>
 	<key>DVTConsoleDebuggerOutputTextFont</key>
-	<string>Menlo-Regular - 11.0</string>
+	<string>SFMono-Regular - 11.0</string>
 	<key>DVTConsoleDebuggerPromptTextColor</key>
 	<string>0.317071 0.437736 1 1</string>
 	<key>DVTConsoleDebuggerPromptTextFont</key>
-	<string>Menlo-Bold - 11.0</string>
+	<string>SFMono-Bold - 11.0</string>
 	<key>DVTConsoleExectuableInputTextColor</key>
 	<string>0.851069 0.444002 0.279582 1</string>
 	<key>DVTConsoleExectuableInputTextFont</key>
-	<string>Menlo-Regular - 11.0</string>
+	<string>SFMono-Regular - 11.0</string>
 	<key>DVTConsoleExectuableOutputTextColor</key>
 	<string>0.795652 0.773823 0.608422 1</string>
 	<key>DVTConsoleExectuableOutputTextFont</key>
-	<string>Menlo-Bold - 11.0</string>
+	<string>SFMono-Bold - 11.0</string>
 	<key>DVTConsoleTextBackgroundColor</key>
 	<string>0.121569 0.141176 0.2 1</string>
 	<key>DVTConsoleTextInsertionPointColor</key>
@@ -30,12 +30,16 @@
 	<string>0.648833 0.788252 1 1</string>
 	<key>DVTDebuggerInstructionPointerColor</key>
 	<string>0.105792 0.2 0.144 1</string>
+	<key>DVTFontAndColorVersion</key>
+	<integer>1</integer>
+	<key>DVTLineSpacing</key>
+	<real>1.1000000238418579</real>
 	<key>DVTMarkupTextBackgroundColor</key>
 	<string>0.191843 0.209882 0.264 1</string>
 	<key>DVTMarkupTextBorderColor</key>
 	<string>0.256496 0.273091 0.32288 1</string>
 	<key>DVTMarkupTextCodeFont</key>
-	<string>Menlo-Regular - 10.0</string>
+	<string>SFMono-Regular - 10.0</string>
 	<key>DVTMarkupTextEmphasisColor</key>
 	<string>0.755129 0.682783 0.512118 1</string>
 	<key>DVTMarkupTextEmphasisFont</key>
@@ -66,10 +70,26 @@
 	<string>0.755129 0.682783 0.512118 1</string>
 	<key>DVTMarkupTextStrongFont</key>
 	<string>.AppleSystemUIFontBold - 10.0</string>
+	<key>DVTScrollbarMarkerAnalyzerColor</key>
+	<string>0.403922 0.372549 1 1</string>
+	<key>DVTScrollbarMarkerBreakpointColor</key>
+	<string>0.290196 0.290196 0.968627 1</string>
+	<key>DVTScrollbarMarkerDiffColor</key>
+	<string>0.556863 0.556863 0.556863 1</string>
+	<key>DVTScrollbarMarkerDiffConflictColor</key>
+	<string>0.968627 0.290196 0.290196 1</string>
+	<key>DVTScrollbarMarkerErrorColor</key>
+	<string>0.968627 0.290196 0.290196 1</string>
+	<key>DVTScrollbarMarkerRuntimeIssueColor</key>
+	<string>0.643137 0.509804 1 1</string>
+	<key>DVTScrollbarMarkerWarningColor</key>
+	<string>0.937255 0.717647 0.34902 1</string>
 	<key>DVTSourceTextBackground</key>
 	<string>0.121569 0.141176 0.2 1</string>
 	<key>DVTSourceTextBlockDimBackgroundColor</key>
 	<string>0.5 0.5 0.5 1</string>
+	<key>DVTSourceTextCurrentLineHighlightColor</key>
+	<string>0.171367 0.207526 0.260056 0.8625</string>
 	<key>DVTSourceTextInsertionPointColor</key>
 	<string>0.905714 0.905714 0.905714 1</string>
 	<key>DVTSourceTextInvisiblesColor</key>
@@ -88,6 +108,10 @@
 		<string>0.366319 0.366319 0.366319 1</string>
 		<key>xcode.syntax.comment.doc.keyword</key>
 		<string>0.366319 0.366319 0.366319 1</string>
+		<key>xcode.syntax.declaration.other</key>
+		<string>0.254902 0.631373 0.752941 1</string>
+		<key>xcode.syntax.declaration.type</key>
+		<string>0.362946 0.846428 0.998966 1</string>
 		<key>xcode.syntax.identifier.class</key>
 		<string>0.857917 0.649166 0.180392 1</string>
 		<key>xcode.syntax.identifier.class.system</key>
@@ -114,6 +138,10 @@
 		<string>0.206321 0.674321 0.46549 1</string>
 		<key>xcode.syntax.keyword</key>
 		<string>0.840988 0.143059 0.229714 1</string>
+		<key>xcode.syntax.mark</key>
+		<string>0.572549 0.631373 0.694118 1</string>
+		<key>xcode.syntax.markup.code</key>
+		<string>0.665 0.052 0.569 1</string>
 		<key>xcode.syntax.number</key>
 		<string>0.775331 0.735929 0.753375 1</string>
 		<key>xcode.syntax.plain</key>
@@ -128,51 +156,59 @@
 	<key>DVTSourceTextSyntaxFonts</key>
 	<dict>
 		<key>xcode.syntax.attribute</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.character</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.comment</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.comment.doc</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Regular - 11.0</string>
 		<key>xcode.syntax.comment.doc.keyword</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Bold - 11.0</string>
+		<key>xcode.syntax.declaration.other</key>
+		<string>SFMono-Medium - 11.0</string>
+		<key>xcode.syntax.declaration.type</key>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.class</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.class.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.constant</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.constant.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.function</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.function.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.macro</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.macro.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.type</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.type.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.variable</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.identifier.variable.system</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.keyword</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Bold - 11.0</string>
+		<key>xcode.syntax.mark</key>
+		<string>SFMono-Bold - 11.0</string>
+		<key>xcode.syntax.markup.code</key>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.number</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.plain</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.preprocessor</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.string</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 		<key>xcode.syntax.url</key>
-		<string>FiraCode-Regular - 12.0</string>
+		<string>SFMono-Medium - 11.0</string>
 	</dict>
 </dict>
 </plist>
