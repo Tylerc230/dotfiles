@@ -12,7 +12,6 @@ hi ColorColumn ctermbg=0 guibg=#363636
 "highlight Normal guibg=none
 set laststatus=2
 set updatetime=250
-let g:gitgutter_map_keys = 0
 set spell spelllang=en_us
 hi SpellBad gui=underline guifg=red                                 
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape

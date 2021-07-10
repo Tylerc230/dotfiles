@@ -7,7 +7,7 @@ end
 
 vim.api.nvim_command('packadd packer.nvim')
 
-local no_errors = pcall(function()
+local no_errors, error_msg = pcall(function()
 
   local time
   local profile_info
@@ -74,6 +74,19 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["hop.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/opt/hop.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
   neoterm = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/neoterm"
@@ -85,6 +98,18 @@ _G.packer_plugins = {
   ["nvcode-color-schemes.vim"] = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
+  },
+  ["nvim-compe"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvim-compe"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-lspinstall"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -118,17 +143,9 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/vim-choosewin"
   },
-  ["vim-easymotion"] = {
-    loaded = true,
-    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/vim-easymotion"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
-  ["vim-gitgutter"] = {
-    loaded = true,
-    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/vim-gitgutter"
   },
   ["vim-sleuth"] = {
     loaded = true,
@@ -145,10 +162,17 @@ time([[Defining packer_plugins]], false)
 time([[Config for galaxyline.nvim]], true)
 try_loadstring("\27LJ\2\n%\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\nlunar\frequire\0", "config", "galaxyline.nvim")
 time([[Config for galaxyline.nvim]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'hop.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)
 
 if not no_errors then
-  vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: ".v:exception | echom "Please check your config for correctness" | echohl None')
+  vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end

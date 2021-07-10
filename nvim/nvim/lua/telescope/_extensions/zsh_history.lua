@@ -67,6 +67,7 @@ return require('telescope').register_extension {
 
 
                     map('n', '<CR>', execute_command)
+                    map('i', '<CR>', execute_command)
                     map('n', 'e', edit_command)
                     map('n', 'y', yank_command)
 

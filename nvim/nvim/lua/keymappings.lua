@@ -24,6 +24,24 @@ map('v', '<leader>i', '=', options)
 map('n', '<leader>v', '<CMD>Ttoggle<CR>', options)
 map('n', '<leader>n', '<CMD>vert Tnew<CR>', options)
 map('n', '<leader>zh', "<CMD>lua require('telescope').extensions.zsh_history.scripts()<CR>", options)
+map('n', '<leader><leader>w', '<cmd>HopWord<CR>', options)
+map('n', '<leader><leader>k', '<cmd>HopLine<CR>', options)
+
+map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
+map('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', options)
+map('n', '<leader>R', '<cmd>lua vim.lsp.buf.rename()<CR>', options)
+map('n', 'gi', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
+map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
+map("n", "<space>i", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
+map('n', '<leader>d', '<cmd>Telescope lsp_document_diagnostics<CR>', options)
+map('n', '<leader>D', '<cmd>Telescope lsp_workspace_diagnostics<CR>', options)
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+  { key = {"cd"}, cb = tree_cb("cd") },
+  { key = "<BS>", cb = tree_cb("dir_up") },
+  { key = "<s>", cb = tree_cb("split") },
+  { key = "<v>", cb = tree_cb("vsplit") },
+}
 
 --" resize current buffer by +/- 5 
 --:

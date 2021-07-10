@@ -20,11 +20,25 @@ require('packer').startup({function()
     config = function() require 'lunar' end,
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'lewis6991/gitsigns.nvim', --gutter signs
+    requires = {
+      'nvim-lua/plenary.nvim'
+    }
+  }
+  use 'kyazdani42/nvim-tree.lua' --left file browser
   use 't9md/vim-choosewin'
-  use 'airblade/vim-gitgutter'
-  use 'easymotion/vim-easymotion'
   use 'scrooloose/nerdcommenter'
+
+  use {
+    'phaazon/hop.nvim', --easy motion
+    event = 'BufRead',
+    opt = true
+  }
+  use {"neovim/nvim-lspconfig"}
+  use {"glepnir/lspsaga.nvim"} --floating lsp windows
+  use {"kabouzeid/nvim-lspinstall"}
+  use {"hrsh7th/nvim-compe"} --auto complete
 
 end,
 config = {
@@ -43,3 +57,54 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+require('gitsigns').setup()
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{}
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+
+vim.o.completeopt = "menuone,noselect"
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+  };
+}
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
