@@ -13,7 +13,10 @@ require('packer').startup({function()
   }
   use 'kassio/neoterm'
   use 'christianchiarulli/nvcode-color-schemes.vim'
-  use 'nvim-treesitter/nvim-treesitter'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
   use {
   'glepnir/galaxyline.nvim',
     branch = 'main',
@@ -55,6 +58,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enabled = true,              -- false will disable the whole extension
   },
+  indent = {
+    enable = true
+  }
 }
 
 require('gitsigns').setup()
@@ -67,6 +73,12 @@ local function setup_servers()
 end
 
 setup_servers()
+local util = require'lspconfig'.util
+require'lspconfig'.sourcekit.setup {
+  cmd = { "xcrun", "sourcekit-lsp" },
+  root_dir = util.root_pattern("Package.swift", ".git"),
+  filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
+}
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require'lspinstall'.post_install_hook = function ()

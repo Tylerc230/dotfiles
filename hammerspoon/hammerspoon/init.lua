@@ -1,3 +1,4 @@
+local hs = hs
 hs.logger.defaultLogLevel="info"
 local subHyper = {"cmd", "alt"}
 local hyper = {"cmd", "alt", "ctrl"}
@@ -43,7 +44,7 @@ modal:bind("shift","l", "", nil, function()
   warp("east")
 end, nil)
 
-modal:bind("","f", "", nil, function() 
+modal:bind("","f", "", nil, function()
   fullscreen()
 end, nil)
 modal:bind("","r", "", nil, function() 
@@ -76,16 +77,101 @@ modal:bind("", "escape", "Exit window mode", nil, function() modal:exit() end, n
 --term_filter = hs.window.filter.new(false):setAppFilter('iTerm2',{allowTitles='iTerm Default'})
 --term_filter = hs.window.filter.new(false):setAppFilter('iTerm2')
  --application launching 
-hs.hotkey.bind(subHyper, 't', function()
-  hs.application.launchOrFocus('iTerm')
-  --local window = term_filter:getWindows()[0]
-    --logger.df("term attempt"..window)
-  --if window then
-    --logger.df("term activated")
-    --window:focus()
+--hs.hotkey.bind(subHyper, 'f', function()
+  --local app = hs.application.get("kitty")
+
+  --if app then
+    --if not app:mainWindow() then
+      --app:selectMenuItem({"kitty", "New OS window"})
+    --elseif app:isFrontmost() then
+      --app:hide()
+    --else
+      --app:activate()
+    --end
+  --else
+    --hs.application.launchOrFocus("kitty")
+    --app = hs.application.get("kitty")
   --end
+
+  --app:mainWindow():moveToUnit'[100,50,0,0]'
+  --app:mainWindow().setShadows(false)
+  --wm("window --toggle zoom-fullscreen")
+  --end
+--end)
+
+-- https://github.com/asmagill/hs._asm.undocumented.spaces
+local spaces = require('hs._asm.undocumented.spaces')
+
+-- Switch alacritty
+hs.hotkey.bind(subHyper, 'f', function ()
+  --local APP_NAME = 'kitty'
+  local APP_NAME = 'Alacritty'
+  local function moveWindow(alacritty, space, mainScreen)
+    -- move to main space
+    local win = nil
+    while win == nil do
+      win = alacritty:mainWindow()
+    end
+    print(win)
+    print(space)
+    --print(win:screen())
+    print(mainScreen)
+    local fullScreen = not win:isStandard()
+    if fullScreen then
+      hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
+    end
+    local winFrame = win:frame()
+    local scrFrame = mainScreen:fullFrame()
+    print(winFrame)
+    print(scrFrame)
+    winFrame.w = scrFrame.w
+    winFrame.h = scrFrame.h
+    winFrame.y = scrFrame.y
+    winFrame.x = scrFrame.x
+    print(winFrame)
+    win:setFrame(winFrame, 0)
+    print(win:frame())
+    win:spacesMoveTo(space)
+    if fullScreen then
+      hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
+    end
+    win:focus()
+  end
+  local alacritty = hs.application.get(APP_NAME)
+  if alacritty ~= nil and alacritty:isFrontmost() then
+    alacritty:hide()
+  else
+    local space = spaces.activeSpace()
+    local mainScreen = hs.screen.find(spaces.mainScreenUUID())
+    --local mainScreen = hs.screen.primaryScreen()
+    if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
+      local appWatcher = nil
+      print('create app watcher')
+      appWatcher = hs.application.watcher.new(function(name, event, app)
+        print(name)
+        print(event)
+        if event == hs.application.watcher.launched and name == APP_NAME then
+          app:hide()
+          moveWindow(app, space, mainScreen)
+          appWatcher:stop()
+        end
+      end)
+      print('start watcher')
+      appWatcher:start()
+    end
+    if alacritty ~= nil then
+      moveWindow(alacritty, space, mainScreen)
+    end
+  end
 end)
 
+-- Hide alacritty if not in focus
+hs.window.filter.default:subscribe(hs.window.filter.windowFocused, function(window, appName)
+  local alacritty = hs.application.get('Alacritty')
+  if alacritty ~= nil then
+     alacritty:hide()
+  end
+end)
 hs.hotkey.bind(subHyper, 'v', function()
   hs.application.launchOrFocus('Xcode')
 end)
