@@ -82,7 +82,6 @@ if has('nvim')
 endif
 
 
-
 function! FugitiveReDetect()
   unlet! b:git_dir
   call FugitiveDetect(getcwd())
@@ -108,3 +107,14 @@ autocmd BufLeave term://* stopinsert
 autocmd FileType neoterm  set nospell
 autocmd FileType neoterm  nnoremap <silent><buffer> q :Tclose<CR>
 tnoremap <ESC> <C-\><C-n>
+
+
+
+au BufRead,BufNewFile Podfile set filetype=ruby
+au BufRead,BufNewFile Fastfile set filetype=ruby
+au BufRead,BufNewFile *.podspec set filetype=ruby
+au BufRead,BufNewFile *.ino set filetype=cpp
+
+"navigation
+nnoremap <C-i> <C-o>
+nnoremap <C-o> <C-i>

@@ -34,14 +34,18 @@ require('packer').startup({function()
   use 'scrooloose/nerdcommenter'
 
   use {
-    'phaazon/hop.nvim', --easy motion
-    event = 'BufRead',
-    opt = true
+    'phaazon/hop.nvim',
+    as = 'hop',
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup ()
+    end
   }
   use {"neovim/nvim-lspconfig"}
   use {"glepnir/lspsaga.nvim"} --floating lsp windows
   use {"kabouzeid/nvim-lspinstall"}
   use {"hrsh7th/nvim-compe"} --auto complete
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
 end,
 config = {
@@ -64,6 +68,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('gitsigns').setup()
+
 local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
@@ -77,7 +82,15 @@ local util = require'lspconfig'.util
 require'lspconfig'.sourcekit.setup {
   cmd = { "xcrun", "sourcekit-lsp" },
   root_dir = util.root_pattern("Package.swift", ".git"),
-  filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
+  --filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
+  filetypes = { "swift" }
+}
+
+require'lspconfig'.clangd.setup {
+  --cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
+  cmd = { "xcrun", "clangd", "-log=verbose" },
+  root_dir = util.root_pattern("compile_commands.json", ".git"),
+  filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
 }
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
@@ -90,7 +103,7 @@ vim.o.completeopt = "menuone,noselect"
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
-  debug = false;
+  debug = true;
   min_length = 1;
   preselect = 'enable';
   throttle_time = 80;

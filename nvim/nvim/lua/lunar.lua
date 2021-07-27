@@ -107,6 +107,10 @@ table.insert(gls.left, {
 vim.fn.getbufvar(0, 'ts')
 
 table.insert(gls.left, {
+    FileName = {provider = 'FileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
+})
+
+table.insert(gls.left, {
     GitIcon = {
         provider = function()
             return ' '
