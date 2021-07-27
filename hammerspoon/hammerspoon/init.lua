@@ -106,14 +106,26 @@ local spaces = require('hs._asm.undocumented.spaces')
 hs.hotkey.bind(subHyper, 'f', function ()
   --local APP_NAME = 'kitty'
   local APP_NAME = 'Alacritty'
-  local function moveWindow(alacritty, space, mainScreen)
+
+  local function visiblePrimarySpace()
+    local primaryScreen = hs.screen.primaryScreen()
+    local primaryScreenSpaces = spaces.layout()[primaryScreen:getUUID()]
+    local visibleSpaces = spaces.query(spaces.masks.currentSpaces)
+    for _, ps in pairs(primaryScreenSpaces) do
+      for _, vs in pairs(visibleSpaces) do  
+        if ps == vs then
+          return ps
+        end
+      end
+    end
+  end
+  local function moveWindow(alacritty, mainScreen)
     -- move to main space
     local win = nil
     while win == nil do
       win = alacritty:mainWindow()
     end
     print(win)
-    print(space)
     --print(win:screen())
     print(mainScreen)
     local fullScreen = not win:isStandard()
@@ -131,6 +143,7 @@ hs.hotkey.bind(subHyper, 'f', function ()
     print(winFrame)
     win:setFrame(winFrame, 0)
     print(win:frame())
+    local space = visiblePrimarySpace()
     win:spacesMoveTo(space)
     if fullScreen then
       hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
@@ -141,9 +154,8 @@ hs.hotkey.bind(subHyper, 'f', function ()
   if alacritty ~= nil and alacritty:isFrontmost() then
     alacritty:hide()
   else
-    local space = spaces.activeSpace()
-    local mainScreen = hs.screen.find(spaces.mainScreenUUID())
-    --local mainScreen = hs.screen.primaryScreen()
+    --local mainScreen = hs.screen.find(spaces.mainScreenUUID())
+    local mainScreen = hs.screen.primaryScreen()
     if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
       local appWatcher = nil
       print('create app watcher')
@@ -152,7 +164,7 @@ hs.hotkey.bind(subHyper, 'f', function ()
         print(event)
         if event == hs.application.watcher.launched and name == APP_NAME then
           app:hide()
-          moveWindow(app, space, mainScreen)
+          moveWindow(app, mainScreen)
           appWatcher:stop()
         end
       end)
@@ -160,7 +172,7 @@ hs.hotkey.bind(subHyper, 'f', function ()
       appWatcher:start()
     end
     if alacritty ~= nil then
-      moveWindow(alacritty, space, mainScreen)
+      moveWindow(alacritty, mainScreen)
     end
   end
 end)
