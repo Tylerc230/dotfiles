@@ -21,6 +21,10 @@ local no_sort_filter = function(opts)
         end
     }
 end
+function commandAndNumber(line) 
+    line:gmatch(" *([0-9]+)  .*  (.*)")
+end
+
 return require('telescope').register_extension {
     exports = {
         scripts = function(opts)
@@ -30,8 +34,10 @@ return require('telescope').register_extension {
             handle:close()
             local commands = {}
             local commandNumberMap = {}
+            local lines = {}
             for s in result:gmatch("[^\r\n]+") do
-                for number, command in s:gmatch(" *([0-9]+)  (.*)") do
+                table.insert(lines, s)
+                for number, command in s:gmatch(" *([0-9]+)  .*  (.*)") do
                     if commandNumberMap[command] == nil then
                         table.insert(commands, command)
                         commandNumberMap[command] = number
@@ -41,7 +47,7 @@ return require('telescope').register_extension {
             pickers.new(opts, {
                 prompt_title = 'Commands',
                 finder = finders.new_table {
-                    results = commands
+                    results = lines
                 },
                 sorter = sorters.get_substr_matcher(),
                 attach_mappings = function(prompt_bufnr, map)
