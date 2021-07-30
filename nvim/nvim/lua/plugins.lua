@@ -23,7 +23,6 @@ require('packer').startup({function()
     config = function() require 'lunar' end,
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
-  use {'lambdalisue/gina.vim' }
   use {
     'lewis6991/gitsigns.nvim', --gutter signs
     requires = {
@@ -77,6 +76,10 @@ local git_browser_actions = transform_mod({
       branch = selection.value
     })
   end
+})
+require("nvim-autopairs.completion.compe").setup({
+  map_cr = true, --  map <CR> on insert mode
+  map_complete = true -- it will auto insert `(` after select function or method item
 })
 
 require('telescope').setup {
