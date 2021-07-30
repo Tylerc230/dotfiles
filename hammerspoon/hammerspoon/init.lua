@@ -104,8 +104,8 @@ local spaces = require('hs._asm.undocumented.spaces')
 
 -- Switch alacritty
 hs.hotkey.bind(subHyper, 'f', function ()
-  --local APP_NAME = 'kitty'
-  local APP_NAME = 'Alacritty'
+  local APP_NAME = 'kitty'
+  --local APP_NAME = 'Alacritty'
 
   local function visiblePrimarySpace()
     local primaryScreen = hs.screen.primaryScreen()
