@@ -23,6 +23,7 @@ require('packer').startup({function()
     config = function() require 'lunar' end,
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
+  use {'lambdalisue/gina.vim' }
   use {
     'lewis6991/gitsigns.nvim', --gutter signs
     requires = {
@@ -41,11 +42,22 @@ require('packer').startup({function()
       require'hop'.setup ()
     end
   }
+  use {"windwp/nvim-autopairs"}
   use {"neovim/nvim-lspconfig"}
   use {"glepnir/lspsaga.nvim"} --floating lsp windows
   use {"kabouzeid/nvim-lspinstall"}
   use {"hrsh7th/nvim-compe"} --auto complete
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+  }
 
 end,
 config = {
@@ -56,18 +68,62 @@ config = {
   }
 }})
 
+require('nvim-autopairs').setup()
+local transform_mod = require('telescope.actions.mt').transform_mod
+local git_browser_actions = transform_mod({
+  logs_for_branch = function(opts)
+    local selection = require ("telescope.actions.state").get_selected_entry()
+    require('telescope').extensions.git_browser.run_logs_for_branch({
+      branch = selection.value
+    })
+  end
+})
+
+require('telescope').setup {
+  pickers = {
+    git_branches = {
+      mappings = {
+        n = {
+          ["l"] = git_browser_actions.logs_for_branch
+        }
+      }
+    },
+    buffers = {
+      mappings = {
+        n = {
+          ["D"] = require("telescope.actions").delete_buffer
+        }
+      }
+    }
+  }
+}
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = { 'haskell' },
   highlight = {
-    enabled = true,              -- false will disable the whole extension
+    enable = true              -- false will disable the whole extension
   },
   indent = {
     enable = true
+  },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
+}
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.objc = {
+  install_info = {
+    url = "/Users/cstyle/tools/tree-sitter-objc", -- local path or git repo
+    files = {"src/parser.c"}
+  },
+  filetype = "objc" -- if filetype does not agrees with parser name
+}
+require('gitsigns').setup {
+  keymaps = {
+    noremap = false,
+    ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
   }
 }
-
-require('gitsigns').setup()
 
 local function setup_servers()
   require'lspinstall'.setup()
@@ -88,7 +144,8 @@ require'lspconfig'.sourcekit.setup {
 
 require'lspconfig'.clangd.setup {
   --cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
-  cmd = { "xcrun", "clangd", "-log=verbose" },
+  --cmd = { "xcrun", "clangd", "-log=verbose" },
+  cmd = { "xcrun", "clangd" },
   root_dir = util.root_pattern("compile_commands.json", ".git"),
   filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
 }
@@ -98,6 +155,12 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false
+    }
+)
 
 vim.o.completeopt = "menuone,noselect"
 require'compe'.setup {
@@ -133,3 +196,7 @@ require'compe'.setup {
 
 local saga = require 'lspsaga'
 saga.init_lsp_saga()
+_G.load = function(file)
+    require("plenary.reload").reload_module(file, true)
+    return require(file)
+end

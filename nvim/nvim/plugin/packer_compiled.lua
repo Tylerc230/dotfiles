@@ -74,6 +74,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
+  ["gina.vim"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/gina.vim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
@@ -87,10 +91,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
-  neogit = {
-    loaded = true,
-    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/neogit"
-  },
   neoterm = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/neoterm"
@@ -102,6 +102,10 @@ _G.packer_plugins = {
   ["nvcode-color-schemes.vim"] = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/nvim-autopairs"
   },
   ["nvim-compe"] = {
     loaded = true,
@@ -143,6 +147,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["trouble.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
+    loaded = true,
+    path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/trouble.nvim"
+  },
   ["vim-choosewin"] = {
     loaded = true,
     path = "/Users/cstyle/.local/share/nvim/site/pack/packer/start/vim-choosewin"
@@ -162,6 +171,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
 -- Config for: galaxyline.nvim
 time([[Config for galaxyline.nvim]], true)
 try_loadstring("\27LJ\2\n%\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\nlunar\frequire\0", "config", "galaxyline.nvim")
