@@ -12,7 +12,7 @@ hi ColorColumn ctermbg=0 guibg=#363636
 "highlight Normal guibg=none
 set laststatus=2
 set updatetime=250
-set spell spelllang=en_us
+set nospell spelllang=en_us
 hi SpellBad gui=underline guifg=red                                 
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 set nowrap
@@ -57,6 +57,7 @@ set autoread
 au CursorHold,CursorHoldI * checktime
 au FocusGained,BufEnter * :checktime
 autocmd FileType fugitive set spell
+autocmd FileType text, markdown set spell
 
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
