@@ -49,8 +49,8 @@ local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
   { key = {"cd"}, cb = tree_cb("cd") },
   { key = "<BS>", cb = tree_cb("dir_up") },
-  { key = "<s>", cb = tree_cb("split") },
-  { key = "<v>", cb = tree_cb("vsplit") },
+  { key = "s", cb = tree_cb("split") },
+  { key = "v", cb = tree_cb("vsplit") },
 }
 
 --" resize current buffer by +/- 5 

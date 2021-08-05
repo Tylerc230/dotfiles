@@ -13,7 +13,8 @@ hi ColorColumn ctermbg=0 guibg=#363636
 set laststatus=2
 set updatetime=250
 set nospell spelllang=en_us
-hi SpellBad gui=underline guifg=red                                 
+hi link SpellBad ErrorMsg
+hi SpellBad gui=undercurl
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 set nowrap
 set termguicolors
@@ -57,7 +58,7 @@ set autoread
 au CursorHold,CursorHoldI * checktime
 au FocusGained,BufEnter * :checktime
 autocmd FileType fugitive set spell
-autocmd FileType text, markdown set spell
+autocmd FileType text,markdown set spell
 
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
@@ -81,7 +82,9 @@ hi! link IncSearch Search
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
-
+let g:nvim_tree_hide_dotfiles = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_update_cwd = 1
 
 function! FugitiveReDetect()
   unlet! b:git_dir
@@ -119,3 +122,19 @@ au BufRead,BufNewFile *.ino set filetype=cpp
 "navigation
 nnoremap <C-i> <C-o>
 nnoremap <C-o> <C-i>
+let g:terminal_color_0 = '#1e2132'
+let g:terminal_color_1 = '#e27878'
+let g:terminal_color_2 = '#b4be82'
+let g:terminal_color_3 = '#e2a478'
+let g:terminal_color_4 = '#84a0c6'
+let g:terminal_color_5 = '#a093c7'
+let g:terminal_color_6 = '#89b8c2'
+let g:terminal_color_7 = '#c6c8d1'
+let g:terminal_color_8 = '#6b7089'
+let g:terminal_color_9 = '#e98989'
+let g:terminal_color_10 = '#c0ca8e'
+let g:terminal_color_11 = '#e9b189'
+let g:terminal_color_12 = '#91acd1'
+let g:terminal_color_13 = '#ada0d3'
+let g:terminal_color_14 = '#95c4ce'
+let g:terminal_color_15 = '#d2d4de'
