@@ -107,7 +107,7 @@ table.insert(gls.left, {
 vim.fn.getbufvar(0, 'ts')
 
 table.insert(gls.left, {
-    FileName = {provider = 'FileName', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
+    FileName = {provider = 'FilePath', condition = condition.buffer_not_empty, highlight = {colors.grey, colors.bg}}
 })
 
 table.insert(gls.left, {
@@ -257,16 +257,6 @@ table.insert(gls.right, {
 table.insert(gls.right, {
     BufferType = {
         provider = 'FileTypeName',
-        condition = condition.hide_in_width,
-        separator = ' ',
-        separator_highlight = {'NONE', colors.bg},
-        highlight = {colors.grey, colors.bg}
-    }
-})
-
-table.insert(gls.right, {
-    FileEncode = {
-        provider = 'FileEncode',
         condition = condition.hide_in_width,
         separator = ' ',
         separator_highlight = {'NONE', colors.bg},

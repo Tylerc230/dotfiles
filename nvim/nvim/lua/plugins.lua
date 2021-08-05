@@ -18,7 +18,8 @@ require('packer').startup({function()
     run = ':TSUpdate'
   }
   use {
-  'glepnir/galaxyline.nvim',
+  --'glepnir/galaxyline.nvim',
+    'eruizc-dev/galaxyline.nvim', --fork
     branch = 'main',
     config = function() require 'lunar' end,
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
@@ -29,7 +30,10 @@ require('packer').startup({function()
       'nvim-lua/plenary.nvim'
     }
   }
-  use 'kyazdani42/nvim-tree.lua' --left file browser
+  use {
+    'kyazdani42/nvim-tree.lua', --left file browser
+    requires = "kyazdani42/nvim-web-devicons",
+  }
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
 
