@@ -125,24 +125,17 @@ hs.hotkey.bind(subHyper, 'f', function ()
     while win == nil do
       win = alacritty:mainWindow()
     end
-    print(win)
-    --print(win:screen())
-    print(mainScreen)
     local fullScreen = not win:isStandard()
     if fullScreen then
       hs.eventtap.keyStroke('cmd', 'return', 0, alacritty)
     end
     local winFrame = win:frame()
     local scrFrame = mainScreen:fullFrame()
-    print(winFrame)
-    print(scrFrame)
     winFrame.w = scrFrame.w
     winFrame.h = scrFrame.h
     winFrame.y = scrFrame.y
     winFrame.x = scrFrame.x
-    print(winFrame)
     win:setFrame(winFrame, 0)
-    print(win:frame())
     local space = visiblePrimarySpace()
     win:spacesMoveTo(space)
     if fullScreen then
@@ -150,25 +143,21 @@ hs.hotkey.bind(subHyper, 'f', function ()
     end
     win:focus()
   end
+
   local alacritty = hs.application.get(APP_NAME)
   if alacritty ~= nil and alacritty:isFrontmost() then
     alacritty:hide()
   else
-    --local mainScreen = hs.screen.find(spaces.mainScreenUUID())
     local mainScreen = hs.screen.primaryScreen()
     if alacritty == nil and hs.application.launchOrFocus(APP_NAME) then
       local appWatcher = nil
-      print('create app watcher')
       appWatcher = hs.application.watcher.new(function(name, event, app)
-        print(name)
-        print(event)
         if event == hs.application.watcher.launched and name == APP_NAME then
           app:hide()
           moveWindow(app, mainScreen)
           appWatcher:stop()
         end
       end)
-      print('start watcher')
       appWatcher:start()
     end
     if alacritty ~= nil then
