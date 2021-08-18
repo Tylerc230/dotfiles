@@ -5,20 +5,24 @@ local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 local previewers = require "telescope.previewers"
 local utils = require "telescope.utils"
+local putils = require "telescope.previewers.utils"
 local make_entry = require "telescope.make_entry"
 local conf = require("telescope.config").values
+local Path = require "plenary.path"
+local pfiletype = require "plenary.filetype"
+
+local function git_show_command(opts)
+    local cf = opts.current_file and Path:new(opts.current_file):make_relative(opts.cwd)
+    local value = opts.commit_sha .. ":" .. cf
+    return { "git", "--no-pager", "show", value }
+end
 
 local function preview_file_at_commit(prompt_bufnr, type, opts)
-    --vnew|execute "0r !date" |setlocal noma|setlocal ro
-    --nvim_get_current_buf()                                
-    --print(vim.api.nvim_create_buf(1, 1))
     local entry = action_state.get_selected_entry()
+    opts.current_file = entry.value
+    local cmd = git_show_command(opts)
     local file_version = opts.commit_sha..":"..entry.value
-    local results = utils.get_os_command_output({
-        "git", 
-        "show", 
-        file_version
-    }, opts.cwd)
+    local results = utils.get_os_command_output(cmd, opts.cwd)
     local buffer_handle = vim.api.nvim_create_buf(1,1)
     vim.api.nvim_buf_set_lines(buffer_handle, 0, 0, 0, results)
     vim.api.nvim_buf_set_name(buffer_handle, file_version)
@@ -29,6 +33,29 @@ local function preview_file_at_commit(prompt_bufnr, type, opts)
     vim.opt_local.readonly = true
     vim.opt_local.modifiable = false 
 end
+
+local preview_git_file =  utils.make_default_callable(function (opts)
+    return previewers.new_buffer_previewer {
+        title = "Git File Preview",
+        dynamic_title = function(self, entry)
+            return "Git File: "..entry.value.." @ "..opts.commit_sha
+        end,
+        define_preview = function(self, entry, _)
+            local lopts = vim.deepcopy(opts)
+            lopts.current_file = entry.value
+            local cmd = git_show_command(lopts)
+            putils.job_maker(cmd, self.state.bufnr, {
+                value = entry.value,
+                bufname = self.state.bufname,
+                cwd = opts.cwd,
+                callback = function(bufnr)
+                end
+            })
+            local ft = pfiletype.detect(entry.value)
+            putils.highlighter(self.state.bufnr, ft)
+        end
+    }
+end, {})
 
 local function run_files_for_commit(opts)
     opts = opts or {}
@@ -45,7 +72,7 @@ local function run_files_for_commit(opts)
             },
             opts
         ),
-        previewer = conf.file_previewer(opts),
+        previewer =  preview_git_file.new(opts) ,
         sorter = conf.file_sorter(opts),
         attach_mappings = function() 
             action_set.select:replace(function(prompt_bufnr, type)
