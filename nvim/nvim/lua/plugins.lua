@@ -36,6 +36,7 @@ require('packer').startup({function()
   }
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
+  use "Pocco81/AutoSave.nvim"
 
   use {
     'phaazon/hop.nvim',
@@ -141,22 +142,39 @@ local function setup_servers()
 end
 
 setup_servers()
+local lsp_config = require'lspconfig'
 local util = require'lspconfig'.util
-require'lspconfig'.sourcekit.setup {
+lsp_config.sourcekit.setup {
   cmd = { "xcrun", "sourcekit-lsp" },
   root_dir = util.root_pattern("Package.swift", ".git"),
   --filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
   filetypes = { "swift" }
 }
 
-require'lspconfig'.clangd.setup {
+lsp_config.clangd.setup {
   --cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
   --cmd = { "xcrun", "clangd", "-log=verbose" },
   cmd = { "xcrun", "clangd" },
   root_dir = util.root_pattern("compile_commands.json", ".git"),
   filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
 }
-
+lsp_config.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
@@ -202,8 +220,15 @@ require'compe'.setup {
 }
 
 local saga = require 'lspsaga'
-saga.init_lsp_saga()
+saga.init_lsp_saga {
+ code_action_prompt = {
+   enable = false,
+   sign = false,
+ }
+}
 _G.load = function(file)
     require("plenary.reload").reload_module(file, true)
     return require(file)
 end
+
+require("autosave").setup()

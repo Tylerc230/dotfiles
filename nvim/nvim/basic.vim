@@ -57,8 +57,7 @@ set signcolumn=yes
 set autoread            
 au CursorHold,CursorHoldI * checktime
 au FocusGained,BufEnter * :checktime
-autocmd FileType fugitive set spell
-autocmd FileType text,markdown set spell
+autocmd FileType gitcommit,text,markdown setlocal spell
 
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
@@ -108,7 +107,7 @@ let g:neoterm_autoscroll = 1
 let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
 let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
 autocmd BufLeave term://* stopinsert
-autocmd FileType neoterm  set nospell
+autocmd FileType neoterm  setlocal nospell
 autocmd FileType neoterm  nnoremap <silent><buffer> q :Tclose<CR>
 tnoremap <ESC> <C-\><C-n>
 
