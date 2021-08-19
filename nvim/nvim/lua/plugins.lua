@@ -12,7 +12,13 @@ require('packer').startup({function()
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
   use 'kassio/neoterm'
+
   use 'christianchiarulli/nvcode-color-schemes.vim'
+  use 'mhartington/oceanic-next'
+  use 'tomasiser/vim-code-dark'
+  use 'marko-cerovac/material.nvim'
+  use 'sainnhe/sonokai'
+  use 'EdenEast/nightfox.nvim'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
@@ -37,7 +43,32 @@ require('packer').startup({function()
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
   use "Pocco81/AutoSave.nvim"
-
+  use {"hrsh7th/nvim-compe"} --auto complete
+  use {
+    'abecodes/tabout.nvim',
+    config = function()
+      require('tabout').setup {
+        tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        enable_backwards = true, -- well ...
+        completion = false, -- if the tabkey is used in a completion pum
+        tabouts = {
+          {open = "'", close = "'"},
+          {open = '"', close = '"'},
+          {open = '`', close = '`'},
+          {open = '(', close = ')'},
+          {open = '[', close = ']'},
+          {open = '{', close = '}'}
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {} -- tabout will ignore these filetypes
+      }
+    end,
+    wants = {'nvim-treesitter'}, -- or require if not used so far
+    after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
+  }
   use {
     'phaazon/hop.nvim',
     as = 'hop',
@@ -50,19 +81,13 @@ require('packer').startup({function()
   use {"neovim/nvim-lspconfig"}
   use {"glepnir/lspsaga.nvim"} --floating lsp windows
   use {"kabouzeid/nvim-lspinstall"}
-  use {"hrsh7th/nvim-compe"} --auto complete
-  use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-  }
 
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup()
+    end
+  }
 end,
 config = {
   display = {
@@ -86,6 +111,7 @@ require("nvim-autopairs.completion.compe").setup({
   map_cr = true, --  map <CR> on insert mode
   map_complete = true -- it will auto insert `(` after select function or method item
 })
+
 
 require('telescope').setup {
   pickers = {
@@ -186,7 +212,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         virtual_text = false
     }
 )
-
 vim.o.completeopt = "menuone,noselect"
 require'compe'.setup {
   enabled = true;
@@ -224,7 +249,16 @@ saga.init_lsp_saga {
  code_action_prompt = {
    enable = false,
    sign = false,
- }
+ },
+  finder_action_keys = {
+    open = 'o', vsplit = 's',split = 'i',quit = '<esc>',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+  },
+  code_action_keys = {
+    quit = '<esc>',exec = '<CR>'
+  },
+  rename_action_keys = {
+    quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+  },
 }
 _G.load = function(file)
     require("plenary.reload").reload_module(file, true)
