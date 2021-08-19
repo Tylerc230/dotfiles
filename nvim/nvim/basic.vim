@@ -6,10 +6,11 @@ set hidden
 let g:nvcode_termcolors=256
 
 syntax on
-colorscheme nvcode " Or whatever colorscheme you make
+"colorscheme nvcode " Or whatever colorscheme you make
+colorscheme sonokai
+let g:sonokai_enable_italic = 1
 set clipboard=unnamed
 hi ColorColumn ctermbg=0 guibg=#363636
-"highlight Normal guibg=none
 set laststatus=2
 set updatetime=250
 set nospell spelllang=en_us
@@ -108,7 +109,6 @@ let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of
 let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
 autocmd BufLeave term://* stopinsert
 autocmd FileType neoterm  setlocal nospell
-autocmd FileType neoterm  nnoremap <silent><buffer> q :Tclose<CR>
 tnoremap <ESC> <C-\><C-n>
 
 
@@ -137,3 +137,5 @@ let g:terminal_color_12 = '#91acd1'
 let g:terminal_color_13 = '#ada0d3'
 let g:terminal_color_14 = '#95c4ce'
 let g:terminal_color_15 = '#d2d4de'
+
+
