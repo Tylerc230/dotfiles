@@ -215,13 +215,15 @@ hs.hotkey.bind(hyper, 'x', function()
 end)
 
 function focus(direction)
-  local rc = wm("window --focus "..direction)
-  if rc == 1 and direction == "west" then
-    wm("display --focus 2")
+  wm("window --focus "..direction, function (exitcode, stdout, stderr)
+    if exitcode == 1 and direction == "west" then
+      wm("display --focus 2")
+    end
+    if exitcode == 1 and direction == "east" then
+      wm("display --focus 1")
+    end
   end
-  if rc == 1 and direction == "east" then
-    wm("display --focus 1")
-  end
+  )
 end
 
 function fullscreen()
@@ -232,9 +234,23 @@ function warp(direction)
   wm("window --warp "..direction)
 end
 
+local function focusLastFocused()
+  local wf = hs.window.filter
+  local lastFocused = wf.defaultCurrentSpace:getWindows(wf.sortByFocusedLast)
+  if #lastFocused > 0 then
+    local to_focus = lastFocused[2]
+    print("Focusing "..to_focus:title())
+    to_focus:focus() 
+  end
+end
+
 function closeWindow() 
-  wm('window --close')
-  --wm('window --focus prev')
+  wm('query --windows', function(exitcode, stdout, stderr)
+    local command = "echo '"..stdout.."' | /usr/local/bin/jq '.[] | select(.focused==1).id'"
+    local window_id, _, _, _ = hs.execute(command)
+    focusLastFocused()
+    wm(string.format('window %s --close', window_id), function(rc, so, se) end)
+  end)
 end
 
 function showWindowMode(show)
@@ -266,9 +282,9 @@ end
 
 
 
-function wm(command)
+function wm(command, callback)
   local args =  split_string("-m "..command, " ")
-  hs.task.new("/usr/local/bin/yabai", nil, args):start()
+  hs.task.new("/usr/local/bin/yabai", callback, args):start()
 end
 
 function split_string (inputstr, sep)
