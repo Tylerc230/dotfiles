@@ -28,6 +28,7 @@ map('n', '<leader>gc', '<CMD>Telescope git_status<CR>', options)
 map('n', '<leader><leader>/', '<CMD>let @/=""<CR>', options)
 map('n', '<leader>ci', '<plug>NERDCommenterToggle', options)
 map('n', '<leader>i', 'V=<ESC>', options)
+map('n', '<leader>I', 'gg=G', options)
 map('v', '<leader>i', '=', options)
 map('n', '<leader>v', '<CMD>Ttoggle<CR>', options)
 map('n', '<leader>n', '<CMD>vert Tnew<CR>', options)
@@ -44,11 +45,12 @@ map('n', 'gi', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
 --map('n', 'gt', '<Cmd>TroubleToggle lsp_document_diagnostics<CR>', options)
 map('n', 'gt', '<Cmd>Lspsaga show_line_diagnostics<CR>', options)
 map('n', 'gf', '<Cmd>Lspsaga code_action<CR>', options)
+map('n', '<leader>a', '<Cmd>Lspsaga lsp_finder<CR>', options)
 --map('n', 'gh', '<Cmd>Lspsaga hover_doc<CR>', options)
 --map('n', '<leader>gt', '<Cmd>TroubleToggle<CR>', options)
 map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
 --map("n", "<space>i", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
-map('n', '<leader>d', '<cmd>Telescope lsp_document_diagnostics<CR>', options)
+--map('n', '<leader>d', '<cmd>Telescope lsp_document_diagnostics<CR>', options)
 map('n', '<leader>D', '<cmd>Telescope lsp_workspace_diagnostics<CR>', options)
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
@@ -56,6 +58,7 @@ vim.g.nvim_tree_bindings = {
   { key = "<BS>", cb = tree_cb("dir_up") },
   { key = "s", cb = tree_cb("split") },
   { key = "v", cb = tree_cb("vsplit") },
+  { key = "N", cb = tree_cb("create") },
 }
 
 --" resize current buffer by +/- 5 
