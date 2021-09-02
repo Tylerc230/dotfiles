@@ -1,0 +1,2 @@
+#!/bin/sh
+xcodebuild -project ./MShopIOSContextualActions/MShopIOSContextualActions.xcodeproj -scheme MShopIOSContextualActions  -destination id=4EBBD6E6-EE07-4001-B1B1-21B165454DF9 COMPILER_INDEX_STORE_ENABLE=NO  CLANG_INDEX_STORE_ENABLE=NO  SWIFT_INDEX_STORE_ENABLE=NO  MTL_ENABLE_INDEX_STORE=NO  CLANG_DEBUG_MODULES=NO  | /usr/local/lib/ruby/gems/3.0.0/bin/xcpretty -r json-compilation-database --output compile_commands.json
