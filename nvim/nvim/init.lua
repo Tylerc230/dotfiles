@@ -12,3 +12,5 @@ vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when th
 vim.cmd('source ~/dotfiles/nvim/nvim/basic.vim')
 require('plugins')
 require('keymappings')
+require('lsp')
+require('dbg')

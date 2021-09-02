@@ -43,7 +43,15 @@ require('packer').startup({function()
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
   use "Pocco81/AutoSave.nvim"
-  use {"hrsh7th/nvim-compe"} --auto complete
+  --use {"hrsh7th/nvim-compe"} --auto complete
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path"
+    }
+  }
   use {
     'abecodes/tabout.nvim',
     config = function()
@@ -67,7 +75,7 @@ require('packer').startup({function()
       }
     end,
     wants = {'nvim-treesitter'}, -- or require if not used so far
-    after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
+    --after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
   }
   use {
     'phaazon/hop.nvim',
@@ -79,8 +87,18 @@ require('packer').startup({function()
   }
   use {"windwp/nvim-autopairs"}
   use {"neovim/nvim-lspconfig"}
-  use {"glepnir/lspsaga.nvim"} --floating lsp windows
+  use {"glepnir/lspsaga.nvim",
+    requires = {{'neovim/nvim-lspconfig'}} --floating lsp windows
+  }
   use {"kabouzeid/nvim-lspinstall"}
+
+--DAP
+  use 'mfussenegger/nvim-dap'
+  use {'nvim-telescope/telescope-dap.nvim'}
+  use {'Pocco81/DAPInstall.nvim'}
+  use {'theHamsta/nvim-dap-virtual-text'}
+  use {'rcarriga/nvim-dap-ui'}
+  use 'jbyuki/one-small-step-for-vimkind'
 
   use {
     "folke/which-key.nvim",
@@ -107,10 +125,10 @@ local git_browser_actions = transform_mod({
     })
   end
 })
-require("nvim-autopairs.completion.compe").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true -- it will auto insert `(` after select function or method item
-})
+--require("nvim-autopairs.completion.compe").setup({
+  --map_cr = true, --  map <CR> on insert mode
+  --map_complete = true -- it will auto insert `(` after select function or method item
+--})
 
 
 require('telescope').setup {
@@ -158,108 +176,68 @@ require('gitsigns').setup {
     ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
   }
 }
-
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
-  end
-end
-
-setup_servers()
-local lsp_config = require'lspconfig'
-local util = require'lspconfig'.util
-lsp_config.sourcekit.setup {
-  cmd = { "xcrun", "sourcekit-lsp" },
-  root_dir = util.root_pattern("Package.swift", ".git"),
-  --filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
-  filetypes = { "swift" }
-}
-
-lsp_config.clangd.setup {
-  --cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
-  --cmd = { "xcrun", "clangd", "-log=verbose" },
-  cmd = { "xcrun", "clangd" },
-  root_dir = util.root_pattern("compile_commands.json", ".git"),
-  filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
-}
-lsp_config.rust_analyzer.setup({
-    on_attach=on_attach,
-    settings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "by_self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    }
-})
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false
-    }
-)
-vim.o.completeopt = "menuone,noselect"
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = true;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
+local cmp = require('cmp')
+cmp.setup {
+  -- You can set mappings if you want
+  completion = {
+    autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
+    completeopt = "menu,menuone,noselect",
+  },
   documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-  };
-}
-
-local saga = require 'lspsaga'
-saga.init_lsp_saga {
- code_action_prompt = {
-   enable = false,
-   sign = false,
- },
-  finder_action_keys = {
-    open = 'o', vsplit = 's',split = 'i',quit = '<esc>',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+    border = "rounded",
   },
-  code_action_keys = {
-    quit = '<esc>',exec = '<CR>'
+  mapping = {
+    ['<Up>'] = cmp.mapping.select_prev_item(),
+    ['<Down>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
   },
-  rename_action_keys = {
-    quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+
+  -- You should specify your *installed* sources.
+  sources = {
+    { name = 'buffer' },
+    {name = "nvim_lsp"},
+    {name = "path"}
   },
 }
+--vim.o.completeopt = "menuone,noselect"
+--require'compe'.setup {
+  --enabled = true;
+  --autocomplete = true;
+  --debug = false;
+  --min_length = 1;
+  --preselect = 'always';
+  --throttle_time = 80;
+  --source_timeout = 200;
+  --resolve_timeout = 800;
+  --incomplete_delay = 400;
+  --max_abbr_width = 100;
+  --max_kind_width = 100;
+  --max_menu_width = 100;
+  --documentation = {
+    --border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    --winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    --max_width = 120,
+    --min_width = 60,
+    --max_height = math.floor(vim.o.lines * 0.3),
+    --min_height = 1,
+  --};
+
+--  source = {
+--    path = true;
+ --   buffer = true;
+  --  calc = true;
+   -- nvim_lsp = true;
+    --nvim_lua = true;
+ -- };
+--}
+
 _G.load = function(file)
     require("plenary.reload").reload_module(file, true)
     return require(file)
