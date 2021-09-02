@@ -72,6 +72,7 @@ modal:bind("","2", "", nil, function()
   wm("display --focus 2")
 end, nil)
 modal:bind("", "escape", "Exit window mode", nil, function() modal:exit() end, nil)
+modal:bind("", "return", "Exit window mode", nil, function() modal:exit() end, nil)
 
 
 --term_filter = hs.window.filter.new(false):setAppFilter('iTerm2',{allowTitles='iTerm Default'})
