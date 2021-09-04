@@ -2,6 +2,7 @@ require('dap')
 require('telescope').load_extension('dap')
 require('dbg.lldb')
 require('dbg.nvim-lua')
+require('dbg.node')
 vim.g.dap_virtual_text = true
 
 require("dapui").setup()
