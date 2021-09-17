@@ -25,7 +25,10 @@ return require('telescope').register_extension {
     exports = {
         scripts = function(opts)
             opts = opts or {}
-            local handle = io.popen("hist_list.sh")
+            local hist_list = [[
+            /bin/zsh --login -c "export HISTFILE=~/.zsh_history; export HISTSIZE=500000; fc -R && fc -lr 0"
+            ]]
+            local handle = io.popen(hist_list)
             local result = handle:read("*a")
             handle:close()
             local commands = {}
