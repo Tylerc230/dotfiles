@@ -26,7 +26,7 @@ return require('telescope').register_extension {
         scripts = function(opts)
             opts = opts or {}
             local hist_list = [[
-            /bin/zsh --login -c "export HISTFILE=~/.zsh_history; export HISTSIZE=500000; fc -R && fc -lr 0"
+            /bin/zsh --login -c "export HISTFILE=~/.zsh_history; export HISTSIZE=500000; fc -R && fc -lrf 0"
             ]]
             local handle = io.popen(hist_list)
             local result = handle:read("*a")
@@ -34,38 +34,53 @@ return require('telescope').register_extension {
             local commands = {}
             local commandNumberMap = {}
             for s in result:gmatch("[^\r\n]+") do
-                for number, command in s:gmatch(" *([0-9]+)  (.*)") do
+                for number, date, time, command in s:gmatch(" *([0-9]+)  ([^%s]*) ([^%s]*)  (.*)") do
                     if commandNumberMap[command] == nil then
-                        table.insert(commands, command)
+                        table.insert(commands, {
+                            number = number,
+                            date = date,
+                            time = time,
+                            command = command
+                        })
                         commandNumberMap[command] = number
                     end
                 end
             end
+            --preivew of command around selected would be nice (how since we dedupe?)
             pickers.new(opts, {
                 prompt_title = 'Commands',
                 finder = finders.new_table {
-                    results = commands
+                    results = commands,
+                    entry_maker = function(command)
+                        local display = string.format("%s %s %s", command.number, command.date, command.command)
+                        return {
+                            value = command,
+                            display = display,
+                            text = display,
+                            ordinal = display,
+                        }
+                    end
                 },
                 sorter = sorters.get_substr_matcher(),
                 attach_mappings = function(prompt_bufnr, map)
                     local execute_command = function()
                         local selection = actions.get_selected_entry(prompt_bufnr)
                         actions.close(prompt_bufnr)
-                        local command = 'T ' .. selection.value
+                        local command = 'T ' .. selection.value.command
                         vim.cmd(command)
                     end
 
                     local edit_command = function()
                         local selection = actions.get_selected_entry(prompt_bufnr)
                         actions.close(prompt_bufnr)
-                        local command = 'T !' .. commandNumberMap[selection.value]
+                        local command = 'T !' .. selection.value.number
                         vim.cmd(command)
                     end
 
                     local yank_command = function()
                         local selection = actions.get_selected_entry(prompt_bufnr)
                         actions.close(prompt_bufnr)
-                        vim.api.nvim_exec("let @+ = '"..selection.value.."'", false)
+                        vim.api.nvim_call_function("setreg", {"+", selection.value.command})
                     end
 
 
