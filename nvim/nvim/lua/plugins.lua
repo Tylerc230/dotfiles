@@ -116,6 +116,29 @@ config = {
 }})
 
 require('nvim-autopairs').setup()
+
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+require'nvim-tree'.setup({
+  update_cwd = true,
+  follow = true,
+  update_focused_file = {
+    -- enables the feature
+    enable      = true,
+  },
+  view = {
+    mappings = {
+      list = {
+        { key = {"cd"}, cb = tree_cb("cd") },
+        { key = "<BS>", cb = tree_cb("dir_up") },
+        { key = "s", cb = tree_cb("split") },
+        { key = "v", cb = tree_cb("vsplit") },
+        { key = "N", cb = tree_cb("create") },
+        { key = ".", cb = tree_cb("toggle_dotfiles") },
+      }
+    }
+  }
+
+})
 local transform_mod = require('telescope.actions.mt').transform_mod
 local git_browser_actions = transform_mod({
   logs_for_branch = function(opts)
