@@ -24,11 +24,8 @@ require('packer').startup({function()
     run = ':TSUpdate'
   }
   use {
-  --'glepnir/galaxyline.nvim',
-    'eruizc-dev/galaxyline.nvim', --fork
-    branch = 'main',
-    config = function() require 'lunar' end,
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
   }
   use {
     'lewis6991/gitsigns.nvim', --gutter signs
@@ -116,7 +113,83 @@ config = {
 }})
 
 require('nvim-autopairs').setup()
+require'lualine'.setup {
+  options = {
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {
+      'branch',
+      'diff',
+      {
+        'diagnostics',
+        sources={'nvim_lsp'},
+        diagnostics_color = {
+          --error = {fg = "LspDiagnosticsDefaultError"},
+          --warn = { fg = 'LspDiagnosticsDefaultWarning' },
+          --info = { fg = 'LspDiagnosticsDefaultInformation' },
+          --hint = { fg = 'LspDiagnosticsDefaultHint' },
+          --error = {fg = "ErrorText"},
+          --warn = { fg = 'WarningText' },
+          --info = { fg = 'InfoText' },
+          --hint = { fg = 'HintText' },
+          error = {fg = "#fc5d7c"},
+          warn = { fg = '#e7c664' },
+          info = { fg = '#76cce0' },
+          hint = { fg = '#9ed072' },
 
+        },
+        always_visible = true,
+      }
+    },
+    lualine_c = {
+      {
+        'filename',
+        path = 1
+      }
+    },
+    lualine_x = {
+      {
+        -- Lsp server name .
+        function()
+          local msg = 'No Active Lsp'
+          local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+          local clients = vim.lsp.get_active_clients()
+          if next(clients) == nil then
+            return msg
+          end
+          for _, client in ipairs(clients) do
+            local filetypes = client.config.filetypes
+            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+              return client.name
+            end
+          end
+          return msg
+        end,
+        icon = ' LSP:',
+        color = { fg = '#ffffff', gui = 'bold' },
+      }
+    },
+    --lualine_x = {'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup({
   update_cwd = true,
