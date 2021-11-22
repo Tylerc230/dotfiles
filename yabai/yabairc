@@ -45,6 +45,7 @@ center_grid='26:26:5:5:16:16'
 #yabai -m query --windows to query windows
 #https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
 yabai -m rule --add app="Simulator" manage=off border=off 
+yabai -m rule --add app="qemu-system-x86_64" manage=off border=off 
 yabai -m rule --add app="Cisco AnyConnect Secure Mobility Client" manage=off border=off
 
 yabai -m rule --add app=Dash manage=off sticky=on grid="26:26:3:3:20:20"
@@ -59,8 +60,10 @@ yabai -m rule --add app='Things' manage=off grid="$center_grid"
 yabai -m rule --add app='Spotify' manage=off sticky=on grid="$center_grid"
 yabai -m rule --add app='iTerm2' title="^.*Hotkey Window$" manage=off
 yabai -m rule --add app='Alfred' manage=off
+yabai -m rule --add app='QuickTime Player' manage=off
 yabai -m rule --add app='kitty' manage=off
 yabai -m rule --add app='Alacritty' manage=off
+yabai -m rule --add app='Amazon Chime' manage=off
 yabai -m rule --add app='System Preferences' manage=off sticky=on grid="$center_grid"
 
 echo "yabai configuration loaded.."
