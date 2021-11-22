@@ -239,7 +239,7 @@ local function focusLastFocused()
   local wf = hs.window.filter
   local lastFocused = wf.defaultCurrentSpace:getWindows(wf.sortByFocusedLast)
   if #lastFocused > 0 then
-    local to_focus = lastFocused[2]
+    local to_focus = lastFocused[1]
     print("Focusing "..to_focus:title())
     to_focus:focus() 
   end
@@ -249,8 +249,9 @@ function closeWindow()
   wm('query --windows', function(exitcode, stdout, stderr)
     local command = "echo '"..stdout.."' | /usr/local/bin/jq '.[] | select(.focused==1).id'"
     local window_id, _, _, _ = hs.execute(command)
-    focusLastFocused()
-    wm(string.format('window %s --close', window_id), function(rc, so, se) end)
+    wm(string.format('window %s --close', window_id), function(rc, so, se) 
+      focusLastFocused()
+    end)
   end)
 end
 
