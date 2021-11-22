@@ -83,24 +83,22 @@ if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
 let g:nvim_tree_hide_dotfiles = 1
-let g:nvim_tree_follow = 1
-let g:nvim_tree_update_cwd = 1
 
-function! FugitiveReDetect()
-  unlet! b:git_dir
-  call FugitiveDetect(getcwd())
-endfunction
+"function! FugitiveReDetect()
+  "unlet! b:git_dir
+  "call FugitiveDetect(getcwd())
+"endfunction
 
-augroup fugitive-ov
-  au BufEnter * call FugitiveReDetect()
-  au BufNew * call FugitiveReDetect()
-  au BufNewFile * call FugitiveReDetect()
-  au BufRead * call FugitiveReDetect()
-  au CmdwinEnter * call FugitiveReDetect()
-  au DirChanged * call FugitiveReDetect()
-  au VimEnter * call FugitiveReDetect()
-augroup END
-
+"augroup fugitive-ov
+  "au BufEnter * call FugitiveReDetect()
+  "au BufNew * call FugitiveReDetect()
+  "au BufNewFile * call FugitiveReDetect()
+  "au BufRead * call FugitiveReDetect()
+  "au CmdwinEnter * call FugitiveReDetect()
+  "au DirChanged * call FugitiveReDetect()
+  "au VimEnter * call FugitiveReDetect()
+"augroup END
+let g:NERDCreateDefaultMappings = 0
 
 let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
