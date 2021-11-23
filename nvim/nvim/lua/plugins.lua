@@ -11,6 +11,13 @@ require('packer').startup({function()
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
+  use {
+    "jameshiew/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"tami5/sqlite.lua"}
+  }
   use 'kassio/neoterm'
 
   use 'christianchiarulli/nvcode-color-schemes.vim'
@@ -228,6 +235,11 @@ local git_browser_actions = transform_mod({
 
 
 require('telescope').setup {
+  extensions = {
+    frecency = {
+      default_workspace = 'CWD',
+    },
+  },
   pickers = {
     git_branches = {
       mappings = {

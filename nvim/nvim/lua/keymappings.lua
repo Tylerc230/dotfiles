@@ -14,7 +14,8 @@ map('n', '<leader>L', '<C-w>L', options)
 
 
 map('n', '<leader>t', ':Telescope find_files<CR>', options)
-map('n', '<leader>r', ':Telescope oldfiles<CR>', options)
+--map('n', '<leader>r', ':Telescope oldfiles<CR>', options)
+map('n', '<leader>r', ':Telescope frecency<CR>', options)
 map('n', '<leader>/', ':Telescope live_grep prompt_prefix=🔍<CR>', options)
 map('n', '<leader>*', ':Telescope grep_string prompt_prefix=🔍<CR>', options)
 map('n', '<leader>b', ':Telescope buffers<CR>', options)
