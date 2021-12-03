@@ -1,63 +1,117 @@
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local lsp_installer = require("nvim-lsp-installer")
 
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{
-      capabilities = capabilities,
-    }
-  end
+-- Register a handler that will be called for all installed servers.
+-- Alternatively, you may also register handlers on specific server instances instead (see example below).
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
 
-  local lsp_config = require'lspconfig'
-  local util = require'lspconfig'.util
-  lsp_config.sourcekit.setup {
-    cmd = { "xcrun", "sourcekit-lsp" },
-    root_dir = util.root_pattern("Package.swift", ".git"),
-    --filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
-    filetypes = { "swift" }
-  }
+  if server.name == "rust_analyzer" then
+    opts =  {
+      settings = {
+        ["rust-analyzer"] = {
+          --trace = {
+          --server = "verbose"
 
-  lsp_config.clangd.setup {
-    --cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
-    --cmd = { "xcrun", "clangd", "-log=verbose" },
-    cmd = { "xcrun", "clangd" },
-    root_dir = util.root_pattern("compile_commands.json"),
-    filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
-  }
+          --},
+          linkedProjects = {
+            --order is important (rust-analyzer/rust-analyzer#7764)
+            "Cargo.toml",
+            --"avr/Cargo.toml",
+          },
+          assist = {
+            importGranularity = "module",
+            importPrefix = "by_self",
+          },
+          cargo = {
+            loadOutDirsFromCheck = true,
+            target = "avr-unknown-gnu-atmega328"
+          },
 
-lsp_config.rust_analyzer.setup({
-    on_attach=on_attach,
-    settings = {
-      ["rust-analyzer"] = {
-        linkedProjects = {
-          --order is important (rust-analyzer/rust-analyzer#7764)
-          "Cargo.toml",
-          "avr/Cargo.toml",
-        },
-        assist = {
-          importGranularity = "module",
-          importPrefix = "by_self",
-        },
-        cargo = {
-          loadOutDirsFromCheck = true,
-          target = "avr-unknown-gnu-atmega328"
-        },
-
-        diagnostics = {
-          disabled = {
-            --https://github.com/rust-analyzer/rust-analyzer/issues/6835
-            "unresolved-macro-call"
-          }
-        },
-        procMacro = {
-          enable = true
-        },
+          diagnostics = {
+            disabled = {
+              --https://github.com/rust-analyzer/rust-analyzer/issues/6835
+              "unresolved-macro-call"
+            }
+          },
+          procMacro = {
+            enable = true
+          },
+        }
       }
     }
-  })
+  end
+  -- (optional) Customize the options passed to the server
+    -- if server.name == "tsserver" then
+    --     opts.root_dir = function() ... end
+    -- end
+
+    -- This setup() function is exactly the same as lspconfig's setup function.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+  server:setup(opts)
+end)
+--local function setup_servers()
+  --require'lspinstall'.setup()
+  --local servers = require'lspinstall'.installed_servers()
+  --for _, server in pairs(servers) do
+    --require'lspconfig'[server].setup{
+      --capabilities = capabilities,
+    --}
+  --end
+
+  --local lsp_config = require'lspconfig'
+  --local util = require'lspconfig'.util
+  --lsp_config.sourcekit.setup {
+    --cmd = { "xcrun", "sourcekit-lsp" },
+    --root_dir = util.root_pattern("Package.swift", ".git"),
+    ----filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
+    --filetypes = { "swift" }
+  --}
+
+  --lsp_config.clangd.setup {
+    ----cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
+    ----cmd = { "xcrun", "clangd", "-log=verbose" },
+    --cmd = { "xcrun", "clangd" },
+    --root_dir = util.root_pattern("compile_commands.json"),
+    --filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
+  --}
+
+--lsp_config.rust_analyzer.setup({
+    --on_attach=on_attach,
+    --settings = {
+      --["rust-analyzer"] = {
+        ----trace = {
+          ----server = "verbose"
+
+        ----},
+        --linkedProjects = {
+          ----order is important (rust-analyzer/rust-analyzer#7764)
+          --"Cargo.toml",
+          ----"avr/Cargo.toml",
+        --},
+        --assist = {
+          --importGranularity = "module",
+          --importPrefix = "by_self",
+        --},
+        --cargo = {
+          --loadOutDirsFromCheck = true,
+          --target = "avr-unknown-gnu-atmega328"
+        --},
+
+        --diagnostics = {
+          --disabled = {
+            ----https://github.com/rust-analyzer/rust-analyzer/issues/6835
+            --"unresolved-macro-call"
+          --}
+        --},
+        --procMacro = {
+          --enable = true
+        --},
+      --}
+    --}
+  --})
 
 
   --local opts = {
@@ -119,14 +173,14 @@ lsp_config.rust_analyzer.setup({
   --}
 --}
   --})
-end
+--end
 
-setup_servers()
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
+--setup_servers()
+---- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+--require'lspinstall'.post_install_hook = function ()
+  --setup_servers() -- reload installed servers
+  --vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+--end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -82,7 +82,6 @@ hi! link IncSearch Search
 if has('nvim')
   let $VISUAL = 'nvr -cc split --remote-wait'
 endif
-let g:nvim_tree_hide_dotfiles = 1
 
 "function! FugitiveReDetect()
   "unlet! b:git_dir

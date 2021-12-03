@@ -2,6 +2,7 @@ local actions = require('telescope.actions')
 local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 local sorters = require('telescope.sorters')
+local action_state = require("telescope.actions.state")
 
 local no_sort_filter = function(opts)
     opts = opts or {}
@@ -64,21 +65,21 @@ return require('telescope').register_extension {
                 sorter = sorters.get_substr_matcher(),
                 attach_mappings = function(prompt_bufnr, map)
                     local execute_command = function()
-                        local selection = actions.get_selected_entry(prompt_bufnr)
+                        local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
                         local command = 'T ' .. selection.value.command
                         vim.cmd(command)
                     end
 
                     local edit_command = function()
-                        local selection = actions.get_selected_entry(prompt_bufnr)
+                        local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
                         local command = 'T !' .. selection.value.number
                         vim.cmd(command)
                     end
 
                     local yank_command = function()
-                        local selection = actions.get_selected_entry(prompt_bufnr)
+                        local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
                         vim.api.nvim_call_function("setreg", {"+", selection.value.command})
                     end

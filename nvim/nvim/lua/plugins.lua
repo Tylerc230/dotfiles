@@ -12,7 +12,7 @@ require('packer').startup({function()
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
   use {
-    "jameshiew/telescope-frecency.nvim",
+    "nvim-telescope/telescope-frecency.nvim",
     config = function()
       require"telescope".load_extension("frecency")
     end,
@@ -94,8 +94,7 @@ require('packer').startup({function()
   use {"glepnir/lspsaga.nvim",
     requires = {{'neovim/nvim-lspconfig'}} --floating lsp windows
   }
-  use {"kabouzeid/nvim-lspinstall"}
-
+  use { 'williamboman/nvim-lsp-installer'}
 --DAP
   use 'mfussenegger/nvim-dap'
   use {'nvim-telescope/telescope-dap.nvim'}
@@ -195,15 +194,24 @@ require'lualine'.setup {
     lualine_z = {}
   },
   tabline = {},
-  extensions = {}
+  extensions = {
+    "nvim-tree", "fugitive", {sections = {}, filetypes = {'neoterm'}}
+  },
 }
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 require'nvim-tree'.setup({
   update_cwd = true,
+  diagnostics = {
+    enable = true
+  },
+  filters = {
+    dotfiles = true,
+  },
   follow = true,
   update_focused_file = {
     -- enables the feature
     enable      = true,
+    --update_cwd = true
   },
   view = {
     mappings = {
@@ -309,8 +317,8 @@ cmp.setup {
 
   -- You should specify your *installed* sources.
   sources = {
-    { name = 'buffer' },
     {name = "nvim_lsp"},
+    { name = 'buffer' },
     {name = "path"}
   },
 }
