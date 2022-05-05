@@ -304,14 +304,14 @@
           "verbose": "Disabled"
         },
         {
+          "keyCode": 224,
+          "label": "LEFT CTRL",
+          "verbose": "Left Control"
+        },
+        {
           "keyCode": 226,
           "label": "LEFT ALT",
           "verbose": "Left Alt"
-        },
-        {
-          "keyCode": 227,
-          "label": "LEFT CMD",
-          "verbose": "Left Cmd"
         },
         {
           "keyCode": 231,
