@@ -39,8 +39,7 @@ rules:
   - from:
       code: caps_lock
     to:
-      code: left_control
-      if_alone: escape
+      code: escape
 - description: Change right command+hjkl to arrow keys
   maps:
   - from:
