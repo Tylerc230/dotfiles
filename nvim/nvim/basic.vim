@@ -16,6 +16,8 @@ set updatetime=250
 set nospell spelllang=en_us
 hi link SpellBad ErrorMsg
 hi SpellBad gui=undercurl
+hi FloatBorder ctermbg=0 guibg=#363636
+
 set timeoutlen=1000 ttimeoutlen=0 "remove delay after tapping escape
 set nowrap
 set termguicolors
@@ -103,7 +105,7 @@ let g:neoterm_default_mod = 'botright'
 let g:neoterm_autoinsert = 1
 let g:neoterm_autoscroll = 1
 let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
-let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
+"let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
 autocmd BufLeave term://* stopinsert
 autocmd FileType neoterm  setlocal nospell
 tnoremap <ESC> <C-\><C-n>

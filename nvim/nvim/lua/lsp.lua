@@ -2,12 +2,24 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lsp_installer = require("nvim-lsp-installer")
+local lsp_config = require("lspconfig")
 
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
   local opts = {}
-
+  if server.name == "clangd" then
+    opts = {
+      cmd = {"/Users/cstyle/.local/share/nvim/lsp_servers/clangd/clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
+      root_dir = lsp_config.util.root_pattern("compile_commands.json"),
+      filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
+      settings  = {
+        ["clangd"] = {
+          query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
+        }
+      }
+    }
+  end
   if server.name == "rust_analyzer" then
     opts =  {
       settings = {
@@ -25,10 +37,10 @@ lsp_installer.on_server_ready(function(server)
             importGranularity = "module",
             importPrefix = "by_self",
           },
-          cargo = {
-            loadOutDirsFromCheck = true,
-            target = "avr-unknown-gnu-atmega328"
-          },
+          --cargo = {
+            --loadOutDirsFromCheck = true,
+            --target = "avr-unknown-gnu-atmega328"
+          --},
 
           diagnostics = {
             disabled = {
@@ -181,9 +193,15 @@ end)
   --setup_servers() -- reload installed servers
   --vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 --end
+local lsp = vim.lsp
+local handlers = lsp.handlers
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
+-- Hover doc popup
+local pop_opts = { border = "rounded", max_width = 80 }
+handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
+handlers["textDocument/signatureHelp"] = lsp.with(handlers.signature_help, pop_opts)
+handlers["textDocument/publishDiagnostics"] = lsp.with(
+    lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = false,
         severity_sort = true
     }
