@@ -56,6 +56,11 @@ require('packer').startup({function()
       "hrsh7th/cmp-path"
     }
   }
+  -- PlantUML
+  use 'aklt/plantuml-syntax'
+  use 'tyru/open-browser.vim'
+  use 'weirongxu/plantuml-previewer.vim'
+
   use {
     'abecodes/tabout.nvim',
     config = function()
