@@ -249,7 +249,7 @@ function closeWindow()
   wm('query --windows', function(exitcode, stdout, stderr)
     local command = "echo '"..stdout.."' | /usr/local/bin/jq '.[] | select(.focused==1).id'"
     local window_id, _, _, _ = hs.execute(command)
-    wm(string.format('window %s --close', window_id), function(rc, so, se) 
+    wm(string.format('window %s --close', string.gsub(window_id, "\n", "")), function(rc, so, se) 
       focusLastFocused()
     end)
   end)
