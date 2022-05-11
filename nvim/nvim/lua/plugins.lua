@@ -270,6 +270,7 @@ require('telescope').setup {
   extensions = {
     frecency = {
       default_workspace = 'CWD',
+      show_unindexed = false
     },
   },
   pickers = {
