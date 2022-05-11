@@ -18,8 +18,25 @@ require('packer').startup({function()
     end,
     requires = {"tami5/sqlite.lua"}
   }
-  use 'kassio/neoterm'
-
+  use {"akinsho/toggleterm.nvim",
+    tag = 'v1.*',
+    config = function()
+      require("toggleterm").setup()
+    end
+  }
+  use {
+    "https://git.sr.ht/~havi/telescope-toggleterm.nvim",
+    event = "TermOpen",
+    requires = {
+      "akinsho/toggleterm.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").load_extension "toggleterm"
+    end,
+  }
   use 'christianchiarulli/nvcode-color-schemes.vim'
   use 'mhartington/oceanic-next'
   use 'tomasiser/vim-code-dark'
@@ -202,7 +219,7 @@ require'lualine'.setup {
   },
   tabline = {},
   extensions = {
-    "nvim-tree", "fugitive", {sections = {}, filetypes = {'neoterm'}}
+    "nvim-tree", "fugitive", "toggleterm", {sections = {}, filetypes = {}}
   },
 }
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -334,6 +351,12 @@ cmp.setup {
     {name = "path"}
   },
 }
+
+--require("telescope-toggleterm").setup {
+   --telescope_mappings = {
+      --["D"] = require("telescope-toggleterm").actions.exit_terminal,
+   --},
+--}
 --vim.o.completeopt = "menuone,noselect"
 --require'compe'.setup {
   --enabled = true;

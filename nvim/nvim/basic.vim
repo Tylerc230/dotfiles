@@ -101,13 +101,7 @@ endif
 "augroup END
 let g:NERDCreateDefaultMappings = 0
 
-let g:neoterm_default_mod = 'botright'
-let g:neoterm_autoinsert = 1
-let g:neoterm_autoscroll = 1
-let g:neoterm_open_in_all_tabs = 1 "open an new terminal for each tab instead of using the same one
-"let g:neoterm_term_per_tab = 1 "send commands to current tab terminal instead of last active
 autocmd BufLeave term://* stopinsert
-autocmd FileType neoterm  setlocal nospell
 tnoremap <ESC> <C-\><C-n>
 
 
