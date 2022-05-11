@@ -64,4 +64,7 @@ map('n', '<C-up>', ':resize +5<cr>', options)
 map('n', '<C-down>', ':resize -5<cr>', options)
 map('n', '<C-y>', ':ClangdSwitchSourceHeader<cr>', options)
 
+--map('n', '<C-,>', '<C-o>', options)
+--map('n', '<C-.>', '<C-i>', options)
+
 

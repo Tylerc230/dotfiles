@@ -48,6 +48,8 @@ require('packer').startup({function()
   use 'scrooloose/nerdcommenter'
   use "Pocco81/AutoSave.nvim"
   --use {"hrsh7th/nvim-compe"} --auto complete
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
   use {
     "hrsh7th/nvim-cmp",
     requires = {
@@ -212,7 +214,7 @@ require'nvim-tree'.setup({
   filters = {
     dotfiles = true,
   },
-  follow = true,
+  --follow = true,
   update_focused_file = {
     -- enables the feature
     enable      = true,
@@ -299,13 +301,18 @@ require('gitsigns').setup {
 }
 local cmp = require('cmp')
 cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end,
+  },
   -- You can set mappings if you want
   completion = {
     autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
     completeopt = "menu,menuone,noselect",
   },
-  documentation = {
-    border = "rounded",
+  window = {
+    documentation = cmp.config.window.bordered()
   },
   mapping = {
     ['<Up>'] = cmp.mapping.select_prev_item(),

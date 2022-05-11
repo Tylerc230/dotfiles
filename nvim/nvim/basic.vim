@@ -118,8 +118,8 @@ au BufRead,BufNewFile *.podspec set filetype=ruby
 au BufRead,BufNewFile *.ino set filetype=cpp
 
 "navigation
-nnoremap <C-i> <C-o>
-nnoremap <C-o> <C-i>
+"nnoremap <C-i> <C-o>
+"nnoremap <C-o> <C-i>
 let g:terminal_color_0 = '#1e2132'
 let g:terminal_color_1 = '#e27878'
 let g:terminal_color_2 = '#b4be82'
