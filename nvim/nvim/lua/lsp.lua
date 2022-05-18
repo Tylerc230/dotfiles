@@ -2,197 +2,84 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.setup()
 local lsp_config = require("lspconfig")
 
--- Register a handler that will be called for all installed servers.
--- Alternatively, you may also register handlers on specific server instances instead (see example below).
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  if server.name == "clangd" then
-    opts = {
-      cmd = {"/Users/cstyle/.local/share/nvim/lsp_servers/clangd/clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
-      root_dir = lsp_config.util.root_pattern("compile_commands.json"),
-      filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
-      settings  = {
-        ["clangd"] = {
-          query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
-        }
-      }
-    }
+
+local map = vim.api.nvim_set_keymap
+local options = {noremap = true, silent = true}
+local function on_attach(client, bufnr)
+  if client.resolved_capabilities.document_formatting then
+    map('n', '<leader>I', "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
+  elseif client.resolved_capabilities.document_range_formatting then
+    map('v', '<leader>i', "<cmd>lua vim.lsp.buf.range_formatting()<CR>", options)
+    map('n', '<leader>i', "<cmd>lua vim.lsp.buf.range_formatting()<CR>", options)
   end
-  if server.name == "rust_analyzer" then
-    opts =  {
-      settings = {
-        ["rust-analyzer"] = {
-          --trace = {
-          --server = "verbose"
+end
 
-          --},
-          linkedProjects = {
-            --order is important (rust-analyzer/rust-analyzer#7764)
-            "Cargo.toml",
-            --"avr/Cargo.toml",
-          },
-          assist = {
-            importGranularity = "module",
-            importPrefix = "by_self",
-          },
-          --cargo = {
-            --loadOutDirsFromCheck = true,
-            --target = "avr-unknown-gnu-atmega328"
-          --},
 
-          diagnostics = {
-            disabled = {
-              --https://github.com/rust-analyzer/rust-analyzer/issues/6835
-              "unresolved-macro-call"
-            }
-          },
-          procMacro = {
-            enable = true
-          },
-        }
-      }
+lsp_config.sumneko_lua.setup { on_attach = on_attach }
+lsp_config.tsserver.setup({
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    on_attach(client, bufnr)
+
+  end,
+})
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.formatting.prettier
+  },
+  on_attach = on_attach
+})
+
+lsp_config.clangd.setup({
+  cmd = {"/Users/cstyle/.local/share/nvim/lsp_servers/clangd/clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
+  root_dir = lsp_config.util.root_pattern("compile_commands.json"),
+  filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
+  settings  = {
+    ["clangd"] = {
+      query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
     }
-  end
-  -- (optional) Customize the options passed to the server
-    -- if server.name == "tsserver" then
-    --     opts.root_dir = function() ... end
-    -- end
+  }
+})
+lsp_config.rust_analyzer.setup({
+  settings = {
+    ["rust-analyzer"] = {
+      --trace = {
+      --server = "verbose"
 
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  server:setup(opts)
-end)
---local function setup_servers()
-  --require'lspinstall'.setup()
-  --local servers = require'lspinstall'.installed_servers()
-  --for _, server in pairs(servers) do
-    --require'lspconfig'[server].setup{
-      --capabilities = capabilities,
-    --}
-  --end
-
-  --local lsp_config = require'lspconfig'
-  --local util = require'lspconfig'.util
-  --lsp_config.sourcekit.setup {
-    --cmd = { "xcrun", "sourcekit-lsp" },
-    --root_dir = util.root_pattern("Package.swift", ".git"),
-    ----filetypes = { "swift", "c", "cpp", "objective-c", "objective-cpp", "objc" }
-    --filetypes = { "swift" }
-  --}
-
-  --lsp_config.clangd.setup {
-    ----cmd = { "/usr/local/Cellar/llvm/12.0.1/bin/clangd", "-log=verbose" },
-    ----cmd = { "xcrun", "clangd", "-log=verbose" },
-    --cmd = { "xcrun", "clangd" },
-    --root_dir = util.root_pattern("compile_commands.json"),
-    --filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" }
-  --}
-
---lsp_config.rust_analyzer.setup({
-    --on_attach=on_attach,
-    --settings = {
-      --["rust-analyzer"] = {
-        ----trace = {
-          ----server = "verbose"
-
-        ----},
-        --linkedProjects = {
-          ----order is important (rust-analyzer/rust-analyzer#7764)
-          --"Cargo.toml",
-          ----"avr/Cargo.toml",
-        --},
-        --assist = {
-          --importGranularity = "module",
-          --importPrefix = "by_self",
-        --},
-        --cargo = {
-          --loadOutDirsFromCheck = true,
-          --target = "avr-unknown-gnu-atmega328"
-        --},
-
-        --diagnostics = {
-          --disabled = {
-            ----https://github.com/rust-analyzer/rust-analyzer/issues/6835
-            --"unresolved-macro-call"
-          --}
-        --},
-        --procMacro = {
-          --enable = true
-        --},
-      --}
-    --}
-  --})
-
-
-  --local opts = {
-    --tools = { -- rust-tools options
-      --autoSetHints = true,
-      --hover_with_actions = true,
-      --inlay_hints = {
-        --show_parameter_hints = false,
-        --parameter_hints_prefix = "",
-        --other_hints_prefix = "",
       --},
-    --},
+      linkedProjects = {
+        --order is important (rust-analyzer/rust-analyzer#7764)
+        "Cargo.toml",
+        --"avr/Cargo.toml",
+      },
+      assist = {
+        importGranularity = "module",
+        importPrefix = "by_self",
+      },
+      --cargo = {
+      --loadOutDirsFromCheck = true,
+      --target = "avr-unknown-gnu-atmega328"
+      --},
 
-    ---- all the opts to send to nvim-lspconfig
-    ---- these override the defaults set by rust-tools.nvim
-    ---- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    --server = {
-      ---- on_attach is a callback called when the language server attachs to the buffer
-      --on_attach = on_attach,
-      --settings = {
-        ---- to enable rust-analyzer settings visit:
-        ---- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-        --["rust-analyzer"] = {
-            --assist = {
-                --importGranularity = "module",
-                --importPrefix = "by_self",
-            --},
-            --cargo = {
-                --loadOutDirsFromCheck = true
-            --},
-            --procMacro = {
-                --enable = true
-            --},
-          ---- enable clippy on save
-          --checkOnSave = {
-            --command = "clippy"
-          --},
-        --}
-      --}
-    --},
-  --}
-
-  --require('rust-tools').setup(opts)
-
-  --lsp_config.rust.setup({
-  --on_attach=on_attach,
-  --settings = {
-  --["rust-analyzer"] = {
-  --assist = {
-  --importGranularity = "module",
-  --importPrefix = "by_self",
-  --},
-  --cargo = {
-  --loadOutDirsFromCheck = true
-  --},
-  --procMacro = {
-  --enable = true
-  --},
-  --}
---}
-  --})
---end
-
---setup_servers()
----- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
---require'lspinstall'.post_install_hook = function ()
-  --setup_servers() -- reload installed servers
-  --vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
---end
+      diagnostics = {
+        disabled = {
+          --https://github.com/rust-analyzer/rust-analyzer/issues/6835
+          "unresolved-macro-call"
+        }
+      },
+      procMacro = {
+        enable = true
+      },
+    }
+  }
+})
 local lsp = vim.lsp
 local handlers = lsp.handlers
 

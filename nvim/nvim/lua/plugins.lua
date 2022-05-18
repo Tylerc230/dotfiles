@@ -117,12 +117,18 @@ require('packer').startup({function()
     end
   }
   use {"windwp/nvim-autopairs"}
-  use {"neovim/nvim-lspconfig"}
+  --LSP
   use {"glepnir/lspsaga.nvim",
     requires = {{'neovim/nvim-lspconfig'}} --floating lsp windows
   }
-  use { 'williamboman/nvim-lsp-installer'}
---DAP
+  use "jose-elias-alvarez/null-ls.nvim"
+  use {
+    "williamboman/nvim-lsp-installer",
+    {
+      "neovim/nvim-lspconfig",
+    }
+  }
+  --DAP
   use 'mfussenegger/nvim-dap'
   use {'nvim-telescope/telescope-dap.nvim'}
   use {'Pocco81/DAPInstall.nvim'}
