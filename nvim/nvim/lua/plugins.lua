@@ -21,7 +21,10 @@ require('packer').startup({function()
   use {"akinsho/toggleterm.nvim",
     tag = 'v1.*',
     config = function()
-      require("toggleterm").setup()
+      require("toggleterm").setup {
+        start_in_insert = false,
+        --open_mapping = [[<leader>n]],
+      }
     end
   }
   use {
@@ -127,12 +130,6 @@ require('packer').startup({function()
   use {'rcarriga/nvim-dap-ui'}
   use 'jbyuki/one-small-step-for-vimkind'
 
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup()
-    end
-  }
 end,
 config = {
   display = {

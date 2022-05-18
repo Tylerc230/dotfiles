@@ -67,14 +67,14 @@ return require('telescope').register_extension {
                     local execute_command = function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        local command = 'T ' .. selection.value.command
+                        local command = 'TermExec cmd="' .. selection.value.command .. '"'
                         vim.cmd(command)
                     end
 
                     local edit_command = function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        local command = 'T !' .. selection.value.number
+                        local command = 'TermExec cmd="!' .. selection.value.number .. '"'
                         vim.cmd(command)
                     end
 
