@@ -64,17 +64,24 @@ return require('telescope').register_extension {
                 },
                 sorter = sorters.get_substr_matcher(),
                 attach_mappings = function(prompt_bufnr, map)
+                    local current_term_buffer = function() 
+                        local last_term_buffer = vim.g["last_term_number"]
+                        if last_term_buffer == nil then
+                            return 1
+                        end
+                        return last_term_buffer
+                    end
                     local execute_command = function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        local command = 'TermExec cmd="' .. selection.value.command .. '"'
+                        local command = current_term_buffer() .. 'TermExec cmd="' .. selection.value.command .. '"'
                         vim.cmd(command)
                     end
 
                     local edit_command = function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        local command = 'TermExec cmd="!' .. selection.value.number .. '"'
+                        local command = current_term_buffer() .. 'TermExec cmd="!' .. selection.value.number .. '"'
                         vim.cmd(command)
                     end
 
@@ -84,11 +91,25 @@ return require('telescope').register_extension {
                         vim.api.nvim_call_function("setreg", {"+", selection.value.command})
                     end
 
+                    local save_term_number = function(term_number)
+                        return function()
+                            vim.g["last_term_number"] = term_number
+                        end
+                    end
+
 
                     map('n', '<CR>', execute_command)
                     map('i', '<CR>', execute_command)
                     map('n', 'e', edit_command)
                     map('n', 'y', yank_command)
+                    map('n', '1', save_term_number(1))
+                    map('n', '2', save_term_number(2))
+                    map('n', '3', save_term_number(3))
+                    map('n', '4', save_term_number(4))
+                    map('n', '5', save_term_number(5))
+                    map('n', '6', save_term_number(6))
+                    map('n', '7', save_term_number(7))
+                    map('n', '8', save_term_number(8))
 
                     return true
                 end
