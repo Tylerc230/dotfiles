@@ -19,7 +19,12 @@ end
 
 
 lsp_config.sumneko_lua.setup { on_attach = on_attach }
+lsp_config.jdtls.setup { on_attach = on_attach }
+--lsp_config.eslint.setup{} -- Needs newer node
 lsp_config.tsserver.setup({
+  experimental = {
+    enableProjectDiagnostics = true
+  },
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -31,6 +36,9 @@ local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.eslint_d,
+    --null_ls.builtins.diagnostics.tsc.with({
+      --multiple_files = true
+    --}),
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.prettier
   },
@@ -97,10 +105,10 @@ handlers["textDocument/publishDiagnostics"] = lsp.with(
 
 local saga = require 'lspsaga'
 saga.init_lsp_saga {
- code_action_prompt = {
-   enable = false,
-   sign = false,
- },
+  code_action_prompt = {
+    enable = false,
+    sign = false,
+  },
   finder_action_keys = {
     open = 'o', vsplit = 's',split = 'i',quit = '<esc>',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
   },

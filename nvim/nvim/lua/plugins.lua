@@ -9,8 +9,20 @@ require('packer').startup({function()
   use 'tpope/vim-sleuth'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+      { "nvim-telescope/telescope-live-grep-args.nvim" }
+    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
+
   }
+
+  use { 'ThePrimeagen/harpoon', requires = 'nvim-lua/plenary.nvim' }
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
@@ -27,6 +39,7 @@ require('packer').startup({function()
       }
     end
   }
+
   use {
     "https://git.sr.ht/~havi/telescope-toggleterm.nvim",
     event = "TermOpen",
@@ -113,14 +126,14 @@ require('packer').startup({function()
     as = 'hop',
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup ()
+      require'hop'.setup ({
+        --multi_windows = true -- doesn't work
+      })
     end
   }
   use {"windwp/nvim-autopairs"}
   --LSP
-  use {"glepnir/lspsaga.nvim",
-    requires = {{'neovim/nvim-lspconfig'}} --floating lsp windows
-  }
+  use {"tami5/lspsaga.nvim"}
   use "jose-elias-alvarez/null-ls.nvim"
   use {
     "williamboman/nvim-lsp-installer",
@@ -128,6 +141,14 @@ require('packer').startup({function()
       "neovim/nvim-lspconfig",
     }
   }
+  use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+    }
+  end
+}
   --DAP
   use 'mfussenegger/nvim-dap'
   use {'nvim-telescope/telescope-dap.nvim'}
@@ -135,6 +156,46 @@ require('packer').startup({function()
   use {'theHamsta/nvim-dap-virtual-text'}
   use {'rcarriga/nvim-dap-ui'}
   use 'jbyuki/one-small-step-for-vimkind'
+
+  --use {'nvim-orgmode/orgmode', config = function()
+    --require('orgmode').setup{
+      --org_agenda_files = {'~/Documents/norg/work/*'},
+      --org_default_notes_file = '~/Documents/norg/refile.org',
+      --org_capture_templates = {
+        --t = { description = 'Tasks', template = '* TODO %?\n  %u' },
+        --l = 'Work Log',
+        --ln = { description = 'New day', template = '* %u\n - %?', target = '~/Documents/norg/work/worklog.org'},
+        --la = { description = 'Add item', template = ' - %?', target = '~/Documents/norg/work/worklog.org'},
+      --}
+    --}
+  --end
+--}
+--use {
+    --"nvim-neorg/neorg",
+    --run = ":Neorg sync-parsers",
+    --config = function()
+        --require('neorg').setup {
+        --load = {
+          --["core.defaults"] = {},
+          --["core.norg.dirman"] = {
+            --config = {
+              --workspaces = {
+                --work = "~/Documents/neorg/work",
+              --}
+            --}
+          --},
+          --["core.norg.completion"] = {
+            --config = {
+              --engine = 'nvim-cmp'
+            --}
+          --},
+          --["core.integrations.nvim-cmp"] = {},
+          --["core.norg.concealer"] = {}
+        --}
+      --}
+    --end,
+    --requires = "nvim-lua/plenary.nvim"
+--}
 
 end,
 config = {
@@ -269,6 +330,7 @@ local git_browser_actions = transform_mod({
 --})
 
 
+require('telescope').load_extension("live_grep_args")
 require('telescope').setup {
   extensions = {
     frecency = {
@@ -298,8 +360,10 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   ignore_install = { 'haskell' },
   highlight = {
-    enable = true              -- false will disable the whole extension
+    enable = true,              -- false will disable the whole extension
+    additional_vim_regex_highlighting = {'org'}
   },
+  ensure_installed = {'org'},
   indent = {
     enable = true
   },
@@ -320,8 +384,13 @@ require('gitsigns').setup {
     ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
   }
 }
+require('orgmode').setup_ts_grammar()
 local cmp = require('cmp')
 cmp.setup {
+  sources = {
+    {name = 'orgmode'},
+    {name = 'neorg'}
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -356,6 +425,12 @@ cmp.setup {
   },
 }
 
+local neogit = require('neogit')
+neogit.setup {
+integrations = {
+    diffview = true
+  },
+}
 --require("telescope-toggleterm").setup {
    --telescope_mappings = {
       --["D"] = require("telescope-toggleterm").actions.exit_terminal,

@@ -10,7 +10,6 @@ end
 vim.cmd [[packadd packer.nvim]]
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
 vim.cmd('source ~/dotfiles/nvim/nvim/basic.vim')
-require('float_fug')
 require('plugins')
 require('keymappings')
 require('lsp')

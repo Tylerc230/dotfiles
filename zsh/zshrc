@@ -75,3 +75,11 @@ neovim_autocd() {
 }
 chpwd_functions+=( neovim_autocd )
 alias ry="brew services restart koekeishiya/formulae/yabai"
+export PATH=$HOME/.toolbox/bin:$PATH
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-15.jdk/Contents/Home
+alias brc='brazil-recursive-cmd --allPackages --'
+source ~/.work.zshrc
+export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
