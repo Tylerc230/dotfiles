@@ -361,9 +361,9 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { 'haskell' },
   highlight = {
     enable = true,              -- false will disable the whole extension
-    additional_vim_regex_highlighting = {'org'}
+    --additional_vim_regex_highlighting = {'org'}
   },
-  ensure_installed = {'org'},
+  --ensure_installed = {'org'},
   indent = {
     enable = true
   },
@@ -384,12 +384,12 @@ require('gitsigns').setup {
     ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
   }
 }
-require('orgmode').setup_ts_grammar()
+--require('orgmode').setup_ts_grammar()
 local cmp = require('cmp')
 cmp.setup {
   sources = {
-    {name = 'orgmode'},
-    {name = 'neorg'}
+    --{name = 'orgmode'},
+    --{name = 'neorg'}
   },
   snippet = {
     expand = function(args)
