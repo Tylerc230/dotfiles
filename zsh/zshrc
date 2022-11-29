@@ -7,11 +7,11 @@ source <(antibody init)
 antibody bundle < $HOME/dotfiles/zsh/zsh_plugins.txt
 
 export PATH=/opt/local/bin:/opt/local/sbin:~/.rbenv/bin:~/.local/bin:~/dotfiles/scripts:/usr/local/bin:/usr/local/opt/ruby/bin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH
-if [[ ! -z "$NVIM_LISTEN_ADDRESS" ]];
+if [[ ! -z "$NVIM" ]];
 then 
-  alias vim='nvr -s --remote-silent'
+  alias vim="nvr -s --remote-silent --servername $NVIM"
 else
-  alias vim=nvim
+  alias vim='nvim'
 fi
 alias vi=vim
 alias pi='be pod install'
@@ -37,7 +37,7 @@ function dm-env() {
 
 export PURE_GIT_UNTRACKED_DIRTY=0
 export HISTFILESIZE=30000
-export EDITOR=nvim
+export EDITOR=vim
 set -o vi
 bindkey -M viins '^k' vi-cmd-mode
 # ZLE hooks for prompt's vi mode status
@@ -71,7 +71,7 @@ unalias history
 # your default shell's rc file e.g. ~/.zshrc
 
 neovim_autocd() {
-    [[ $NVIM_LISTEN_ADDRESS ]] && ~/dotfiles/scripts/neovim_autocd.py
+    [[ $NVIM ]] && ~/dotfiles/scripts/neovim_autocd.py
 }
 chpwd_functions+=( neovim_autocd )
 alias ry="brew services restart koekeishiya/formulae/yabai"
