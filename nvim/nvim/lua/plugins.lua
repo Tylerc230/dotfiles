@@ -91,6 +91,12 @@ require('packer').startup({function()
       "hrsh7th/cmp-path"
     }
   }
+  --for jest
+  use 'David-Kunz/jester'
+  use({
+    "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
+  })
   -- PlantUML
   use 'aklt/plantuml-syntax'
   use 'tyru/open-browser.vim'
@@ -205,7 +211,13 @@ config = {
     end
   }
 }})
-
+require("coverage").setup({
+  lang = {
+    javascript = {
+      coverage_file = "build/brazil-documentation/coverage/lcov.info"
+    }
+  }
+})
 require('nvim-autopairs').setup()
 require'lualine'.setup {
   options = {
