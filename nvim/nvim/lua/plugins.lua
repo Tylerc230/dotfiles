@@ -141,6 +141,7 @@ require('packer').startup({function()
   --LSP
   use {"tami5/lspsaga.nvim"}
   use "jose-elias-alvarez/null-ls.nvim"
+  use { "neovim/nvim-lspconfig" }
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -435,6 +436,7 @@ cmp.setup {
     {name = "path"}
   },
 }
+
 
 local neogit = require('neogit')
 neogit.setup {

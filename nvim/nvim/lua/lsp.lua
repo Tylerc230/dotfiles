@@ -6,6 +6,7 @@ lsp_installer.setup()
 require("mason-lspconfig").setup()
 local lsp_config = require("lspconfig")
 
+require("mason").setup()
 
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
@@ -22,6 +23,7 @@ end
 lsp_config.lua_ls.setup { on_attach = on_attach }
 lsp_config.jdtls.setup { on_attach = on_attach }
 lsp_config.solargraph.setup { on_attach = on_attach }
+lsp_config.pyright.setup { on_attach = on_attach }
 --lsp_config.eslint.setup{} -- Needs newer node
 lsp_config.tsserver.setup({
   experimental = {
