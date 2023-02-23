@@ -79,7 +79,7 @@ require('packer').startup({function()
   }
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
-  use "Pocco81/AutoSave.nvim"
+  use "Pocco81/auto-save.nvim"
   --use {"hrsh7th/nvim-compe"} --auto complete
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
@@ -485,4 +485,4 @@ _G.load = function(file)
     return require(file)
 end
 
-require("autosave").setup()
+require("auto-save").setup()
