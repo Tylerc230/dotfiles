@@ -142,10 +142,9 @@ require('packer').startup({function()
   use {"tami5/lspsaga.nvim"}
   use "jose-elias-alvarez/null-ls.nvim"
   use {
-    "williamboman/nvim-lsp-installer",
-    {
-      "neovim/nvim-lspconfig",
-    }
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
   }
   use {
   "folke/trouble.nvim",

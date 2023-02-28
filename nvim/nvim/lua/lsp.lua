@@ -1,8 +1,9 @@
 -- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local lsp_installer = require("nvim-lsp-installer")
+local lsp_installer = require("mason")
 lsp_installer.setup()
+require("mason-lspconfig").setup()
 local lsp_config = require("lspconfig")
 
 
@@ -18,7 +19,7 @@ local function on_attach(client, bufnr)
 end
 
 
-lsp_config.sumneko_lua.setup { on_attach = on_attach }
+lsp_config.lua_ls.setup { on_attach = on_attach }
 lsp_config.jdtls.setup { on_attach = on_attach }
 --lsp_config.eslint.setup{} -- Needs newer node
 lsp_config.tsserver.setup({
@@ -46,13 +47,14 @@ null_ls.setup({
 })
 
 lsp_config.clangd.setup({
-  cmd = {"/Users/cstyle/.local/share/nvim/lsp_servers/clangd/clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
-  root_dir = lsp_config.util.root_pattern("compile_commands.json"),
+  --cmd = {"clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
+  cmd = {"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd"},
+  --root_dir = lsp_config.util.root_pattern("compile_commands.json"),
   filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
   settings  = {
-    ["clangd"] = {
-      query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
-    }
+    --["clangd"] = {
+      --query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
+    --}
   }
 })
 lsp_config.rust_analyzer.setup({
