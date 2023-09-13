@@ -10,9 +10,9 @@ local lsp_config = require("lspconfig")
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
 local function on_attach(client, bufnr)
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     map('n', '<leader>I', "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     map('v', '<leader>i', "<cmd>lua vim.lsp.buf.range_formatting()<CR>", options)
     map('n', '<leader>i', "<cmd>lua vim.lsp.buf.range_formatting()<CR>", options)
   end
@@ -21,14 +21,15 @@ end
 
 lsp_config.lua_ls.setup { on_attach = on_attach }
 lsp_config.jdtls.setup { on_attach = on_attach }
+lsp_config.solargraph.setup { on_attach = on_attach }
 --lsp_config.eslint.setup{} -- Needs newer node
 lsp_config.tsserver.setup({
   experimental = {
     enableProjectDiagnostics = true
   },
   on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
     on_attach(client, bufnr)
 
   end,
