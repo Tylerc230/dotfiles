@@ -286,7 +286,7 @@ end
 
 function wm(command, callback)
   local args =  split_string("-m "..command, " ")
-  hs.task.new("/opt/homebrew/bin/yabai", callback, args):start()
+  hs.task.new("/usr/local/bin/yabai", callback, args):start()
 end
 
 function split_string (inputstr, sep)
