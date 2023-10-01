@@ -20,9 +20,6 @@ require('packer').startup({function()
 
   }
 
-  use { 'ThePrimeagen/harpoon', requires = 'nvim-lua/plenary.nvim' }
-  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
-  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
   use {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
@@ -30,29 +27,13 @@ require('packer').startup({function()
     end,
     requires = {"tami5/sqlite.lua"}
   }
-  use {"akinsho/toggleterm.nvim",
-    tag = 'v1.*',
-    config = function()
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup {
         start_in_insert = false,
-        --open_mapping = [[<leader>n]],
       }
     end
   }
 
-  use {
-    "https://git.sr.ht/~havi/telescope-toggleterm.nvim",
-    event = "TermOpen",
-    requires = {
-      "akinsho/toggleterm.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("telescope").load_extension "toggleterm"
-    end,
-  }
   use 'christianchiarulli/nvcode-color-schemes.vim'
   use 'mhartington/oceanic-next'
   use 'tomasiser/vim-code-dark'
@@ -65,7 +46,7 @@ require('packer').startup({function()
   }
   use {
     'nvim-lualine/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    requires = {'nvim-tree/nvim-web-devicons', opt = true},
   }
   use {
     'lewis6991/gitsigns.nvim', --gutter signs
@@ -74,8 +55,10 @@ require('packer').startup({function()
     }
   }
   use {
-    'kyazdani42/nvim-tree.lua', --left file browser
-    requires = "kyazdani42/nvim-web-devicons",
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional
+    },
   }
   use 't9md/vim-choosewin'
   use 'scrooloose/nerdcommenter'
@@ -149,7 +132,7 @@ require('packer').startup({function()
   }
   use {
   "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
+  requires = "nvim-tree/nvim-web-devicons",
   config = function()
     require("trouble").setup {
     }
@@ -162,46 +145,6 @@ require('packer').startup({function()
   use {'theHamsta/nvim-dap-virtual-text'}
   use {'rcarriga/nvim-dap-ui'}
   use 'jbyuki/one-small-step-for-vimkind'
-
-  --use {'nvim-orgmode/orgmode', config = function()
-    --require('orgmode').setup{
-      --org_agenda_files = {'~/Documents/norg/work/*'},
-      --org_default_notes_file = '~/Documents/norg/refile.org',
-      --org_capture_templates = {
-        --t = { description = 'Tasks', template = '* TODO %?\n  %u' },
-        --l = 'Work Log',
-        --ln = { description = 'New day', template = '* %u\n - %?', target = '~/Documents/norg/work/worklog.org'},
-        --la = { description = 'Add item', template = ' - %?', target = '~/Documents/norg/work/worklog.org'},
-      --}
-    --}
-  --end
---}
---use {
-    --"nvim-neorg/neorg",
-    --run = ":Neorg sync-parsers",
-    --config = function()
-        --require('neorg').setup {
-        --load = {
-          --["core.defaults"] = {},
-          --["core.norg.dirman"] = {
-            --config = {
-              --workspaces = {
-                --work = "~/Documents/neorg/work",
-              --}
-            --}
-          --},
-          --["core.norg.completion"] = {
-            --config = {
-              --engine = 'nvim-cmp'
-            --}
-          --},
-          --["core.integrations.nvim-cmp"] = {},
-          --["core.norg.concealer"] = {}
-        --}
-      --}
-    --end,
-    --requires = "nvim-lua/plenary.nvim"
---}
 
 end,
 config = {
@@ -298,8 +241,27 @@ require'lualine'.setup {
     "nvim-tree", "fugitive", "toggleterm", {sections = {}, filetypes = {}}
   },
 }
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set('n', '<BS>',  api.tree.change_root_to_parent,        opts('Up'))
+  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+  vim.keymap.set('n', 'N',     api.fs.create,                         opts('Create'))
+  vim.keymap.set('n', '.',     api.tree.toggle_hidden_filter,         opts('Toggle Filter: Dotfiles'))
+  vim.keymap.set('n', 'v',     api.node.open.vertical,                opts('Open: Vertical Split'))
+  vim.keymap.set('n', 'cd',    api.tree.change_root_to_node,                  opts('CD'))
+end
 require'nvim-tree'.setup({
+  on_attach = my_on_attach,
   update_cwd = true,
   diagnostics = {
     enable = true
@@ -307,25 +269,9 @@ require'nvim-tree'.setup({
   filters = {
     dotfiles = true,
   },
-  --follow = true,
   update_focused_file = {
-    -- enables the feature
     enable      = true,
-    --update_cwd = true
   },
-  view = {
-    mappings = {
-      list = {
-        { key = {"cd"}, cb = tree_cb("cd") },
-        { key = "<BS>", cb = tree_cb("dir_up") },
-        { key = "s", cb = tree_cb("split") },
-        { key = "v", cb = tree_cb("vsplit") },
-        { key = "N", cb = tree_cb("create") },
-        { key = ".", cb = tree_cb("toggle_dotfiles") },
-      }
-    }
-  }
-
 })
 local transform_mod = require('telescope.actions.mt').transform_mod
 local git_browser_actions = transform_mod({
@@ -336,11 +282,6 @@ local git_browser_actions = transform_mod({
     })
   end
 })
---require("nvim-autopairs.completion.compe").setup({
-  --map_cr = true, --  map <CR> on insert mode
-  --map_complete = true -- it will auto insert `(` after select function or method item
---})
-
 
 require('telescope').load_extension("live_grep_args")
 require('telescope').setup {
@@ -391,17 +332,10 @@ parser_config.objc = {
   filetype = "objc" -- if filetype does not agrees with parser name
 }
 require('gitsigns').setup {
-  keymaps = {
-    noremap = false,
-    ['n <leader>gB'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-  }
 }
---require('orgmode').setup_ts_grammar()
 local cmp = require('cmp')
 cmp.setup {
   sources = {
-    --{name = 'orgmode'},
-    --{name = 'neorg'}
   },
   snippet = {
     expand = function(args)
@@ -436,50 +370,6 @@ cmp.setup {
     {name = "path"}
   },
 }
-
-
-local neogit = require('neogit')
-neogit.setup {
-integrations = {
-    diffview = true
-  },
-}
---require("telescope-toggleterm").setup {
-   --telescope_mappings = {
-      --["D"] = require("telescope-toggleterm").actions.exit_terminal,
-   --},
---}
---vim.o.completeopt = "menuone,noselect"
---require'compe'.setup {
-  --enabled = true;
-  --autocomplete = true;
-  --debug = false;
-  --min_length = 1;
-  --preselect = 'always';
-  --throttle_time = 80;
-  --source_timeout = 200;
-  --resolve_timeout = 800;
-  --incomplete_delay = 400;
-  --max_abbr_width = 100;
-  --max_kind_width = 100;
-  --max_menu_width = 100;
-  --documentation = {
-    --border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    --winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    --max_width = 120,
-    --min_width = 60,
-    --max_height = math.floor(vim.o.lines * 0.3),
-    --min_height = 1,
-  --};
-
---  source = {
---    path = true;
- --   buffer = true;
-  --  calc = true;
-   -- nvim_lsp = true;
-    --nvim_lua = true;
- -- };
---}
 
 _G.load = function(file)
     require("plenary.reload").reload_module(file, true)
