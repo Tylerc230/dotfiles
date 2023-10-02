@@ -145,6 +145,7 @@ require('packer').startup({function()
   use {'theHamsta/nvim-dap-virtual-text'}
   use {'rcarriga/nvim-dap-ui'}
   use 'jbyuki/one-small-step-for-vimkind'
+  require('experimental_plugins').start(use)
 
 end,
 config = {
@@ -333,10 +334,9 @@ parser_config.objc = {
 }
 require('gitsigns').setup {
 }
+
 local cmp = require('cmp')
 cmp.setup {
-  sources = {
-  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -365,6 +365,7 @@ cmp.setup {
 
   -- You should specify your *installed* sources.
   sources = {
+    { name = "neorg" },
     {name = "nvim_lsp"},
     { name = 'buffer' },
     {name = "path"}
