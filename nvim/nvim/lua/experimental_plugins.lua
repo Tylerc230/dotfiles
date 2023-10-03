@@ -10,11 +10,11 @@ function config.start(use)
                     ["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
                     ["core.integrations.nvim-cmp"] = {},
                     ["core.qol.todo_items"] = {},
-                    ["core.ui.calendar"] = {},
+                    --["core.ui.calendar"] = {},
                     ["core.dirman"] = { -- Manages Neorg workspaces
                         config = {
                             workspaces = {
-                                notes = "~/notes",
+                                dotfiles = "~/dotfiles/notes",
                             },
                         },
                     },

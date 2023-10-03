@@ -1,0 +1,18 @@
+* Vim
+** Commands
+   - :Neorg workspace notes - opens index of the notes workspace (defined plugin startup block)
+   - :Neorg return - return to place before opening neorg
+   - :Neorg toc left - open a table of contents
+   - :Neorg keybind all - show all commands
+   - ( ) a todo
+** Useful keybindings
+   - local leader is <space><space> (default it \)
+   - <ll>tu - mark as undone
+   - <ll>td - mark as done
+   - <C-Space> - cycle through todo states
+   - <ll>nn - create a new note
+   - >> Promote header list, (<< demote)
+   - <Alt-enter> in insert mode adds new item to list
+   - <ll>mh - header traversal mode
+   - <ll>mn - norg mode (normal)
+
