@@ -51,7 +51,7 @@ null_ls.setup({
 
 lsp_config.clangd.setup({
   --cmd = {"clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
-  cmd = {"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd"},
+  cmd = {"clangd"},
   --root_dir = lsp_config.util.root_pattern("compile_commands.json"),
   filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
   settings  = {

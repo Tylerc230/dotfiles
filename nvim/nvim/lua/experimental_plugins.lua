@@ -15,7 +15,9 @@ function config.start(use)
                         config = {
                             workspaces = {
                                 dotfiles = "~/dotfiles/notes",
+                                notes = "~/notes",
                             },
+                            default_workspace = "notes",
                         },
                     },
                     ["core.keybinds"] = {

@@ -325,13 +325,13 @@ require'nvim-treesitter.configs'.setup {
   textobjects = { enable = true },
 }
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.objc = {
-  install_info = {
-    url = "/Users/cstyle/tools/tree-sitter-objc", -- local path or git repo
-    files = {"src/parser.c"}
-  },
-  filetype = "objc" -- if filetype does not agrees with parser name
-}
+--parser_config.objc = {
+  --install_info = {
+    --url = "/Users/cstyle/tools/tree-sitter-objc", -- local path or git repo
+    --files = {"src/parser.c"}
+  --},
+  --filetype = "objc" -- if filetype does not agrees with parser name
+--}
 require('gitsigns').setup {
 }
 

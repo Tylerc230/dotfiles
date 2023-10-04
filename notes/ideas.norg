@@ -1,0 +1,4 @@
+* Vim 
+** Telescope
+*** jump to files with local changes
+**** jump to files with changes in commit (need to provide sha, would be presented with a list of changed files)
