@@ -1,0 +1,30 @@
+* Vim
+** Neorg
+*** Commands
+    - :Neorg workspace notes - opens index of the notes workspace (defined plugin startup block)
+    - :Neorg return - return to place before opening neorg
+    - :Neorg toc left - open a table of contents
+    - :Neorg keybind all - show all commands
+    - :Neorg toc - show toc to left
+*** Useful keybindings
+    - local leader is <space><space> (default it \)
+    - <ll>tu - mark as undone
+    - <ll>td - mark as done
+    - <ll>ti - mark as important
+    - <C-Space> - cycle through todo states
+    - <C-t> promote heading
+    - <C-d> demote heading
+    - <ll>nn - create a new note
+    - >> Promote header list, (<< demote)
+    - <Alt-enter> in insert mode adds new item to list
+    - <ll>mh - header traversal mode
+    - <ll>mn - norg mode (normal)
+    - za - toggle fold
+    - zR - unfold all
+    - = - fix indenting
+
+* Syntax
+  - { :ksjdkf: }basic link to file in same dir 
+  - { * <heading name> } - go to heading in same file
+  - { # <heder> } - link to anything with same name
+  - [ link name ] - add l;ink name to link

@@ -6,10 +6,11 @@ function config.start(use)
             require('neorg').setup {
                 load = {
                     ["core.defaults"] = {}, -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                    ["core.concealer"] = { config = { icon_preset = "diamond" } },
                     ["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
                     ["core.integrations.nvim-cmp"] = {},
                     ["core.qol.todo_items"] = {},
+                    ["core.summary"] = {},
                     --["core.ui.calendar"] = {},
                     ["core.dirman"] = { -- Manages Neorg workspaces
                         config = {
@@ -19,6 +20,7 @@ function config.start(use)
                             },
                             default_workspace = "notes",
                         },
+
                     },
                     ["core.keybinds"] = {
                         -- https://github.com/nvim-neorg/neorg/blob/main/lua/neorg/modules/core/keybinds/keybinds.lua
