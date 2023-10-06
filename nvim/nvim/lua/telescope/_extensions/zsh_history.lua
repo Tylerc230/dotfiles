@@ -3,6 +3,41 @@ local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 local sorters = require('telescope.sorters')
 local action_state = require("telescope.actions.state")
+local terms = require("toggleterm.terminal")
+local lazy = require("toggleterm.lazy")
+local ui = lazy.require("toggleterm.ui")
+local commandline = lazy.require("toggleterm.commandline")
+local fn = vim.fn
+local api = vim.api
+
+local toggleterm =  require'toggleterm'
+local command = api.nvim_create_user_command
+command(
+    "TermEdit",
+    function(opts)
+        local num = (opts.count and opts.count >= 1) and opts.count or terms.get_toggled_id()
+        -- only works when terminal alredy open, else it creates the wrong one
+        local term = terms.get_or_create_term(num)
+        local parsed = require("toggleterm.commandline").parse(opts.args)
+        if not term:is_open() then term:open(parsed.size, parsed.direction) end
+        local original_send = term.send
+        term.send = function(self, cmd, go_back)
+        cmd = type(cmd) == "table" and table.concat(cmd, "") or cmd
+        fn.chansend(self.job_id, cmd)
+        self:scroll_bottom()
+        if go_back and self:is_focused() then
+            ui.goto_previous()
+            ui.stopinsert()
+        elseif not go_back and not term:is_focused() then
+            self:focus()
+        end
+    end
+
+        toggleterm.exec_command(opts.args, opts.count)
+        term.send = original_send
+    end,
+    { count = true, complete = commandline.term_exec_complete, nargs = "*" }
+)
 
 local no_sort_filter = function(opts)
     opts = opts or {}
@@ -81,7 +116,7 @@ return require('telescope').register_extension {
                     local edit_command = function()
                         local selection = action_state.get_selected_entry()
                         actions.close(prompt_bufnr)
-                        local command = current_term_buffer() .. 'TermExec cmd="!' .. selection.value.number .. '"'
+                        local command = current_term_buffer() .. 'TermEdit cmd="' .. selection.value.command .. '"'
                         vim.cmd(command)
                     end
 
