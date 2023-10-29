@@ -1,91 +1,90 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
-
-require('packer').startup({function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-sleuth'
-  use {
+require("lazy").setup({
+  'tpope/vim-fugitive',
+  'tpope/vim-surround',
+  'tpope/vim-sleuth',
+  {
     'nvim-telescope/telescope.nvim',
-    requires = {
+    depdendencies = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
       { "nvim-telescope/telescope-live-grep-args.nvim" }
     },
     config = function()
-      require("telescope").load_extension("live_grep_args")
+      --require("telescope").load_extension("live_grep_args")
     end
 
-  }
+  },
 
-  use {
+  {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
       require"telescope".load_extension("frecency")
     end,
-    requires = {"tami5/sqlite.lua"}
-  }
-  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    dependencies = {"tami5/sqlite.lua"}
+  },
+  {"akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup {
         start_in_insert = false,
       }
     end
-  }
+  },
 
-  use 'christianchiarulli/nvcode-color-schemes.vim'
-  use 'mhartington/oceanic-next'
-  use 'tomasiser/vim-code-dark'
-  use 'marko-cerovac/material.nvim'
-  use 'sainnhe/sonokai'
-  use 'EdenEast/nightfox.nvim'
-  use {
+  'christianchiarulli/nvcode-color-schemes.vim',
+  'mhartington/oceanic-next',
+  'tomasiser/vim-code-dark',
+  'marko-cerovac/material.nvim',
+  'sainnhe/sonokai',
+  'EdenEast/nightfox.nvim',
+  {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
-  }
-  use {
+  },
+  {
     'nvim-lualine/lualine.nvim',
-    requires = {'nvim-tree/nvim-web-devicons', opt = true},
-  }
-  use {
+    depdendencies = {'nvim-tree/nvim-web-devicons', opt = true},
+  },
+  {
     'lewis6991/gitsigns.nvim', --gutter signs
-    requires = {
+    depdendencies = {
       'nvim-lua/plenary.nvim'
     }
-  }
-  use {
+  },
+  {
     'nvim-tree/nvim-tree.lua',
-    requires = {
+    depdendencies = {
       'nvim-tree/nvim-web-devicons', -- optional
     },
-  }
-  use 't9md/vim-choosewin'
-  use 'scrooloose/nerdcommenter'
-  use "Pocco81/auto-save.nvim"
+  },
+  't9md/vim-choosewin',
+  'scrooloose/nerdcommenter',
+  "Pocco81/auto-save.nvim",
   --use {"hrsh7th/nvim-compe"} --auto complete
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/vim-vsnip'
-  use {
+   'hrsh7th/cmp-vsnip',
+  'hrsh7th/vim-vsnip',
+   {
     "hrsh7th/nvim-cmp",
-    requires = {
+    depdendencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path"
     }
-  }
+  },
+  {
   --for jest
-  use 'David-Kunz/jester'
-  use({
+   'David-Kunz/jester',
+    depdendencies = "nvim-lua/plenary.nvim",
+  },
+  {
     "andythigpen/nvim-coverage",
-    requires = "nvim-lua/plenary.nvim",
-  })
+    dependencies = "nvim-lua/plenary.nvim",
+  },
   -- PlantUML
-  use 'aklt/plantuml-syntax'
-  use 'tyru/open-browser.vim'
-  use 'weirongxu/plantuml-previewer.vim'
+  'aklt/plantuml-syntax',
+  'tyru/open-browser.vim',
+  'weirongxu/plantuml-previewer.vim',
 
-  use {
+  {
     'abecodes/tabout.nvim',
     config = function()
       require('tabout').setup {
@@ -109,8 +108,8 @@ require('packer').startup({function()
     end,
     wants = {'nvim-treesitter'}, -- or require if not used so far
     --after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
-  }
-  use {
+  },
+  {
     'phaazon/hop.nvim',
     as = 'hop',
     config = function()
@@ -119,42 +118,35 @@ require('packer').startup({function()
         --multi_windows = true -- doesn't work
       })
     end
-  }
-  use {"windwp/nvim-autopairs"}
+  },
+  {"windwp/nvim-autopairs"},
   --LSP
-  use {"tami5/lspsaga.nvim"}
-  use "jose-elias-alvarez/null-ls.nvim"
-  use { "neovim/nvim-lspconfig" }
-  use {
+  {"tami5/lspsaga.nvim"},
+  "jose-elias-alvarez/null-ls.nvim",
+  { "neovim/nvim-lspconfig" },
+  {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-  }
-  use {
+  },
+  {
   "folke/trouble.nvim",
-  requires = "nvim-tree/nvim-web-devicons",
+  depdendencies = "nvim-tree/nvim-web-devicons",
   config = function()
     require("trouble").setup {
     }
   end
-}
+},
   --DAP
-  use 'mfussenegger/nvim-dap'
-  use {'nvim-telescope/telescope-dap.nvim'}
-  use {'Pocco81/DAPInstall.nvim'}
-  use {'theHamsta/nvim-dap-virtual-text'}
-  use {'rcarriga/nvim-dap-ui'}
-  use 'jbyuki/one-small-step-for-vimkind'
-  require('experimental_plugins').start(use)
+  'mfussenegger/nvim-dap',
+  {'nvim-telescope/telescope-dap.nvim'},
+  {'Pocco81/DAPInstall.nvim'},
+  {'theHamsta/nvim-dap-virtual-text'},
+  {'rcarriga/nvim-dap-ui'},
+  'jbyuki/one-small-step-for-vimkind',
+  --require('experimental_plugins').start(use)
+})
 
-end,
-config = {
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border = 'single' })
-    end
-  }
-}})
 require("coverage").setup({
   lang = {
     javascript = {
@@ -284,7 +276,7 @@ local git_browser_actions = transform_mod({
   end
 })
 
-require('telescope').load_extension("live_grep_args")
+--require('telescope').load_extension("live_grep_args")
 require('telescope').setup {
   extensions = {
     frecency = {
@@ -372,9 +364,9 @@ cmp.setup {
   },
 }
 
-_G.load = function(file)
-    require("plenary.reload").reload_module(file, true)
-    return require(file)
-end
+--_G.load = function(file)
+    --require("plenary.reload").reload_module(file, true)
+    --return require(file)
+--end
 
 require("auto-save").setup()
