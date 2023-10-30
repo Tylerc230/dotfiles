@@ -15,8 +15,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-vim.cmd('source ~/dotfiles/nvim/nvim/basic.vim')
 require('plugins')
+vim.cmd('source ~/dotfiles/nvim/nvim/basic.vim')
 require('keymappings')
 require('lsp')
 --require('dbg')
