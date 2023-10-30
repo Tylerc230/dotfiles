@@ -21,6 +21,7 @@
     - <ll>mn - norg mode (normal)
     - za - toggle fold
     - zR - unfold all
+    - zfa{ - fold curly braces
     - = - fix indenting
 
 * Syntax

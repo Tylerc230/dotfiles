@@ -11,6 +11,7 @@ function config.start(use)
                     ["core.integrations.nvim-cmp"] = {},
                     ["core.qol.todo_items"] = {},
                     ["core.summary"] = {},
+                    ["core.integrations.telescope"] = {},
                     --["core.ui.calendar"] = {},
                     ["core.dirman"] = { -- Manages Neorg workspaces
                         config = {
@@ -33,7 +34,7 @@ function config.start(use)
             }
         end,
         run = ":Neorg sync-parsers",
-        requires = "nvim-lua/plenary.nvim",
+        requires = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
     }
 end
 return config
