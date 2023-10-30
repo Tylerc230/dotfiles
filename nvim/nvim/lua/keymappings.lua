@@ -15,7 +15,7 @@ map('n', '<leader>L', '<C-w>L', options)
 
 
 map('n', '<leader>t', ':Telescope find_files<CR>', options)
-map('n', '<leader>r', ':Telescope frecency<CR>', options)
+map('n', '<leader>r', ':Telescope frecency workspace=CWD<CR>', options)
 
 map('n', '<leader>/', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', options)
 map('n', '<leader>*', ':Telescope grep_string prompt_prefix=🔍<CR>', options)

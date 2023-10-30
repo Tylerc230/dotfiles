@@ -11,7 +11,7 @@ require("lazy").setup({
       { "nvim-telescope/telescope-live-grep-args.nvim" }
     },
     config = function()
-      --require("telescope").load_extension("live_grep_args")
+      require("telescope").load_extension("live_grep_args")
     end
 
   },
@@ -21,7 +21,6 @@ require("lazy").setup({
     config = function()
       require"telescope".load_extension("frecency")
     end,
-    dependencies = {"tami5/sqlite.lua"}
   },
   {"akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup {
@@ -276,7 +275,7 @@ local git_browser_actions = transform_mod({
   end
 })
 
---require('telescope').load_extension("live_grep_args")
+require('telescope').load_extension("live_grep_args")
 require('telescope').setup {
   extensions = {
     frecency = {
