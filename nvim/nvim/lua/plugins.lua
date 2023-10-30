@@ -5,7 +5,7 @@ require("lazy").setup({
   'tpope/vim-sleuth',
   {
     'nvim-telescope/telescope.nvim',
-    depdendencies = {
+    dependencies = {
       {'nvim-lua/popup.nvim'},
       {'nvim-lua/plenary.nvim'},
       { "nvim-telescope/telescope-live-grep-args.nvim" }
@@ -42,17 +42,17 @@ require("lazy").setup({
   },
   {
     'nvim-lualine/lualine.nvim',
-    depdendencies = {'nvim-tree/nvim-web-devicons', opt = true},
+    dependencies = {'nvim-tree/nvim-web-devicons', opt = true},
   },
   {
     'lewis6991/gitsigns.nvim', --gutter signs
-    depdendencies = {
+    dependencies = {
       'nvim-lua/plenary.nvim'
     }
   },
   {
     'nvim-tree/nvim-tree.lua',
-    depdendencies = {
+    dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional
     },
   },
@@ -64,7 +64,7 @@ require("lazy").setup({
   'hrsh7th/vim-vsnip',
    {
     "hrsh7th/nvim-cmp",
-    depdendencies = {
+    dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path"
@@ -73,7 +73,7 @@ require("lazy").setup({
   {
   --for jest
    'David-Kunz/jester',
-    depdendencies = "nvim-lua/plenary.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
   },
   {
     "andythigpen/nvim-coverage",
@@ -131,7 +131,7 @@ require("lazy").setup({
   },
   {
   "folke/trouble.nvim",
-  depdendencies = "nvim-tree/nvim-web-devicons",
+  dependencies = "nvim-tree/nvim-web-devicons",
   config = function()
     require("trouble").setup {
     }
