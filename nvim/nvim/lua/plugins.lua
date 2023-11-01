@@ -37,7 +37,7 @@ require("lazy").setup({
   'EdenEast/nightfox.nvim',
   {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    build = ':TSUpdate'
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -105,12 +105,12 @@ require("lazy").setup({
         exclude = {} -- tabout will ignore these filetypes
       }
     end,
-    wants = {'nvim-treesitter'}, -- or require if not used so far
+    dependencies = {'nvim-treesitter'}, -- or require if not used so far
     --after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
   },
   {
     'phaazon/hop.nvim',
-    as = 'hop',
+    name = 'hop',
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require'hop'.setup ({
@@ -143,7 +143,7 @@ require("lazy").setup({
   {'theHamsta/nvim-dap-virtual-text'},
   {'rcarriga/nvim-dap-ui'},
   'jbyuki/one-small-step-for-vimkind',
-  --require('experimental_plugins').start(use)
+  require('experimental_plugins')
 })
 
 require("coverage").setup({
