@@ -55,12 +55,13 @@ set exrc                " Source _nvimrc in local folder
 set undofile " Maintain undo history between sessions
 set undodir=~/.cache/undodir
 set signcolumn=yes
+set noeol
 
 "Auto reload buffer if it changes on disk
 set autoread            
 au CursorHold,CursorHoldI * checktime
 au FocusGained,BufEnter * :checktime
-autocmd FileType gitcommit,text,markdown setlocal spell
+autocmd FileType gitcommit,text,markdown,norg setlocal spell
 
 " When editing a file, always jump to the last cursor position
 if has("autocmd")
