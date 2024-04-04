@@ -7,10 +7,14 @@ require("mason-lspconfig").setup()
 local lsp_config = require("lspconfig")
 
 require("mason").setup()
+local navic = require("nvim-navic")
 
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
 local function on_attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
   if client.server_capabilities.document_formatting then
     map('n', '<leader>I', "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
   elseif client.server_capabilities.document_range_formatting then
@@ -53,7 +57,8 @@ lsp_config.clangd.setup({
   --cmd = {"clangd", "-query-driver=/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"},
   cmd = {"clangd"},
   --root_dir = lsp_config.util.root_pattern("compile_commands.json"),
-  filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
+  --filetypes = { "c", "cpp", "objective-c", "objective-cpp", "objc" },
+  filetypes = { "c", "cpp"},
   settings  = {
     --["clangd"] = {
       --query_driver = "/Users/cstyle/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-g++"
