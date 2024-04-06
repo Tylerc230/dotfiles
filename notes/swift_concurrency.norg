@@ -1,0 +1,72 @@
+* Concurrency
+  - Concurrency: multi tasking on a single CPU
+  - Parallelism: multiple tasking running on different cpus
+  - Thread explosion: Creating many more threads than there are CPUs so that the system spends a lot of time context switching.
+** Queues
+   - Work is performed in the same order it is added.
+   - Serial: removes one piece of work and performs it before moving on to the next
+   -- Serialize converting movies bc converting movies are already done on multiple threads so its move efficient to do one movie at a time.
+   -- Used to protect data, don't want one queue reading data while another is trying to write data.
+   - Concurrent: Remove and execute multiple pieces of work at the same time, still started in the same order that it was added.
+   - @State is designed to work on background queues
+   - Main queue always executes on the main thread, other queues can also execute on the main thread.
+** Swift Concurrency
+   - Synchronous function: normal functions always execute on a single thread
+   - Async function: add `async` to definition, use `await` when calling it
+   @code swift
+   func randomD6() async -> Int {
+     Int.random(in: 1...6)
+   }
+
+   let result = await randomD6()
+   print(result)
+   @end
+   - Can only be used in an async context (like `throws`).
+   - `async` means it _might_ do async work, not that it does (above does not).
+   - `await` is a suspension point, the function will stop running here and wait for the result to come back. Will only suspend at points marked with `await`.
+   - All async functions that call the suspended function are also suspended. This is why only async functions can call async functions, because they all suspend.
+   - `await` ed functions do not block the thread they're on.
+   - Once a function resumes, it might be running on a different thread (or the same one).
+   - Atomic: all lines of code will be executed without being interrupted by other running code.
+   - State of the system might change from before an `await` to after the `await`. N number of seconds could elapse during the await, class or global variables could change, local variables cannot.
+   - The compiler doesn't know ahead of time that the above function does not suspend so it must use the slightly more expensive calling convention for async functions (when using `await`).
+   - _But_ calling `await` will not cause your code wait for one runloop to go by before continuing.
+   - if the code doesn't actually suspend, the code will run like regular sync functions (with same efficiency, except for the more complex calling convention). ie we only pay performance hit if we actually suspend.
+** Throwing 
+   - Function marked as `async throws` we call it with `try await` (reversed).
+** Async context
+   - Can make a cli tool async by marking `main` as `static func main() async {`
+   - SwiftUI has `.task()` and `.refreshable()`
+   - Call `Task {}` from a sync function, task is executed immediately and sync function continues without blocking.
+** Async let
+   - Allows you to perform multiple async functions simultaneously
+   @code swift
+   async let (userData, _) = URLSession.shared.data(from: URL(string: "https://hws.dev/user-24601.json")!)
+   async let (messageData, _) = URLSession.shared.data(from: URL(string: "https://hws.dev/user-messages.json")!)
+   let user = try await decoder.decode(User.self, from: userData)
+   let messages = try await decoder.decode([Message].self, from: messageData)
+   @end
+   - Note, we don't use `await` here, its implied by `async let`, we use `await` when we read the return value.
+   - Not marked with `try` because that happens when we actually read the return value.
+   - If you don't ever read the results (like if doing a POST), then there is no need to catch, or mark the calling function as `throws`.
+   - Async let captures any parameters it uses so we need to use let instead of var (I don't really understand this)
+** Continuations
+   - Convert code with callback to async method
+   @code swift
+   func fetchMessages() async -> [Message] {
+      await withCheckedContinuation { continuation in
+         fetchMessages { messages in
+            continuation.resume(returning: messages)
+         }
+      }
+   }
+   @end
+   - Can return a value or throw an exception
+   - Must be resumed exactly once, no more, no less. More will crash, less prints a message to the logs.
+
+
+
+
+
+
+
