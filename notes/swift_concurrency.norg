@@ -105,8 +105,9 @@
        locationContinuation?.resume(throwing: error)
     }
     @end
-** Tasks
+** Tasks and TaskGroup
    - Can be called from sync functions and execute immediately. sync function does not block.
+   - We can optionally await for its return value (in an async context) `await task.value`
    @code swift
    func doRegularWork() {
       Task {
@@ -114,6 +115,39 @@
       }
    }
    @end
+   - Tasks have a priority (high, medium, low, background).
+   - `async let` i syntactic sugar for creating a task and waiting for its completion later on.
+   - `Task {}` starts running immediately at the same priority as the calling function, any task local values and its actor context.
+   - `let result = await downloadTask.result` returns the Result<Success, Error>. `try result.get()` returns the value or throws if there was an error during the task
+*** Detached Tasks
+    - Detached tasks should not be used most of the time.
+    - DT do not have a parent task
+    - `Task.detached {}` Start tasks immediately but do not inherit anything from the caller.
+    - Task local values - Allow us to share a value anywhere inside of a task
+    - Actor context - When you create a regular task inside an actor, it is isolated to that actor. This means you can access properties of that actor synchronously. DTs have restricted access to that actor.
+    - When would we use DT? Executing some CPU intensive work from the main actor will serialize the work on the main thread. If you turn the tasks below to DTs they are free to run on any thread (and run concurrently) b/c the didn't inherit the main actor context.
+    @code swift
+var body: some View {
+   Button("Authenticate", action: doWork)
+}
+
+func doWork() {
+   Task {
+      for i in 1...10_000 {
+         print("In Task 1: \(i)")
+      }
+   }
+
+   Task {
+      for i in 1...10_000 {
+         print("In Task 2: \(i)")
+      }
+   }
+}
+    @end
+
+
+
 ** AsyncSequence
    - Called using for loops, `for`, `while` `repeat`
    - Need to use await to wait for next value

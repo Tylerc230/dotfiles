@@ -25,6 +25,13 @@
     - zfa{ - fold curly braces
     - gf - follow link
     - = - fix indenting
+** vim
+*** folds
+    zR - all folds open
+    zM - close all open folds
+    zo - open fold a cursor
+    zc - close current fold
+    za - toggle fold a cursor
 
 * Syntax
   - { :ksjdkf: }basic link to file in same dir 
@@ -33,3 +40,5 @@
   - [ link name ] - add l;ink name to link
 
   todo needs to be on a modifier (header, bullet etc) ie `- (x)` 
+
+
