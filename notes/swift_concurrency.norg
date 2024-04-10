@@ -63,7 +63,90 @@
    @end
    - Can return a value or throw an exception
    - Must be resumed exactly once, no more, no less. More will crash, less prints a message to the logs.
+   - withUnsafeContinuation wont crash or check times called.
+*** Throwing continuations
+    - withChecked/UnsafeThrowingContinuation for code that can return an error
+    @code swift
+    func fetchMessages() async throws -> [Message] {
+       return try await withCheckedThrowingContinuation { continuation in
+          fetchMessages { messages in
+             if messages.isEmpty {
+                continuation.resume(throwing: FetchError.noMessages)
+             } else {
+                continuation.resume(returning: messages)
+             }
+          }
+       }
+    }
+    @end
+*** Continuations in delegates
+    @code swift
+    class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+       var locationContinuation: CheckedContinuation<CLLocationCoordinate2D?, Error>?
+       let manager = CLLocationManager()
 
+       override init() {
+          super.init()
+          manager.delegate = self
+       }
+    }
+    func requestLocation() async throws -> CLLocationCoordinate2D? {
+       try await withCheckedThrowingContinuation { continuation in
+          locationContinuation = continuation
+          manager.requestLocation()
+       }
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+       locationContinuation?.resume(returning: locations.first?.coordinate)
+       //Should prob nil out continuation here
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+       locationContinuation?.resume(throwing: error)
+    }
+    @end
+** Tasks
+   - Can be called from sync functions and execute immediately. sync function does not block.
+   @code swift
+   func doRegularWork() {
+      Task {
+         await doAsyncWork()
+      }
+   }
+   @end
+** AsyncSequence
+   - Called using for loops, `for`, `while` `repeat`
+   - Need to use await to wait for next value
+   - Can use `map()`, `filter()`, `prefix(5)` etc just like normal Sequences
+   - Can use `break` and `continue` in loops
+   @code swift
+   func fetchUsers() async throws {
+      let url = URL(string: "https://hws.dev/users.csv")!
+
+      for try await line in url.lines {
+         print("Received user: \(line)")
+      }
+   }
+   @end
+   - Can call `next()` on them just like `Sequence()`
+   @code swift
+   var iterator = url.lines.makeAsyncIterator()
+
+   if let line = try await iterator.next() {
+      print("The first user is \(line)")
+   }
+
+   for i in 2...5 {
+      if let line = try await iterator.next() {
+         print("User #\(i): \(line)")
+      }
+   }
+   @end
+   - Might need to use `some AsyncSequence` because each filter/map return a new type of sequence so chaining them makes nested types.
+   - `allSatisfying(predicate)` need to `await` on this because it waits until all values are returned from the sequence before it can return a value (not another async sequence). Same with `min()`, `max()` and `reduce()`
+   - Can call AsyncSequences from SwiftUI `.task{}` method. Will continue to produce values and cancel when view goes away.
+*** Creating async sequences
+    - Conform to `AsyncSequence` and `AsyncIteratorProtocol`, implement `next() async` and implement `makeAsyncIterator()`
 
 
 
