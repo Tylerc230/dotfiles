@@ -114,7 +114,7 @@ handlers["textDocument/publishDiagnostics"] = lsp.with(
 
 
 local saga = require 'lspsaga'
-saga.init_lsp_saga {
+saga.setup {
   code_action_prompt = {
     enable = false,
     sign = false,

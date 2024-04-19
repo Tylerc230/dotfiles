@@ -22,7 +22,7 @@ require("lazy").setup({
       require"telescope".load_extension("frecency")
     end,
   },
-  {"akinsho/toggleterm.nvim", tag = '*', config = function()
+  {"akinsho/toggleterm.nvim", version = '*', config = function()
       require("toggleterm").setup {
         start_in_insert = false,
       }
@@ -120,7 +120,16 @@ require("lazy").setup({
   },
   {"windwp/nvim-autopairs"},
   --LSP
-  {"tami5/lspsaga.nvim"},
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      require('lspsaga').setup({})
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'
+    }
+  },
   "jose-elias-alvarez/null-ls.nvim",
   { "neovim/nvim-lspconfig" },
   {
