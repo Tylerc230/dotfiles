@@ -32,6 +32,12 @@
     zo - open fold a cursor
     zc - close current fold
     za - toggle fold a cursor
+*** Surrounds
+    - ds" - Delete the surrounding "
+    - cs]) - Change square to parens
+    - S" - In visual mode
+    - ysiw( - normal mode, surround inner word with ()
+
 
 * Syntax
   - { :ksjdkf: }basic link to file in same dir 

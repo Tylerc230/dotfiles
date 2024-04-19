@@ -156,6 +156,11 @@ require("lazy").setup({
       show_basename = false,
     },
   },
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+  },
   require('experimental_plugins')
 })
 

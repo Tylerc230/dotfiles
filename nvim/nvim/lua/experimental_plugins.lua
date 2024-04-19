@@ -31,6 +31,7 @@ return {
             },
         }
     end,
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope", "luarocks.nvim" },
+    lazy = false,
+    version = "*"
 }
