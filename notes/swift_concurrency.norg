@@ -115,7 +115,9 @@
       }
    }
    @end
-   - Tasks have a priority (high, medium, low, background).
+   - Tasks have a priority (high, medium, low, background). Can be assigned when you create the Task `Task(priority: .high) {}`, if not, it is inherited from the parent. If its created directly on the main thread, its priority is .userInitiated.
+   -- If a high priority task is waiting on the result of a low priority task, the low priority task's priority is elevated.
+   -- If a low priority task is executing on an actor and a higher priority is queue, the lower will be elevated.
    - `async let` i syntactic sugar for creating a task and waiting for its completion later on.
    - `Task {}` starts running immediately at the same priority as the calling function, any task local values and its actor context.
    - `let result = await downloadTask.result` returns the Result<Success, Error>. `try result.get()` returns the value or throws if there was an error during the task
@@ -126,6 +128,17 @@
     - Task local values - Allow us to share a value anywhere inside of a task
     - Actor context - When you create a regular task inside an actor, it is isolated to that actor. This means you can access properties of that actor synchronously. DTs have restricted access to that actor.
     - When would we use DT? Executing some CPU intensive work from the main actor will serialize the work on the main thread. If you turn the tasks below to DTs they are free to run on any thread (and run concurrently) b/c the didn't inherit the main actor context.
+*** Canceling tasks
+    - Cooperative cancellation, we can ask a task to stop but it doesn't have to. Allows task to stop in a consistent state.
+    - Call `cancel()` to cancel
+    - Call `Task.isCancelled` to check
+    - Call `Task.checkCancellation()` throws error if task is cancelled
+    - `Task.sleep()` doesn't honor cancellation, if a task is sleeping and gets cancelled, it will keep sleeping.
+    - If a task is part of a task group and throws an error, the other tasks will be cancelled.
+    - SwiftUI's `task()` method cancels the tasks when the view disappears.
+*** Sleeping tasks
+    - `Task.sleep(nanoseconds:)` - Does not block the thread
+      HERE: https://www.hackingwithswift.com/quick-start/concurrency/how-to-voluntarily-suspend-a-task
     @code swift
 var body: some View {
    Button("Authenticate", action: doWork)
@@ -181,6 +194,8 @@ func doWork() {
    - Can call AsyncSequences from SwiftUI `.task{}` method. Will continue to produce values and cancel when view goes away.
 *** Creating async sequences
     - Conform to `AsyncSequence` and `AsyncIteratorProtocol`, implement `next() async` and implement `makeAsyncIterator()`
+*** AsyncStream
+    - More advanced async stream, might generate values faster than they can be read. Values can be buffered or discarded.
 
 
 
