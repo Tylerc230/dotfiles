@@ -1,8 +1,9 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-require("lazy").setup({
-  'tpope/vim-fugitive',
+local experimental = require('experimental_plugins')
+local plugins = {
   'tpope/vim-surround',
   'tpope/vim-sleuth',
+  'tpope/vim-fugitive',
   {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -165,13 +166,10 @@ require("lazy").setup({
       show_basename = false,
     },
   },
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1000,
-    config = true,
-  },
-  require('experimental_plugins')
-})
+  unpack(experimental)
+}
+--require("lazy").setup(vim.tbl_extend('force', plugins, experimental))
+require("lazy").setup(plugins)
 
 require("coverage").setup({
   lang = {

@@ -21,6 +21,7 @@ map('n', '<leader>/', ':lua require("telescope").extensions.live_grep_args.live_
 map('n', '<leader>*', ':Telescope grep_string prompt_prefix=🔍<CR>', options)
 map('n', '<leader>b', ':Telescope buffers<CR>', options)
 map('n', '<leader>gb', ':Telescope git_branches<CR>', options)
+map('n', '<leader>p', ':Telescope neoclip<CR>', options)
 map('n', '<leader>ch', ':lua require("telescope.builtin").command_history()<CR>', options)
 map('n', '<leader>f', '<CMD>NvimTreeToggle<CR>', options)
 map('n', '<leader>F', '<CMD>NvimTreeFindFile<CR>', options)
