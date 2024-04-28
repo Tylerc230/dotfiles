@@ -1,0 +1,17 @@
+[Rockridge bart schedule]{https://api.bart.gov/api/etd.aspx?cmd=etd&orig=ROCK&key=MW9S-E7SL-26DU-VV8V&json=y}
+* Todo
+** Timers
+   - ( ) higher frequency alarm to update ui (once every 1/60s?)
+   - ( ) lower requency alarm to make api requests (once every 5 min?)
+   - ( ) Calculate remaining etd based on last request and current timer.
+** Neopixels
+   - ( ) Add pins to arduino for data/power/gnd
+   - ( ) choose a neopixel library
+   - ( ) calculate which pixels to draw based on etd above (outer ring: 24 pix, inner right: 16 pix, center: 4)
+   - ( ) loading state for wifi connect, network request, error states
+** Body
+   - Pick design
+   - extra components? (barrel jack? power switch)
+
+* Future plans
+  - Configurable via BLE app

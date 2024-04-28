@@ -1,0 +1,189 @@
+* Frame behavior (layout)
+  - Parent offers children some space, child communicates back what it needs, parent redistributes any leftover space to the other children.
+  - Child can also take more than what is offered (but this wont effect the layout of the other syblings)
+** minWidth/maxWidth
+   - offer to the child the value passed to `frame` from its parent clamped to min/max widthi
+   - idealWidth - offer the ideal width to the child, must use `fixedSize`
+   - Passing nil to any parameter acts as though `frame` was not called for that dimension
+   ## fixedSize
+   - Views always have an idealWidth/Height
+   - `frame(idealWidth/Height:)` creates a similar view but with a different ideal size
+   - ideal size for a Text view is all its text on one line
+   - fixedSize() offers the child its ideal size, regardless of what was offered to the frame
+* Layout Protocol
+  - PropposedViewSize - Pair of optional CGfloat
+  -- 0.0 - child view should return its miniumum size
+  -- .infinity - child view should return its maximum size
+  -- nil - child should return its ideal size
+  - sizeThatFits(proposedViewSize, subviews, cache) - returns the size the layout wants
+
+* Animation
+** Implicit vs explicit
+   - Implicit specify with .animation(.easeInOut, value)
+   -- Any time an animatable property changes on a view (size, color, offset, etc), it will be animated using the above timing
+   - Explicit use withAnimation {}
+   -- Only animatable properties that are dependent on the value changed in the block are animated
+   @code swift
+   .onTapGesture {
+     self.half.toggle()//This scale will not animate
+
+     withAnimation(.easeInOut(duration: 1.0)) {
+       self.dim.toggle()//The dim will animate
+     }
+   }
+   @end
+** Animatable Protocol
+   - Implemented by Views, has an `animatableData: <some VectorArithamtic` property.
+   -- `animatableData` called many times during animation to change its value over time from its start to its end value
+   -- Its up to the view to render all the values from the start to the end value when this value is updated eg animate a triangle to a square
+   -- Can return AnimatablePair from `animatableData` to animate multiple values. AnimatablePair conforms to `VectorArithamtic`. AP can be nested to support N values.
+   - Angle, CGPoint, CGRect, CGSize, EdgeInsets, StrokeStyle and UnitPoint all conform to `Animatable`, but they're not Views(?)
+   - AnimatablePair, CGFloat, Double, EmptyAnimatableData and Float conform to VectorArithamtic
+** GeometryEffect
+   - Used to animate transform matrices
+   - GeometryEffect conforms to Animatable
+   - Need to implement `func effectValue(size: CGSize) -> ProjectionTransform`
+   - `.offset()` is a GeometryEffect
+   @code swift
+   public extension View {
+     func offset(x: CGFloat, y: CGFloat) -> some View {
+       return modifier(_OffsetEffect(offset: CGSize(width: x, height: y)))
+     }
+
+     func offset(_ offset: CGSize) -> some View {
+       return modifier(_OffsetEffect(offset: offset))
+     }
+   }
+
+   struct _OffsetEffect: GeometryEffect {
+     var offset: CGSize
+
+     var animatableData: CGSize.AnimatableData {
+       get { CGSize.AnimatableData(offset.width, offset.height) }
+       set { offset = CGSize(width: newValue.first, height: newValue.second) }
+     }
+
+     public func effectValue(size: CGSize) -> ProjectionTransform {
+       return ProjectionTransform(CGAffineTransform(translationX: offset.width, y: offset.height))
+     }
+   }
+   @end
+** Canvas (might be good for animated menu bubble thing)
+   - Canvas body is not a view builder, can use any swift code.
+   - First param is GraphicsContext, used for drawing paths, drawing images/text, symbols (aka ui swift views), animations
+   - GraphicsContext can also be mutated: addFilter (blur, saturation, shadow etc), clip, scale, rotate, translate
+   - Instead of push/pop context, you can create a copy and use that. OR use `drawLayer{ context in }` which passes a copy of the context into the block (sort of like doing a push)
+   @code swift
+   var body: some View {
+     Canvas { context, size in
+     let rect = CGRect(origin: .zero, size: size).insetBy(dx: 25, dy: 25)
+
+     // Path
+     let path = Path(roundedRect: rect, cornerRadius: 35.0)
+       ...
+   }
+   @end
+** KeyFrames
+   - Can animate different properties of a view over time
+   - Each property in `Value` can have its own track
+   @code swift 
+   Text("🐻")
+     .keyframeAnimator(initialValue: AnimationValues()) { content, value in
+
+       content
+         .scaleEffect(value.scale)
+         .scaleEffect(y: value.verticalStretch)
+         .offset(value.translation)
+         .opacity(value.opacity)
+
+     } keyframes: { _ in
+       KeyframeTrack(\.verticalStretch) {
+         LinearKeyframe(1.2, duration: 0.1)
+       }
+
+       KeyframeTrack(\.scale) {
+         CubicKeyframe(0.8, duration: 0.2)
+         CubicKeyframe(0.6, duration: 0.3)
+       }
+
+       KeyframeTrack(\.translation) {
+       }
+
+       KeyframeTrack(\.opacity) {
+       }
+     }
+   @end
+** CustomAnimations
+   - Animations control the timing of an animation (easeInOut, linear etc)
+   - CustomAnimation protocol has 1 req method: `animate(value: time: context)`
+   -- Called repeatedly by the system, returning Value for a given time offset during the animation
+   -- Animates the delta between start and end values, so with 0.5 -> 0.8, we would animate 0.0 -> 0.3
+   -- First frame should be value.scaled(by: 0.0) (value would be 0.3 in this case), Last frame should be value.scaled(by: 1.0)
+   -- Can pass environment variables to animation
+* Transitions
+  - Determines how a view is added and removed from the hierarchy 
+  - A transition by itself has no effect, it must be associated with an animation
+
+  @code swift
+  //implicit
+  LabelView()
+    .animation(.easeInOut(duration: 1.0))
+    .transition(.opacity)
+  @end
+  or
+  @code swift
+  //explicit
+  if show {
+    LabelView()
+      .transition(.opacity)
+  }
+
+  Button("Animate") {
+    withAnimation(.easeInOut(duration: 1.0)) {
+      self.show.toggle()
+    }
+  }
+  @end
+  or
+  @code swift
+  //Add animation to transition
+  LabelView()
+    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 1.0)))
+  @end
+** Asymetrical
+   - `.transition(.asymmetric(insertion: .opacity, removal: .scale))`
+** Combining transitions
+   - `.transition(AnyTransition.opacity.combined(with: .slide))`
+** Different transitions
+   @code swift
+   .scale(scale: 0.0, anchor: UnitPoint(x: 1, y: 0))
+     .scale(scale: 2.0)
+     .move(edge: .leading)
+     .offset(x: 30)
+     .offset(y: 50)
+     .offset(x: 100, y: 10)
+   @end
+** Custom transitions
+   - Adds 2 different ViewModifiers (or GeometryEffects), active = offscreen, identity = on screen
+   @code swift
+   extension AnyTransition {
+     static var myOpacity: AnyTransition { get {
+       AnyTransition.modifier(
+         active: MyOpacityModifier(opacity: 0),
+         identity: MyOpacityModifier(opacity: 1))
+     }
+     }
+   }
+
+   struct MyOpacityModifier: ViewModifier {
+     let opacity: Double
+
+     func body(content: Content) -> some View {
+       content.opacity(opacity)
+     }
+   }
+   @end
+   - Can use clip shape to crossfade between 2 images eg star wipe
+
+** Phase animations
+   - phaseAnimator() and PhaseAnimator { phase in <views>}

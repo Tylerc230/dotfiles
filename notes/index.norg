@@ -3,6 +3,8 @@
    - {:$/index:}[Index]
    - {:$/nvim_keybindings:}[Vim]
      {:swift_concurrency:}
+     {:$/bart-proj:}
+     {:$/swiftui:}
 
 
 
