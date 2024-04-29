@@ -46,6 +46,12 @@ return {
         end,
     },
     {
+        "levouh/tint.nvim",
+        config = function()
+            require("tint").setup()
+        end
+    },
+    {
         "nvim-telescope/telescope-project.nvim",
         config = function()
             local project_actions = require("telescope._extensions.project.actions")
@@ -53,6 +59,7 @@ return {
                 extensions = {
                     project = {
                         base_dirs = {
+                            '~/workplace'
                         },
                         hidden_files = true, -- default: false
                         theme = "dropdown",

@@ -50,16 +50,18 @@ map('n', '<leader><leader>c', '<cmd>HopChar1<CR>', options)
 map('v', '<leader><leader>c', '<cmd>HopChar1<CR>', options)
 map('o', '<leader><leader>c', 'v<cmd>HopChar1<CR>', options)--can type d<leader><leader>c<char> to jump to char
 
+map('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
 map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
 map('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', options)
 map('n', '<leader>R', '<cmd>Lspsaga rename<CR>', options)
+-- add all these to a menu https://nvimdev.github.io/lspsaga/
 map('n', 'gi', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
 --map('n', 'gt', '<Cmd>TroubleToggle lsp_document_diagnostics<CR>', options)
 --map('n', 'gt', '<Cmd>Lspsaga show_line_diagnostics<CR>', options)
 map('n', 'gt', '<Cmd>lua vim.diagnostic.open_float()<CR>', options)
 
 map('n', '<leader>gf', '<Cmd>Lspsaga code_action<CR>', options)
-map('n', '<leader>a', '<Cmd>Lspsaga lsp_finder<CR>', options)
+map('n', '<leader>a', '<Cmd>Lspsaga finder<CR>', options)
 --map('n', '<leader>gt', '<Cmd>TroubleToggle<CR>', options)
 map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
 --map("n", "<space>i", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
@@ -72,8 +74,3 @@ map('n', '<C-left>', ':vertical resize -5<cr>', options)
 map('n', '<C-up>', ':resize +5<cr>', options)
 map('n', '<C-down>', ':resize -5<cr>', options)
 map('n', '<C-y>', ':ClangdSwitchSourceHeader<cr>', options)
-
---map('n', '<C-,>', '<C-o>', options)
---map('n', '<C-.>', '<C-i>', options)
-
-
