@@ -4,3 +4,4 @@ mafredri/zsh-async
 #marszall87/lambda-pure
 sindresorhus/pure
 zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
