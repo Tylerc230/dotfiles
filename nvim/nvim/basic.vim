@@ -56,6 +56,7 @@ set undofile " Maintain undo history between sessions
 set undodir=~/.cache/undodir
 set signcolumn=yes
 set noeol
+set conceallevel=2
 
 "Auto reload buffer if it changes on disk
 set autoread            
