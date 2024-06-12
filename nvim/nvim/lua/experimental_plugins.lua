@@ -133,4 +133,5 @@ return {
         priority = 1000,
         config = true,
     },
+    { url = "ssh://git.amazon.com:2222/pkg/Vim-code-browse" },
 }

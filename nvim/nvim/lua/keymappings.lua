@@ -64,6 +64,7 @@ map('n', '<leader>gf', '<Cmd>Lspsaga code_action<CR>', options)
 map('n', '<leader>a', '<Cmd>Lspsaga finder<CR>', options)
 --map('n', '<leader>gt', '<Cmd>TroubleToggle<CR>', options)
 map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
+--map('n', '<leader>k', '<cmd>Lspsaga incoming_calls<CR>', options)-- need to find a new key for this
 --map("n", "<space>i", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
 map('n', '<leader>D', '<cmd>Telescope diagnostics<CR>', options)
 
