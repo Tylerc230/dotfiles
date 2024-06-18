@@ -2,7 +2,7 @@ return {
     {
         "epwalsh/obsidian.nvim",
         version = "*",  -- recommended, use latest release instead of latest commit
-        lazy = true,
+        lazy = false,
         ft = "markdown",
         -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
         -- event = {
@@ -19,13 +19,32 @@ return {
         },
         opts = {
             workspaces = {
+                --{
+                    --name = "personal",
+                    --path = "~/Documents/Personal",
+                --},
                 {
-                    name = "personal",
-                    path = "~/Documents/Personal",
+                    name = "work",
+                    path = "~/Documents/WorkVault/",
                 },
             },
 
         },
+    },
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            "MunifTanjim/nui.nvim",
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            "rcarriga/nvim-notify",
+        }
     },
     {
         "nvim-neorg/neorg",
