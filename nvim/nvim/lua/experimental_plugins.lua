@@ -57,6 +57,7 @@ return {
                     ["core.integrations.nvim-cmp"] = {},
                     ["core.qol.todo_items"] = {},
                     ["core.summary"] = {},
+                    ["core.export"] = {},
                     ["core.integrations.telescope"] = {},
                     --["core.ui.calendar"] = {},
                     ["core.dirman"] = { -- Manages Neorg workspaces
@@ -124,29 +125,29 @@ return {
             }
         end
     },
-    --{
-        --"doctorfree/cheatsheet.nvim",
-        --event = "VeryLazy",
-        --dependencies = {
-            --{ "nvim-telescope/telescope.nvim" },
-            --{ "nvim-lua/popup.nvim" },
-            --{ "nvim-lua/plenary.nvim" },
-        --},
-        --config = function()
-            --local ctactions = require("cheatsheet.telescope.actions")
-            --require("cheatsheet").setup({
-                --bundled_cheetsheets = false,
-                --bundled_plugin_cheatsheets = false,
-                --include_only_installed_plugins = true,
-                --telescope_mappings = {
-                    --["<CR>"] = ctactions.select_or_fill_commandline,
-                    --["<A-CR>"] = ctactions.select_or_execute,
-                    --["<C-Y>"] = ctactions.copy_cheat_value,
-                    --["<C-E>"] = ctactions.edit_user_cheatsheet,
-                --},
-            --})
-        --end,
-    --},
+    {
+        "doctorfree/cheatsheet.nvim",
+        event = "VeryLazy",
+        dependencies = {
+            { "nvim-telescope/telescope.nvim" },
+            { "nvim-lua/popup.nvim" },
+            { "nvim-lua/plenary.nvim" },
+        },
+        config = function()
+            local ctactions = require("cheatsheet.telescope.actions")
+            require("cheatsheet").setup({
+                bundled_cheatsheets = false,
+                bundled_plugin_cheatsheets = false,
+                include_only_installed_plugins = true,
+                telescope_mappings = {
+                    ["<CR>"] = ctactions.select_or_fill_commandline,
+                    ["<A-CR>"] = ctactions.select_or_execute,
+                    ["<C-Y>"] = ctactions.copy_cheat_value,
+                    ["<C-E>"] = ctactions.edit_user_cheatsheet,
+                },
+            })
+        end,
+    },
     {
         "vhyrro/luarocks.nvim",
         priority = 1000,
