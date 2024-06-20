@@ -59,7 +59,7 @@ yabai -m rule --add app="Microsoft Outlook" title="^.*Reminder.*$" manage=off bo
 yabai -m rule --add app='Messages' manage=off sticky=on grid="$center_grid"
 yabai -m rule --add app='Things' manage=off grid="$center_grid"
 yabai -m rule --add app='Spotify' manage=off sticky=on grid="$center_grid"
-yabai -m rule --add app='iTerm2' title="^.*Hotkey Window$" manage=off
+#yabai -m rule --add app='iTerm2' title="^.*Hotkey Window$" manage=off
 yabai -m rule --add app='Alfred' manage=off
 yabai -m rule --add app='QuickTime Player' manage=off
 yabai -m rule --add app='kitty' manage=off

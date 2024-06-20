@@ -146,6 +146,11 @@ local plugins = {
     }
   end
   },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^4', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
   --DAP
   'mfussenegger/nvim-dap',
   {'nvim-telescope/telescope-dap.nvim'},

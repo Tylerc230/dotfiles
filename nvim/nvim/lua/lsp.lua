@@ -15,6 +15,7 @@ local function on_attach(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
+
   if client.server_capabilities.document_formatting then
     map('n', '<leader>I', "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
   elseif client.server_capabilities.document_range_formatting then
@@ -65,39 +66,39 @@ lsp_config.clangd.setup({
     --}
   }
 })
-lsp_config.rust_analyzer.setup({
-  settings = {
-    ["rust-analyzer"] = {
-      --trace = {
-      --server = "verbose"
+--lsp_config.rust_analyzer.setup({
+  --settings = {
+    --["rust-analyzer"] = {
+      ----trace = {
+      ----server = "verbose"
 
+      ----},
+      --linkedProjects = {
+        ----order is important (rust-analyzer/rust-analyzer#7764)
+        --"Cargo.toml",
+        ----"avr/Cargo.toml",
       --},
-      linkedProjects = {
-        --order is important (rust-analyzer/rust-analyzer#7764)
-        "Cargo.toml",
-        --"avr/Cargo.toml",
-      },
-      assist = {
-        importGranularity = "module",
-        importPrefix = "by_self",
-      },
-      --cargo = {
-      --loadOutDirsFromCheck = true,
-      --target = "avr-unknown-gnu-atmega328"
+      --assist = {
+        --importGranularity = "module",
+        --importPrefix = "by_self",
       --},
+      ----cargo = {
+      ----loadOutDirsFromCheck = true,
+      ----target = "avr-unknown-gnu-atmega328"
+      ----},
 
-      diagnostics = {
-        disabled = {
-          --https://github.com/rust-analyzer/rust-analyzer/issues/6835
-          "unresolved-macro-call"
-        }
-      },
-      procMacro = {
-        enable = true
-      },
-    }
-  }
-})
+      --diagnostics = {
+        --disabled = {
+          ----https://github.com/rust-analyzer/rust-analyzer/issues/6835
+          --"unresolved-macro-call"
+        --}
+      --},
+      --procMacro = {
+        --enable = true
+      --},
+    --}
+  --}
+--})
 local lsp = vim.lsp
 local handlers = lsp.handlers
 
