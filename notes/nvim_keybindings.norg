@@ -37,6 +37,12 @@
     - cs]) - Change square to parens
     - S" - In visual mode
     - ysiw( - normal mode, surround inner word with ()
+* treesitter incremental selection
+  init_selection = "gnn", -- set to `false` to disable one of the mappings
+  node_incremental = "grn",
+  scope_incremental = "grc",
+  node_decremental = "grm",
+  },
 
 
 * Syntax
