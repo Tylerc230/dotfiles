@@ -56,7 +56,13 @@ local plugins = {
       'nvim-tree/nvim-web-devicons', -- optional
     },
   },
-  't9md/vim-choosewin',
+  {
+    "yorickpeterse/nvim-window",
+    keys = {
+      { "<leader>w", "<cmd>lua require('nvim-window').pick()<cr>", desc = "nvim-window: Jump to window" },
+    },
+    config = true,
+  },
   'scrooloose/nerdcommenter',
   "Pocco81/auto-save.nvim",
   --use {"hrsh7th/nvim-compe"} --auto complete
