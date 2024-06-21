@@ -57,6 +57,7 @@ set undodir=~/.cache/undodir
 set signcolumn=yes
 set noeol
 set conceallevel=2
+set noswapfile
 
 "Auto reload buffer if it changes on disk
 set autoread            
