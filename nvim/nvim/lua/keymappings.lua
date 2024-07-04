@@ -1,37 +1,70 @@
-local map = vim.api.nvim_set_keymap
--- Map leader to space
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '  '
+local wk = require("which-key")
+wk.register({
+    g = {
+        name = "git",
+        b = { ':Telescope git_branches<CR>', "Git Branches" },
+        s = { '<CMD>Git<CR>', "Git Status"},
+        c = { '<CMD>Telescope git_status<CR>', "Git Changes" },
+        h = { '<CMD>Telescope git_stash<CR>', "Git Stash"},
+        l = {
+            l = {  '<CMD>Telescope git_commits<CR>', "Git log" },
+            b = {'<CMD>Telescope git_bcommits<CR>', "Git log (buffer)"}
+        }
+    },
+    w = { '<CMD>lua require(\'nvim-window\').pick()<CR>', "Choose Window"},
+    h = {'<C-w>h', "Window left"},
+    j = {'<C-w>j', "Window down"},
+    k = {'<C-w>k', "Window up"},
+    l = {'<C-w>l', "Window right"},
+    H = {'<C-w>H', "Window left"},
+    J = {'<C-w>J', "Window down"},
+    K = {'<C-w>K', "Window up"},
+    L = {'<C-w>L', "Window right"},
+    f = {
+        t = { ':Telescope find_files<CR>', "Find Files"},
+        r = { ':Telescope frecency workspace=CWD<CR>', "Recent Files"},
+        ["/"] = { ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', "Grep Files"},
+        b = { ':Telescope buffers<CR>', "Find Buffers"},
+        ["*"] = { ':Telescope grep_string prompt_prefix=🔍<CR>'},
+        f = { '<CMD>NvimTreeToggle<CR>', "Open NVimTree"},
+        F = { '<CMD>NvimTreeFindFile<CR>', "Open File in NVimTree"},
+    }
+}, { prefix = "<leader>" })
+
+local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
 -- better window movement
-map('n', '<leader>h', '<C-w>h', options)
-map('n', '<leader>j', '<C-w>j', options)
-map('n', '<leader>k', '<C-w>k', options)
-map('n', '<leader>l', '<C-w>l', options)
-map('n', '<leader>H', '<C-w>H', options)
-map('n', '<leader>J', '<C-w>J', options)
-map('n', '<leader>K', '<C-w>K', options)
-map('n', '<leader>L', '<C-w>L', options)
+--map('n', '<leader>h', '<C-w>h', options)
+--map('n', '<leader>j', '<C-w>j', options)
+--map('n', '<leader>k', '<C-w>k', options)
+--map('n', '<leader>l', '<C-w>l', options)
+--map('n', '<leader>H', '<C-w>H', options)
+--map('n', '<leader>J', '<C-w>J', options)
+--map('n', '<leader>K', '<C-w>K', options)
+--map('n', '<leader>L', '<C-w>L', options)
 
 
-map('n', '<leader>t', ':Telescope find_files<CR>', options)
-map('n', '<leader>r', ':Telescope frecency workspace=CWD<CR>', options)
+--map('n', '<leader>t', ':Telescope find_files<CR>', options)
+--map('n', '<leader>r', ':Telescope frecency workspace=CWD<CR>', options)
 
-map('n', '<leader>/', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', options)
-map('n', '<leader>*', ':Telescope grep_string prompt_prefix=🔍<CR>', options)
-map('n', '<leader>b', ':Telescope buffers<CR>', options)
-map('n', '<leader>gb', ':Telescope git_branches<CR>', options)
+--map('n', '<leader>/', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', options)
+--map('n', '<leader>*', ':Telescope grep_string prompt_prefix=🔍<CR>', options)
+--map('n', '<leader>b', ':Telescope buffers<CR>', options)
+--map('n', '<leader>gb', ':Telescope git_branches<CR>', options)
 map('n', '<leader>p', ':Telescope neoclip<CR>', options)
 map('n', '<leader>ch', ':lua require("telescope.builtin").command_history()<CR>', options)
-map('n', '<leader>f', '<CMD>NvimTreeToggle<CR>', options)
-map('n', '<leader>F', '<CMD>NvimTreeFindFile<CR>', options)
-map('n', '<leader>w', '<CMD>lua require(\'nvim-window\').pick()<CR>', options)
+--map('n', '<leader>f', '<CMD>NvimTreeToggle<CR>', options)
+--map('n', '<leader>F', '<CMD>NvimTreeFindFile<CR>', options)
+--map('n', '<leader>w', '<CMD>lua require(\'nvim-window\').pick()<CR>', options)
 --map('n', '<leader>gs', '<CMD>Neogit<CR>', options)
-map('n', '<leader>gs', '<CMD>Git<CR>', options)
-map('n', '<leader>gh', '<CMD>Telescope git_stash<CR>', options)
-map('n', '<leader>gll', '<CMD>Telescope git_commits<CR>', options)
-map('n', '<leader>glL', '<CMD>Telescope git_bcommits<CR>', options)
-map('n', '<leader>gc', '<CMD>Telescope git_status<CR>', options)
+--map('n', '<leader>gs', '<CMD>Git<CR>', options)
+--map('n', '<leader>gh', '<CMD>Telescope git_stash<CR>', options)
+--map('n', '<leader>gll', '<CMD>Telescope git_commits<CR>', options)
+--map('n', '<leader>glL', '<CMD>Telescope git_bcommits<CR>', options)
+--map('n', '<leader>gc', '<CMD>Telescope git_status<CR>', options)
 map('n', '<leader><leader>/', '<CMD>let @/=""<CR>', options)
 map('n', '<leader><leader>j', '<CMD>Telescope neorg search_headings<CR>', options)
 map('n', '<leader>ci', ':call nerdcommenter#Comment(0, "Toggle")<CR>', options)
