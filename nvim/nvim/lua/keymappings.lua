@@ -46,9 +46,7 @@ map('n', '<leader><leader>w', '<cmd>HopWord<CR>', options)
 map('n', '<leader><leader>l', '<cmd>HopLine<CR>', options)
 map('v', '<leader><leader>w', '<cmd>HopWord<CR>', options)
 map('v', '<leader><leader>l', '<cmd>HopLine<CR>', options)
-map('n', '<leader><leader>c', '<cmd>HopChar1<CR>', options)
-map('v', '<leader><leader>c', '<cmd>HopChar1<CR>', options)
-map('o', '<leader><leader>c', 'v<cmd>HopChar1<CR>', options)--can type d<leader><leader>c<char> to jump to char
+map('n', '<leader>n', '<cmd>Legendary<CR>', options)
 
 map('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
 map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)

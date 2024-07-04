@@ -44,7 +44,74 @@ return {
             --   `nvim-notify` is only needed, if you want to use the notification view.
             --   If not available, we use `mini` as the fallback
             "rcarriga/nvim-notify",
+        },
+        config = {
         }
+    },
+    {
+        'stevearc/dressing.nvim',
+        opts = {},
+    },
+    {
+        'mrjones2014/legendary.nvim',
+        -- since legendary.nvim handles all your keymaps/commands,
+        -- its recommended to load legendary.nvim before other plugins
+        version = 'v2.13.9',
+        priority = 10000,
+        lazy = false,
+        config = function()
+            require('legendary').setup({
+                include_builtin = false,
+                include_legendary_cmds = false,
+                commands = {
+                    {
+                        ':ObsidianSearch {query}',
+                        description = 'Search for text in workspace. ',
+                    },
+                    {
+                        ':ObsidianNew',
+                        description = 'Create new note',
+                    },
+                    {
+                        ':ObsidianOpen',
+                        description = 'Open current note in obsidian app',
+                    },
+                    {
+                        ':ObsidianQuickSwitch',
+                        description = 'Switch to different note',
+                    },
+                    {
+                        ':ObsidianToday',
+                        description = 'Open today\'s journal',
+                    },
+                    {
+                        ':ObsidianYesterday',
+                        description = 'Open yesterdays\'s journal (weekdays only)',
+                    },
+                    {
+                        ':ObsidianDailies {range}',
+                        description = 'Open list of notes. range -2 1 = tomorrow to 2 days ago',
+                        unfinished = true
+                    },
+                    {
+                        ':ObsidianPasteImg [image_name]',
+                        description = 'Paste image from clipboard into note ',
+                        unfinished = true
+                    },
+                    {
+                        ':ObsidianToggleCheckbox',
+                        description = 'Toggle the current checkbox',
+                    },
+                    {
+                        ':GBrowse',
+                        description = 'find file in code.amazon.com',
+                    }
+
+                }
+            })
+        end
+        -- sqlite is only needed if you want to use frecency sorting
+        -- dependencies = { 'kkharji/sqlite.lua' }
     },
     {
         "nvim-neorg/neorg",
