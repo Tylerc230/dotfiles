@@ -167,55 +167,6 @@ return {
         end
     },
     {
-        "nvim-telescope/telescope-project.nvim",
-        config = function()
-            local project_actions = require("telescope._extensions.project.actions")
-            require('telescope').setup {
-                extensions = {
-                    project = {
-                        base_dirs = {
-                            '~/workplace'
-                        },
-                        hidden_files = true, -- default: false
-                        theme = "dropdown",
-                        order_by = "asc",
-                        search_by = "title",
-                        sync_with_nvim_tree = true, -- default false
-                        -- default for on_project_selected = find project files
-                        on_project_selected = function(prompt_bufnr)
-                            -- Do anything you want in here. For example:
-                            project_actions.change_working_directory(prompt_bufnr, false)
-                            require("harpoon.ui").nav_file(1)
-                        end
-                    }
-                }
-            }
-        end
-    },
-    {
-        "doctorfree/cheatsheet.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            { "nvim-telescope/telescope.nvim" },
-            { "nvim-lua/popup.nvim" },
-            { "nvim-lua/plenary.nvim" },
-        },
-        config = function()
-            local ctactions = require("cheatsheet.telescope.actions")
-            require("cheatsheet").setup({
-                bundled_cheatsheets = false,
-                bundled_plugin_cheatsheets = false,
-                include_only_installed_plugins = true,
-                telescope_mappings = {
-                    ["<CR>"] = ctactions.select_or_fill_commandline,
-                    ["<A-CR>"] = ctactions.select_or_execute,
-                    ["<C-Y>"] = ctactions.copy_cheat_value,
-                    ["<C-E>"] = ctactions.edit_user_cheatsheet,
-                },
-            })
-        end,
-    },
-    {
         "vhyrro/luarocks.nvim",
         priority = 1000,
         config = true,
