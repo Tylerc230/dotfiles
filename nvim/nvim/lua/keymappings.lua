@@ -3,36 +3,50 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '  '
 local wk = require("which-key")
 wk.register({
-    g = {
-        name = "git",
-        b = { ':Telescope git_branches<CR>', "Git Branches" },
-        s = { '<CMD>Git<CR>', "Git Status"},
-        c = { '<CMD>Telescope git_status<CR>', "Git Changes" },
-        h = { '<CMD>Telescope git_stash<CR>', "Git Stash"},
-        l = {
-            l = {  '<CMD>Telescope git_commits<CR>', "Git log" },
-            b = {'<CMD>Telescope git_bcommits<CR>', "Git log (buffer)"}
+    ["<leader>"] = {
+        g = {
+            name = "git",
+            b = { ':Telescope git_branches<CR>', "Git Branches" },
+            s = { '<CMD>Git<CR>', "Git Status"},
+            c = { '<CMD>Telescope git_status<CR>', "Git Changes" },
+            h = { '<CMD>Telescope git_stash<CR>', "Git Stash"},
+            l = {
+                l = {  '<CMD>Telescope git_commits<CR>', "Git log" },
+                b = {'<CMD>Telescope git_bcommits<CR>', "Git log (buffer)"}
+            }
+        },
+        w = { '<CMD>lua require(\'nvim-window\').pick()<CR>', "Choose Window"},
+        h = {'<C-w>h', "Window left"},
+        j = {'<C-w>j', "Window down"},
+        k = {'<C-w>k', "Window up"},
+        l = {'<C-w>l', "Window right"},
+        H = {'<C-w>H', "Window left"},
+        J = {'<C-w>J', "Window down"},
+        K = {'<C-w>K', "Window up"},
+        L = {'<C-w>L', "Window right"},
+        f = {
+            t = { ':Telescope find_files<CR>', "Find Files"},
+            r = { ':Telescope frecency workspace=CWD<CR>', "Recent Files"},
+            ["/"] = { ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', "Grep Files"},
+            b = { ':Telescope buffers<CR>', "Find Buffers"},
+            ["*"] = { ':Telescope grep_string prompt_prefix=🔍<CR>'},
+            f = { '<CMD>NvimTreeToggle<CR>', "Open NVimTree"},
+            F = { '<CMD>NvimTreeFindFile<CR>', "Open File in NVimTree"},
         }
     },
-    w = { '<CMD>lua require(\'nvim-window\').pick()<CR>', "Choose Window"},
-    h = {'<C-w>h', "Window left"},
-    j = {'<C-w>j', "Window down"},
-    k = {'<C-w>k', "Window up"},
-    l = {'<C-w>l', "Window right"},
-    H = {'<C-w>H', "Window left"},
-    J = {'<C-w>J', "Window down"},
-    K = {'<C-w>K', "Window up"},
-    L = {'<C-w>L', "Window right"},
-    f = {
-        t = { ':Telescope find_files<CR>', "Find Files"},
-        r = { ':Telescope frecency workspace=CWD<CR>', "Recent Files"},
-        ["/"] = { ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', "Grep Files"},
-        b = { ':Telescope buffers<CR>', "Find Buffers"},
-        ["*"] = { ':Telescope grep_string prompt_prefix=🔍<CR>'},
-        f = { '<CMD>NvimTreeToggle<CR>', "Open NVimTree"},
-        F = { '<CMD>NvimTreeFindFile<CR>', "Open File in NVimTree"},
+    g = {
+        d = {"<Cmd>lua vim.lsp.buf.definition()<CR>", "Go to definition"},
+        t = {"<Cmd>lua vim.diagnostic.open_float()<CR>", "Show error at line"},
+        T = { '<cmd>Telescope diagnostics<CR>', "List all diagnostics in workspace"},
+        i = {"<Cmd>lua vim.lsp.buf.hover()<CR>", "Get info"},
+        f = {'<Cmd>Lspsaga code_action<CR>', "Select code action"},
+        r = {'<cmd>Telescope lsp_references<CR>', "Show symbol references"},
+        m = {'<cmd>Telescope lsp_document_symbols<CR>', "Search symbols in doc"},
+        a = { '<Cmd>Lspsaga finder<CR>', "Show all references and definitions in list"},
+        s = { ':Telescope lsp_dynamic_workspace_symbols<CR>', "Search symbols in workspace"}
+
     }
-}, { prefix = "<leader>" })
+})
 
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
@@ -81,23 +95,23 @@ map('v', '<leader><leader>w', '<cmd>HopWord<CR>', options)
 map('v', '<leader><leader>l', '<cmd>HopLine<CR>', options)
 map('n', '<leader>n', '<cmd>Legendary<CR>', options)
 
-map('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
-map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
-map('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', options)
+--map('n', '<leader>s', ':Telescope lsp_dynamic_workspace_symbols<CR>', options)
+--map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', options)
+--map('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', options)
 map('n', '<leader>R', '<cmd>Lspsaga rename<CR>', options)
 -- add all these to a menu https://nvimdev.github.io/lspsaga/
-map('n', 'gi', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
+--map('n', 'gi', '<Cmd>lua vim.lsp.buf.hover()<CR>', options)
 --map('n', 'gt', '<Cmd>TroubleToggle lsp_document_diagnostics<CR>', options)
 --map('n', 'gt', '<Cmd>Lspsaga show_line_diagnostics<CR>', options)
-map('n', 'gt', '<Cmd>lua vim.diagnostic.open_float()<CR>', options)
+--map('n', 'gt', '<Cmd>lua vim.diagnostic.open_float()<CR>', options)
 
-map('n', '<leader>gf', '<Cmd>Lspsaga code_action<CR>', options)
-map('n', '<leader>a', '<Cmd>Lspsaga finder<CR>', options)
+--map('n', '<leader>gf', '<Cmd>Lspsaga code_action<CR>', options)
+--map('n', '<leader>a', '<Cmd>Lspsaga finder<CR>', options)
 --map('n', '<leader>gt', '<Cmd>TroubleToggle<CR>', options)
-map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
+--map('n', '<leader>m', '<cmd>Telescope lsp_document_symbols<CR>', options)
 --map('n', '<leader>k', '<cmd>Lspsaga incoming_calls<CR>', options)-- need to find a new key for this
 --map("n", "<space>i", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
-map('n', '<leader>D', '<cmd>Telescope diagnostics<CR>', options)
+--map('n', '<leader>D', '<cmd>Telescope diagnostics<CR>', options)
 
 --" resize current buffer by +/- 5 
 --:
