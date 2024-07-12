@@ -86,7 +86,7 @@ wk.register({
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
 --map('n', '<leader>p', ':Telescope neoclip<CR>', options)
-map('n', '<leader>ch', ':lua require("telescope.builtin").command_history()<CR>', options)
+--map('n', '<leader>ch', ':lua require("telescope.builtin").command_history()<CR>', options)
 --map('n', '<leader><leader>/', '<CMD>let @/=""<CR>', options)
 map('n', '<leader><leader>j', '<CMD>Telescope neorg search_headings<CR>', options)
 --map('n', '<leader>ci', ':call nerdcommenter#Comment(0, "Toggle")<CR>', options)
