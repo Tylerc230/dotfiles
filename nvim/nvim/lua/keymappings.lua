@@ -25,10 +25,10 @@ wk.register({
         j = {'<C-w>j', "Window down"},
         k = {'<C-w>k', "Window up"},
         l = {'<C-w>l', "Window right"},
-        H = {'<C-w>H', "Window left"},
-        J = {'<C-w>J', "Window down"},
-        K = {'<C-w>K', "Window up"},
-        L = {'<C-w>L', "Window right"},
+        H = {'<C-w>H', "Move Window left"},
+        J = {'<C-w>J', "Move Window down"},
+        K = {'<C-w>K', "Move Window up"},
+        L = {'<C-w>L', "Move Window right"},
         R = {'<cmd>Lspsaga rename<CR>', "Rename"},
         z = {
             h = { "<CMD>lua require('telescope').extensions.zsh_history.scripts()<CR>", "Zsh history"},
@@ -83,19 +83,8 @@ wk.register({
         },
     }
 }, {mode = "v"})
-
+-- Add mappings for gnn/grc (increase node selection using treesitter)
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
---map('n', '<leader>p', ':Telescope neoclip<CR>', options)
---map('n', '<leader>ch', ':lua require("telescope.builtin").command_history()<CR>', options)
---map('n', '<leader><leader>/', '<CMD>let @/=""<CR>', options)
 map('n', '<leader><leader>j', '<CMD>Telescope neorg search_headings<CR>', options)
---map('n', '<leader>ci', ':call nerdcommenter#Comment(0, "Toggle")<CR>', options)
---map('v', '<leader>ci', ':call nerdcommenter#Comment(0, "Toggle")<CR>', options)
---map('n', '<leader>i', 'V=<ESC>', options)
---map('n', '<leader>I', 'gg=G', options)
---map('n', '<C-right>', ':vertical resize +5<cr>', options)
---map('n', '<C-left>', ':vertical resize -5<cr>', options)
---map('n', '<C-up>',  w, options)
---map('n', '<C-down>', ':resize -5<cr>', options)
 map('n', '<C-y>', ':ClangdSwitchSourceHeader<cr>', options)

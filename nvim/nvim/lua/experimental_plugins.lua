@@ -19,14 +19,14 @@ return {
         },
         opts = {
             workspaces = {
-                --{
-                --name = "personal",
-                --path = "~/Documents/Personal",
-                --},
                 {
-                    name = "work",
-                    path = "~/Documents/WorkVault/",
+                    name = "personal",
+                    path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
                 },
+                --{
+                    --name = "work",
+                    --path = "~/Documents/WorkVault/",
+                --},
             },
 
             daily_notes = {
@@ -72,23 +72,6 @@ return {
         },
         config = {
         }
-    },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        }
-    },
-    {
-        'stevearc/dressing.nvim',
-        opts = {},
     },
     {
         'mrjones2014/legendary.nvim',
@@ -201,25 +184,5 @@ return {
         lazy = false,
         version = "*"
     },
-    {
-        "AckslD/nvim-neoclip.lua",
-        requires = {
-            {'nvim-telescope/telescope.nvim'},
-        },
-        config = function()
-            require('neoclip').setup()
-        end,
-    },
-    {
-        "levouh/tint.nvim",
-        config = function()
-            require("tint").setup()
-        end
-    },
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
-    },
-    { url = "ssh://git.amazon.com:2222/pkg/Vim-code-browse" },
+    --{ url = "ssh://git.amazon.com:2222/pkg/Vim-code-browse" },
 }
