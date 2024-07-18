@@ -33,6 +33,9 @@ return {
                 -- Optional, if you keep daily notes in a separate directory.
                 folder = "dailies",
             },
+            follow_url_func = function(url)
+                vim.fn.jobstart({"open", url})  -- Mac OS
+            end,
 
             note_id_func = function(title)
                 -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
@@ -136,6 +139,18 @@ return {
                     {
                         ':ObsidianToggleCheckbox',
                         description = 'Toggle the current checkbox',
+                    },
+                    {
+                        ':ObsidianLink',
+                        description = 'Link to existing file (in visual)',
+                    },
+                    {
+                        ':ObsidianLinkNew',
+                        description = 'Link to new file (selected text becomes note title an link title)',
+                    },
+                    {
+                        ':NoiceDismiss',
+                        description = 'Dismiss all notifications',
                     },
                     {
                         ':GBrowse',
