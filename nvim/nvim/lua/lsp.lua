@@ -7,14 +7,10 @@ require("mason-lspconfig").setup()
 local lsp_config = require("lspconfig")
 
 require("mason").setup()
-local navic = require("nvim-navic")
 
 local map = vim.api.nvim_set_keymap
 local options = {noremap = true, silent = true}
 local function on_attach(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
 
   if client.server_capabilities.document_formatting then
     map('n', '<leader>I', "<cmd>lua vim.lsp.buf.formatting()<CR>", options)

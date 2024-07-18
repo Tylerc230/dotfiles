@@ -169,17 +169,15 @@ local plugins = {
   {'rcarriga/nvim-dap-ui'},
   'jbyuki/one-small-step-for-vimkind',
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      show_dirname = false,
-      show_basename = false,
-    },
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require'treesitter-context'.setup{
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        -- Separator between context and content. Should be a single character string, like '-'.
+        -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+        separator = '⎯',
+      }
+    end
   },
   unpack(experimental)
 }
