@@ -17,7 +17,8 @@ wk.register({
         },
         c = {
             i = { ':call nerdcommenter#Comment(0, "Toggle")<CR>', "Toggle comment"},
-            h = { ':lua require("telescope.builtin").command_history()<CR>', "Command History"}
+            h = { ':lua require("telescope.builtin").command_history()<CR>', "Command History"},
+            c = { ':lua require("telescope.builtin").commands()<CR>', "All commands"}
         },
         w = { '<CMD>lua require(\'nvim-window\').pick()<CR>', "Choose Window"},
         h = {'<C-w>h', "Window left"},
@@ -57,7 +58,7 @@ wk.register({
         t = {"<Cmd>lua vim.diagnostic.open_float()<CR>", "Show error at line"},
         T = { '<cmd>Telescope diagnostics<CR>', "List all diagnostics in workspace"},
         i = {"<Cmd>lua vim.lsp.buf.hover()<CR>", "Get info"},
-        f = {'<Cmd>Lspsaga code_action<CR>', "Select code action"},
+        f = {'<Cmd>Lspsaga code_action<CR>', "Select code action"},-- This duplicates go to file
         r = {'<cmd>Telescope lsp_references<CR>', "Show symbol references"},
         m = {'<cmd>Telescope lsp_document_symbols<CR>', "Search symbols in doc"},
         a = { '<Cmd>Lspsaga finder<CR>', "Show all references and definitions in list"},
