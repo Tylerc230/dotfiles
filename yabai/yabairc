@@ -44,16 +44,16 @@ yabai -m config window_gap                   5
 center_grid='26:26:5:5:16:16'
 #yabai -m query --windows to query windows
 #https://github.com/koekeishiya/yabai/blob/master/doc/yabai.asciidoc
-yabai -m rule --add app="Simulator" manage=off border=off 
-yabai -m rule --add app="qemu-system-x86_64" manage=off border=off 
-yabai -m rule --add app="Cisco AnyConnect Secure Mobility Client" manage=off border=off
+yabai -m rule --add app="Simulator" manage=off
+yabai -m rule --add app="qemu-system-x86_64" manage=off
+yabai -m rule --add app="Cisco AnyConnect Secure Mobility Client" manage=off
 
 yabai -m rule --add app=Dash manage=off sticky=on grid="26:26:3:3:20:20"
-yabai -m rule --add app="A Companion for SwiftUI" border=off manage=off
-yabai -m rule --add app=Xcode title="^$" manage=off border=off
-yabai -m rule --add app="Xcode.*" manage=off border=off
-yabai -m rule --add app="Microsoft Outlook" title="^.*Reminder.*$" manage=off border=off
-#yabai -m rule --add app="Microsoft Outlook" manage=off border=off
+yabai -m rule --add app="A Companion for SwiftUI" manage=off
+yabai -m rule --add app=Xcode title="^$" manage=off
+yabai -m rule --add app="Xcode.*" manage=off
+yabai -m rule --add app="Microsoft Outlook" title="^.*Reminder.*$" manage=off
+#yabai -m rule --add app="Microsoft Outlook" manage=off
 
 
 yabai -m rule --add app='Messages' manage=off sticky=on grid="$center_grid"
