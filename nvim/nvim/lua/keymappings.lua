@@ -15,6 +15,12 @@ wk.register({
                 b = {'<CMD>Telescope git_bcommits<CR>', "Git log (buffer)"}
             }
         },
+        o = {
+            o = {':ObsidianQuickSwitch<CR>', "Quick Open Note"},
+            t = {':ObsidianToday<CR>', "Today's note"},
+            y = {':ObsidianYesterday<CR>', "Yesterday's note"},
+            c = {':ObsidianToggleCheckbox<CR>', "Toggle checkbox"}
+        },
         c = {
             i = { ':call nerdcommenter#Comment(0, "Toggle")<CR>', "Toggle comment"},
             h = { ':lua require("telescope.builtin").command_history()<CR>', "Command History"},
