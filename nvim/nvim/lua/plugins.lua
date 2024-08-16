@@ -361,6 +361,18 @@ require('telescope').load_extension("live_grep_args")
 require('telescope').setup {
   defaults = {
     path_display = {'smart'},
+    mappings = {
+      i = {
+        ["<C-h>"] = "which_key",
+        ["<Down>"] = require('telescope.actions').cycle_history_next,
+        ["<Up>"] = require('telescope.actions').cycle_history_prev,
+      },
+      n = {
+        ["<C-h>"] = "which_key",
+        ["<Down>"] = require('telescope.actions').cycle_history_next,
+        ["<Up>"] = require('telescope.actions').cycle_history_prev,
+      },
+    },
   },
   extensions = {
     frecency = {
@@ -368,6 +380,7 @@ require('telescope').setup {
       show_unindexed = false
     },
   },
+
   pickers = {
     git_branches = {
       mappings = {
