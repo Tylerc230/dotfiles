@@ -19,7 +19,8 @@ wk.register({
             o = {':ObsidianQuickSwitch<CR>', "Quick Open Note"},
             t = {':ObsidianToday<CR>', "Today's note"},
             y = {':ObsidianYesterday<CR>', "Yesterday's note"},
-            c = {':ObsidianToggleCheckbox<CR>', "Toggle checkbox"}
+            c = {':ObsidianToggleCheckbox<CR>', "Toggle checkbox"},
+            s = {':ObsidianSearch<CR>', "Search notes"}
         },
         c = {
             i = { ':call nerdcommenter#Comment(0, "Toggle")<CR>', "Toggle comment"},
