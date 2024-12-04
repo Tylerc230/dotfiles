@@ -2,22 +2,51 @@
 	email = tylerc230@gmail.com
 	name = Tyler Casselman
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [core]
   ;editor = nvr --remote-wait-silent
   editor = nvr --remote-tab-wait-silent
+  pager = delta
 
-	excludesfile = /Users/tyler/.gitignore
+  excludesfile = /Users/tyler/.gitignore
 [core]
-    hooksPath = ~/dotfiles/git/hooks
+  hooksPath = ~/dotfiles/git/hooks
+
+[include]
+  path = ~/dotfiles/git/themes.gitconfig
+[delta]
+  navigate = true  # use n and N to move between diff sections
+    ;side-by-side = true
+  line-numbers = true
+  features = collared-trogon
+    ;syntax-theme = Vibrant Sunburst
+  hunk-header-style = file line-number syntax
+  file-style = magenta omit
+  file-modified-label = modified:
+
+  hunk-header-decoration-style = bold black omit
+
+  zero-style                    = dim syntax
+
+  minus-style                   = bold red
+  minus-non-emph-style          = dim red
+  minus-emph-style              = bold red 52
+  minus-empty-line-marker-style = normal "#3f0001"
+
+  plus-style                    = bold green
+  plus-non-emph-style           = dim green
+  plus-emph-style               = bold green 22
+  plus-empty-line-marker-style  = normal "#002800"
+
+  whitespace-error-style        = reverse red
 [color]
   ui = true
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -28,10 +57,13 @@
   old = red bold
   new = green bold
 [push]
-	default = upstream
+  default = upstream
+[pull]
+  rebase = true
 
 [merge]
   tool = vimdiff
+  conflictstyle = zdiff3
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
@@ -41,4 +73,4 @@
 [diff]
   tool = vimdiff
 [rerere]
-	enabled = true
+  enabled = true
