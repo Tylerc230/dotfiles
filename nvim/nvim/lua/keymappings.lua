@@ -2,6 +2,13 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '  '
 local wk = require("which-key")
+        --["af"] = { query = "@function.outer", desc = "Around function" } ,
+        --["if"] = { query = "@function.inner", desc = "Inside function" },
+        --["ac"] = { query = "@class.outer", desc = "Around class" },
+        --["ic"] = { query = "@class.inner", desc = "Inside class" },
+        ---- You can also use captures from other query groups like `locals.scm`
+        --["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+--//add text object movement: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 wk.register({
     ["<leader>"] = {
         g = {
@@ -17,6 +24,7 @@ wk.register({
         },
         o = {
             o = {':ObsidianQuickSwitch<CR>', "Quick Open Note"},
+            d = {':ObsidianDailies<CR>', "Open dailies list"},
             t = {':ObsidianToday<CR>', "Today's note"},
             y = {':ObsidianYesterday<CR>', "Yesterday's note"},
             c = {':ObsidianToggleCheckbox<CR>', "Toggle checkbox"},
