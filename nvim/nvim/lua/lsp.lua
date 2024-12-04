@@ -26,7 +26,7 @@ lsp_config.jdtls.setup { on_attach = on_attach }
 lsp_config.solargraph.setup { on_attach = on_attach }
 lsp_config.pyright.setup { on_attach = on_attach }
 --lsp_config.eslint.setup{} -- Needs newer node
-lsp_config.tsserver.setup({
+lsp_config.ts_ls.setup({
   experimental = {
     enableProjectDiagnostics = true
   },
