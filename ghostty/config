@@ -1,0 +1,4 @@
+keybind = global:opt+cmd+f=toggle_quick_terminal
+quick-terminal-animation-duration = 0.1
+quick-terminal-position = top
+font-family = "Operator Mono"
