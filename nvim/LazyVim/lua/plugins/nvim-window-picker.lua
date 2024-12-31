@@ -33,6 +33,7 @@ return {
           bo = {
             -- if the file type is one of following, the window will be ignored
             filetype = { "notify" },
+            buftype = {},--remote 'termainal'
           },
         },
       })
