@@ -8,7 +8,8 @@ return {
       {"<leader>ot", ':ObsidianToday<CR>', "Today's note"},
       {"<leader>oy", ':ObsidianYesterday<CR>', "Yesterday's note"},
       {"<leader>oc", ':ObsidianToggleCheckbox<CR>', "Toggle checkbox"},
-      {"<leader>os", ':ObsidianSearch<CR>', "Search notes"}
+      {"<leader>os", ':ObsidianSearch<CR>', "Search notes"},
+      {"<leader>od", ':ObsidianDailies -14<CR>', "Open dailies list"},
     },
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -35,9 +36,13 @@ return {
         --},
       },
 
+      templates = {
+        folder = "Templates",
+      },
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
         folder = "dailies",
+        template = "DailyTemplate.md"
       },
       follow_url_func = function(url)
         vim.fn.jobstart({"open", url})  -- Mac OS
