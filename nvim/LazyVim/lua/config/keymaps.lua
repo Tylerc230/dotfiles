@@ -13,3 +13,4 @@ map("n", "<C-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease Window Wi
 map("n", "<C-Right>", "<cmd>vertical resize +5<cr>", { desc = "Increase Window Width" })
 map("t", "<ESC>", "<C-\\><C-n>")
 map("n", "<leader>fz", "<CMD>lua require('telescope').extensions.zsh_history.scripts()<CR>", {desc = "Zsh History"})
+map("n", "<leader>ci", "<CMD>lua vim.lsp.buf.hover()<CR>", {desc = "Code Info"})
