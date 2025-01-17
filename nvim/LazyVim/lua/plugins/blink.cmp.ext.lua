@@ -25,7 +25,7 @@ return {
     -- signature = { enabled = true },
 
     keymap = {
-      ["<Tab>"] = {
+      ["<Right>"] = {
         function(cmp)
           cmp.show()
         end,

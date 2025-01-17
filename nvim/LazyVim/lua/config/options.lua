@@ -6,6 +6,8 @@ vim.api.nvim_set_hl(0, 'WindowPickerStatusLine', { link = 'Search' })
 vim.api.nvim_set_hl(0, 'WindowPickerWinBar', { link = 'Search' })
 vim.api.nvim_set_hl(0, 'WindowPickerStatusLineNC', { link = 'DiffDelete' })
 vim.api.nvim_set_hl(0, 'WindowPickerWinBarNC', { link = 'DiffDelete' })
+vim.opt.fixeol = false
+vim.opt.swapfile = false
 
 
 
