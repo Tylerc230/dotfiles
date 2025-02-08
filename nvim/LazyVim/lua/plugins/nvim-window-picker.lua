@@ -28,12 +28,14 @@ return {
     },
     config = function()
       require("window-picker").setup({
+        hint = "floating-big-letter",
+        -- hint = "statusline-winbar",
         show_prompt = false,
         filter_rules = {
           bo = {
             -- if the file type is one of following, the window will be ignored
-            filetype = { "notify" },
-            buftype = {},--remote 'termainal'
+            filetype = { "notify", "NvimSeparator" },
+            buftype = {}, --remote 'termainal'
           },
         },
       })
