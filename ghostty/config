@@ -1,4 +1,10 @@
 keybind = global:opt+cmd+f=toggle_quick_terminal
-quick-terminal-animation-duration = 0.1
+quick-terminal-animation-duration = 0.2
 quick-terminal-position = top
-font-family = "Operator Mono"
+font-family = MonoLisa Trial
+font-size = 16
+window-save-state = always
+quick-terminal-autohide = false
+quick-terminal-screen = macos-menu-bar
+window-colorspace = display-p3
+font-thicken = true
