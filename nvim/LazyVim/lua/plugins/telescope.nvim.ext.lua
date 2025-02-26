@@ -3,9 +3,33 @@ return {
   "nvim-telescope/telescope.nvim",
   keys = {
 
-      { "<leader>gC", "<cmd>Telescope git_bcommits<CR>", desc = "Buffer Commits" },
+    { "<leader>gC", "<cmd>Telescope git_bcommits<CR>", desc = "Buffer Commits" },
   },
   opts = {
+
+    extensions = {
+      frecency = {
+        default_workspace = "CWD",
+        show_unindexed = false,
+      },
+    },
+
+    pickers = {
+      git_branches = {
+        mappings = {
+          n = {
+            -- ["l"] = git_browser_actions.logs_for_branch,
+          },
+        },
+      },
+      buffers = {
+        mappings = {
+          n = {
+            ["D"] = require("telescope.actions").delete_buffer,
+          },
+        },
+      },
+    },
     defaults = {
       path_display = { "smart" },
       mappings = {

@@ -1,15 +1,16 @@
 return {
   {
     "epwalsh/obsidian.nvim",
-    version = "*",  -- recommended, use latest release instead of latest commit
+    version = "*", -- recommended, use latest release instead of latest commit
     ft = "markdown",
     keys = {
-      {"<leader>oo", ':ObsidianQuickSwitch<CR>', "Quick Open Note"},
-      {"<leader>ot", ':ObsidianToday<CR>', "Today's note"},
-      {"<leader>oy", ':ObsidianYesterday<CR>', "Yesterday's note"},
-      {"<leader>oc", ':ObsidianToggleCheckbox<CR>', "Toggle checkbox"},
-      {"<leader>os", ':ObsidianSearch<CR>', "Search notes"},
-      {"<leader>od", ':ObsidianDailies -14<CR>', "Open dailies list"},
+      { "<leader>oo", ":ObsidianQuickSwitch<CR>", "Quick Open Note" },
+      { "<leader>ot", ":ObsidianToday<CR>", "Today's note" },
+      { "<leader>oy", ":ObsidianYesterday<CR>", "Yesterday's note" },
+      { "<leader>oc", ":ObsidianToggleCheckbox<CR>", "Toggle checkbox" },
+      { "<leader>os", ":ObsidianSearch<CR>", "Search notes" },
+      { "<leader>od", ":ObsidianDailies -14<CR>", "Open dailies list" },
+      { "<leader>ss", ":ObsidianTOC<CR>", "Obsidian TOC", ft = "markdown" },
     },
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -25,6 +26,9 @@ return {
       -- see below for full list of optional dependencies 👇
     },
     opts = {
+      ui = {
+        enable = false,
+      },
       workspaces = {
         {
           name = "personal",
@@ -42,12 +46,15 @@ return {
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
         folder = "dailies",
-        template = "DailyTemplate.md"
+        template = "DailyTemplate.md",
       },
       follow_url_func = function(url)
-        vim.fn.jobstart({"open", url})  -- Mac OS
+        vim.fn.jobstart({ "open", url }) -- Mac OS
       end,
 
+      follow_img_func = function(url)
+        vim.fn.jobstart({ "open", url }) -- Mac OS
+      end,
       note_id_func = function(title)
         -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
         -- In this case a note with the title 'My new note' will be given an ID that looks
