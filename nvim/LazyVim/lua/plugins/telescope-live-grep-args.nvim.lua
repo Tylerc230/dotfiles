@@ -24,6 +24,15 @@ return {
         end,
         desc = "Grep with Args (root dir)",
       },
+      {
+        "<leader>sG",
+        function()
+          require(
+            "telescope"
+          ).extensions.live_grep_args.live_grep_args({cwd = vim.loop.cwd()})
+        end,
+        desc = "Grep with Args (cwd)",
+      },
     },
     opts = {
       extensions = {
