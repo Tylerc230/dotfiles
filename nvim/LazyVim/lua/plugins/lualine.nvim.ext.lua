@@ -3,6 +3,9 @@ local icons = LazyVim.config.icons
 return {
   "nvim-lualine/lualine.nvim",
   opts = {
+  options = {
+      globalstatus = false,
+    },
     sections = {
       lualine_c = {
         LazyVim.lualine.root_dir(),
